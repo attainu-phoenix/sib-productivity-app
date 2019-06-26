@@ -40,7 +40,7 @@ class Header extends React.Component {
     }
 
     buttonClicked() {
-        console.log("search button clicked ...")
+        console.log("search button clicked ")
     }
 
 
