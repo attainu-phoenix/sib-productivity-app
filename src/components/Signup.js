@@ -143,7 +143,7 @@ export default class SignupComponent extends React.Component{
   							<input className={`form-control ${
                                     !this.state.formState.isPasswordValid && "is-invalid"
                                     }`} 
-  							       type="text" 
+  							       type="password" 
   							       name="password"
   							       onChange={this.onChange}
   							       placeholder="Password"/>
@@ -158,7 +158,7 @@ export default class SignupComponent extends React.Component{
   							<input className={`form-control ${
                                     !this.state.formState.isCpasswordValid && "is-invalid"
                                     }`}  
-  							       type="text" 
+  							       type="password" 
   							       name="cpassword"
   							       onChange={this.onChange}
   							       placeholder="Confirm Password"/>
