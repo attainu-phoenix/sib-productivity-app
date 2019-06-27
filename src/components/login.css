@@ -1,0 +1,26 @@
+.button-round {
+    border-radius: 10px;
+}
+
+.myfont {
+
+    width: 100%;
+    display: block;
+    font-family: Montserrat-Medium;
+    font-size: 39px;
+    color: #555;
+    line-height: 1.2;
+    text-align: center;
+
+
+}
+
+.btn-google {
+    color: white;
+    background-color: #ea4335;
+    border-radius: 20px;
+}
+
+.down{
+       margin-top: 40%;
+}
