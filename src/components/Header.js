@@ -67,7 +67,7 @@ class Header extends React.Component {
                             </div>
                         <a className="nav-item nav-link" href="/#" style={style.anchorTag}>SignUp <span className="sr-only">(current)</span></a>
                         <a className="nav-item nav-link" href="/#" style={style.anchorTag}>LogIn</a>
-                        <a className="navbar brand" href="/#" style={style.anchorTag}>
+                        <li className="navbar brand"  style={style.anchorTag}>
                             <span className="oi oi-person"
                                 data-container="body"
                                 data-toggle="popover"
@@ -84,7 +84,7 @@ class Header extends React.Component {
                                     </div>
                                 </div>
                             </span>
-                        </a>
+                        </li>
 
                     </div>
                 </div>

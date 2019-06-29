@@ -13,13 +13,13 @@ class Home extends React.Component {
 
     render() {
         return (
-            <Route>
+            <Router>
                 <Route path="/app" component={App} />
                 {this.doRedirect()}
-            </Route>
+            </Router>
         )
     }
 }
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Home/>, document.getElementById('root'));
