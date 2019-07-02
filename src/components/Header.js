@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css';
-import HomeComponent from './Home.js';
+
 
 class HeaderComponent extends React.Component{
                                               
@@ -41,7 +41,7 @@ render() {
   </div>
 </nav>
 
-<HomeComponent/>
+
 </div>
   );
 }
