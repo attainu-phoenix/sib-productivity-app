@@ -1,0 +1,29 @@
+.head-color{
+
+background-color: #ca3e47;
+
+}
+
+.btn-mdb-color {
+	background-color: #59698d !important;
+	color: #fff;
+}
+.btn-rounded {
+	border-radius: 10em;
+}
+
+.search-col{
+	color: white;
+}
+
+.red-border{
+	width: 150px;
+}
+
+.dropdown-menu{
+	background-color: #ca3e47 !important;
+}
+.dropdown-menu>a{
+	color: #fff;
+}
+
