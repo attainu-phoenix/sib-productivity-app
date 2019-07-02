@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header.js'
 import Menu from './Menu.js'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
 import AddToDo from '../components/AddToDo.js'
 

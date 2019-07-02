@@ -13,7 +13,14 @@ const CalendarStyles ={
         marginRight:'20px'
     },
     modalHeadeBackgroundColor:{
-        backgroundColor:"#ca3e47"
+        backgroundColor:"#ca3e47",
+        color:'white'
+    },
+    closeIcon:{
+        color:'white'
+    },
+    navLink:{
+        color:'black'
     }
 
 }
