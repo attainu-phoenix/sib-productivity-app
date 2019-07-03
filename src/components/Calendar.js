@@ -5,13 +5,14 @@ import CalendarHeader from './CalendarHeader.js'
 import CalendarActionButtons from './CalendarActionButtons.js'
 import Event from './Event'
 import moment from 'moment'
+import UniqueId from 'react-html-id';
 
 class Calendar extends React.Component {
 
     constructor(props) {
         super(props)
 
-
+        UniqueId.enableUniqueIds(this);
         this.onClickCheckBox = this.onClickCheckBox.bind(this);
         this.scheduleEvent = this.scheduleEvent.bind(this);
         this.editEventOnChangeTitle = this.editEventOnChangeTitle.bind(this);
@@ -31,8 +32,8 @@ class Calendar extends React.Component {
             scheduleDate: moment().toDate(),
             editDate: moment().toDate(),
             isCheck: false,
-            editEventInputField: "",
-            editEvetnDescriptionField: "",
+            editEventTitle: "",
+            editEventDescription: "",
             addEventTitle: "",
             addEventDescription: "",
             addEventDate: moment().toDate(),
@@ -41,15 +42,20 @@ class Calendar extends React.Component {
             currentMonth: "",
             currentYear: "",
             events: [
-                { id: 'Standup', isDone: false, eventTitle: "Standup", description: "Standup with mentees for project", date: "Thu Jul 04 2019 18:15:00 GMT+0530 (India Standard Time)" },
-                { id: 'Code Review', isDone: true, eventTitle: "Code Review", description: "Code Review For Project", date: "Wed Jul 03 2019 18:00:00 GMT+0530 (India Standard Time)" },
-                { id: 'Mentor Sync-up', isDone: false, eventTitle: "Mentor Sync-up", description: "Arkesh Jaiswal is inviting you to a scheduled Zoom meeting.", date: "Tue Jul 02 2019 00:26:26 GMT+0530 (India Standard Time)" }
+                { id: this.nextUniqueId(), isDone: false, eventTitle: "Standup", description: "Standup with mentees for project", date: "Thu Jul 04 2019 18:15:00 GMT+0530 (India Standard Time)" },
+                { id: this.nextUniqueId(), isDone: true, eventTitle: "Code Review", description: "Code Review For Project", date: "Wed Jul 03 2019 18:00:00 GMT+0530 (India Standard Time)" },
+                { id: this.nextUniqueId(), isDone: false, eventTitle: "Mentor Sync-up", description: "Arkesh Jaiswal is inviting you to a scheduled Zoom meeting.", date: "Tue Jul 02 2019 00:26:26 GMT+0530 (India Standard Time)" }
             ],
             addEventFormState: {
                 isAddEventFormValid: true,
                 isTitleValid: true,
                 isDescriptionValid: true,
                 isDateValid: true
+            },
+            editEventFormState: {
+                editEventTitle: true,
+                editEventDescription: true,
+                isEditEventFormVaid: true
             }
 
         }
@@ -99,7 +105,7 @@ class Calendar extends React.Component {
         this.setState({
             scheduleDate: moment(date).toDate()
         });
-        
+
 
     }
     editEventOnChangeDate(date) {
@@ -111,19 +117,43 @@ class Calendar extends React.Component {
     }
 
     editEventOnChangeTitle(event) {
-        this.setState({ editEventInputField: event.target.value })
-        console.log(this.state.editEventInputField)
+        this.setState({ editEventTitle: event.target.value })
+        console.log(this.state.editEventTitle)
     }
 
     eventEditOnChangeDescription(event) {
-        this.setState({ editEvetnDescriptionField: event.target.value })
-        console.log(this.state.editEvetnDescriptionField);
+        this.setState({ editEventDescription: event.target.value })
+        console.log(this.state.editEventDescription);
     }
-    onClickEditEvent() {
-        console.log("Edit Event Clicked ")
+    onClickEditEvent(id,e) {
+        //console.log("Edit Event Clicked");
+        let index = this.state.events.findIndex((event)=>{
+            return event.id === id
+        })
+        console.log("index value :",index);
+        let event = Object.assign({},this.state.events[index]);
+        event.eventTitle = this.state.editEventTitle;
+        event.description = this.state.editEventDescription;
+        event.date = this.state.editDate;
+        
+        let events = Object.assign([], this.state.events);
+        events[index] = event;
+
+        this.setState({
+            events:events
+        })
+
+
     }
-    deleteEvent() {
+    deleteEvent(index, e) {
         console.log("Delete Event Clicked ")
+
+        let events = Object.assign([], this.state.events);
+        events.splice(index, 1);
+        this.setState({
+            events: events
+        })
+
     }
 
     onChangeAddEventTitle(event) {
@@ -192,9 +222,50 @@ class Calendar extends React.Component {
             date: this.state.addEventDate
         }
 
-        var newEvents = this.state.events.concat(eventData)
+        //var newEvents = this.state.events.concat(eventData)
+        var newEvents = [...this.state.events, eventData]
         this.setState({ events: newEvents })
     }
+
+    validateEditEventForm() {
+        let newEditEventFormState = {
+            editEventTitle: true,
+            editEventDescription: true,
+            isEditEventFormVaid: true
+        }
+
+        if (!this.state.editEventTitle) {
+            newEditEventFormState.editEventTitle = false;
+            newEditEventFormState.isEditEventFormVaid = false;
+        }
+
+        if (!this.state.editEventDescription) {
+            newEditEventFormState.editEventDescription = false;
+            newEditEventFormState.isEditEventFormVaid = false;
+        }
+
+        this.state({
+            editEventFormState: newEditEventFormState
+        })
+
+        return newEditEventFormState.isEditEventFormVaid;
+
+    }
+
+    handleSubmitEditEventForm(event) {
+        event.preventDefault();
+
+        if (!this.validateEditEventForm()) {
+            return;
+        }
+
+        let editEventData = {
+            id: this.state.editEventTitle,
+            editEventTitle: this.state.editEventTitle,
+            editEventDescription: this.state.editEventDescription
+        }
+    }
+
     onChangeSelect(event) {
 
         let value = event.target.value;
@@ -214,9 +285,11 @@ class Calendar extends React.Component {
 
     renderEvents() {
 
+        console.log(this.state.events)
+
         return (
-            this.state.events.map(e => {
-                // console.log(new Date(e.date).getDay())
+            this.state.events.map((e, index) => {
+
                 return (
                     <Event
                         key={e.id}
@@ -226,14 +299,14 @@ class Calendar extends React.Component {
                         checked={e.isDone}
                         scheduleEventStartDate={this.state.scheduleDate}
                         scheduleEvent={this.scheduleEvent}
-                        editEventStartDate={this.state.editDate}
+                        editEventStartDate={moment(e.date).toDate()}
                         editEventOnChangeDate={this.editEventOnChangeDate}
                         editEventTitle={e.eventTitle}
                         eventEditOnChangeTitle={this.editEventOnChangeTitle}
                         editEventDescription={e.description}
                         eventEditOnChangeDescription={this.eventEditOnChangeDescription}
-                        onClickEditEvent={this.onClickEditEvent}
-                        deleteEvent={this.deleteEvent}
+                        onClickEditEvent={this.onClickEditEvent.bind(this,e.id)}
+                        deleteEvent={this.deleteEvent.bind(this, index)}
 
                     />
                 )

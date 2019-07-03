@@ -17,7 +17,7 @@ class HeaderComponent extends React.Component {
 
             <form className="form-inline ml-auto ">
               <input className="form-control  mx-auto " type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-white"><i class="fas fa-search search-col" aria-hidden="true"></i></button>
+              <button className="btn btn-outline-white"><i className="fas fa-search search-col" aria-hidden="true"></i></button>
             </form>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
@@ -26,13 +26,13 @@ class HeaderComponent extends React.Component {
               <li className="nav-item">
                 <a className="nav-link text-white" href="/#">Login</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user search-col" aria-hidden="true"></i>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className="fas fa-user search-col" aria-hidden="true"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/#">Settings</a>
-                  <a class="dropdown-item" href="/#">Logout</a>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a className="dropdown-item" href="/#">Settings</a>
+                  <a className="dropdown-item" href="/#">Logout</a>
                 </div>
               </li>
             </ul>
