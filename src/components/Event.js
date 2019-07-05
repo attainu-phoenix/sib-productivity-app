@@ -103,7 +103,8 @@ class Event extends React.Component {
                                         
                                         selected={this.props.editEventStartDate}
                                         onChange={this.props.editEventOnChangeDate}
-                                        showTimeSelect
+                                        onSelect={this.props.onSelectDay}
+                                        showTimeSelect={true}
                                         timeFormat="HH:mm"
                                         timeIntervals={15}
                                         dateFormat="MMMM d, yyyy h:mm aa"

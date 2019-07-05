@@ -31,6 +31,7 @@ class Calendar extends React.Component {
         this.changeEventTitle = this.changeEventTitle.bind(this);
         this.changeEventDescription = this.changeEventDescription.bind(this);
         this.showEventsTodayAndMonthly = this.showEventsTodayAndMonthly.bind(this);
+        this.changeEventDate = this.changeEventDate.bind(this);
         this.state = {
             dateContext: moment(),
             scheduleDate: moment().toDate(),
@@ -83,14 +84,14 @@ class Calendar extends React.Component {
     }
 
 
-    onClickCheckBox(id,e) {
+    onClickCheckBox(id, e) {
 
         let index = this.state.events.findIndex((event) => {
             return event.id === id
         })
-       
+
         let event = Object.assign({}, this.state.events[index]);
-       
+
         let isDone = event.isDone;
         event.isDone = !isDone;
 
@@ -307,13 +308,21 @@ class Calendar extends React.Component {
 
 
     editEventOnChangeDate(date) {
-        console.log(date)
+        // console.log(date)
         // let newDate = moment(date).toDate()
 
         this.setState({
             editDate: new Date(date)
         });
 
+    }
+
+    changeEventDate(date) {
+        console.log("changeEventDate() called ...")
+        console.log(date)
+        this.setState({
+            editDate: new Date(date)
+        });
     }
 
     onChangeSelect(event) {
@@ -339,9 +348,9 @@ class Calendar extends React.Component {
             this.setState({
                 showTodayEvents: true
             })
-        }else{
+        } else {
             this.setState({
-                showTodayEvents:false
+                showTodayEvents: false
             })
         }
 
@@ -351,14 +360,14 @@ class Calendar extends React.Component {
         return (
             this.state.events.map((e, index) => {
 
-                let isSame = moment().isSame(e.date, 'day')
-                if (isSame) {
+                    let isSame = moment().isSame(e.date, 'day')
+                    if (isSame) {
                     return (
                         <Event
                             key={this.nextUniqueId()}
                             eventTitle={e.eventTitle}
                             eventDate={moment(e.date).format("MMM Do YY")}
-                            onClickCheckBox={this.onClickCheckBox.bind(this,e.id)}
+                            onClickCheckBox={this.onClickCheckBox.bind(this, e.id)}
                             checked={e.isDone}
                             editEventStartDate={moment(e.date).toDate()}
                             editEventOnChangeDate={this.editEventOnChangeDate}
@@ -376,7 +385,7 @@ class Calendar extends React.Component {
 
     renderEventsMonth() {
 
-        
+
         return (
             this.state.events.map((e, index) => {
 
@@ -385,11 +394,10 @@ class Calendar extends React.Component {
                         key={this.nextUniqueId()}
                         eventTitle={e.eventTitle}
                         eventDate={moment(e.date).format("MMM Do YY")}
-                        onClickCheckBox={this.onClickCheckBox.bind(this,e.id)}
+                        onClickCheckBox={this.onClickCheckBox.bind(this, e.id)}
                         checked={e.isDone}
-                        // scheduleEventStartDate={this.state.scheduleDate}
-                        // scheduleEvent={this.scheduleEvent}
-                        editEventStartDate={moment(e.date).toDate()}
+                        editEventStartDate={this.state.editDate}
+                        // onSelectDay={this.changeEventDate}
                         editEventOnChangeDate={this.editEventOnChangeDate}
                         editEventTitle={e.eventTitle}
                         editEventDescription={e.description}
@@ -406,12 +414,12 @@ class Calendar extends React.Component {
     render() {
 
         let events;
-        if(this.state.showTodayEvents){
+        if (this.state.showTodayEvents) {
             events = this.renderEventsToday();
-        }else{
+        } else {
             events = this.renderEventsMonth();
         }
-        
+
 
         return (
             <div>
