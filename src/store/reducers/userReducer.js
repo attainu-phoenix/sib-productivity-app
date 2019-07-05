@@ -1,4 +1,3 @@
-import {store} from '../store.js';
 
 function userReducer(newUser={},action){
 	if(action.type === "SIGNUP"){

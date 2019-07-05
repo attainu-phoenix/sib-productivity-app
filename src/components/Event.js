@@ -4,7 +4,10 @@ import CalendarStyles from '../styles/CalendarStyles.js'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import UniqueId from 'react-html-id';
-class Event extends React.Component {
+import {stateMapper} from '../store/store.js'
+import {connect} from  'react-redux'
+
+class EventComponent extends React.Component {
 
     constructor(props) {
         super(props)
@@ -155,5 +158,5 @@ class Event extends React.Component {
         )
     }
 }
-
+let Event = connect(stateMapper)(EventComponent);
 export default Event;

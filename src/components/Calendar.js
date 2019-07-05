@@ -6,8 +6,10 @@ import CalendarActionButtons from './CalendarActionButtons.js'
 import Event from './Event'
 import moment from 'moment'
 import UniqueId from 'react-html-id';
+import { store, stateMapper } from '../store/store.js'
+import { connect } from 'react-redux'
 
-class Calendar extends React.Component {
+class CalendarComponent extends React.Component {
 
     constructor(props) {
         super(props)
@@ -23,7 +25,6 @@ class Calendar extends React.Component {
         this.onChangeAddEventTitle = this.onChangeAddEventTitle.bind(this);
         this.onChangeAddEventDescription = this.onChangeAddEventDescription.bind(this);
         this.onChangeAddEventDate = this.onChangeAddEventDate.bind(this);
-        // this.addEvent = this.addEvent.bind(this);
         this.onChangeSelect = this.onChangeSelect.bind(this);
         this.selectMonth = this.selectMonth.bind(this);
         this.handelSubmitAddEventForm = this.handelSubmitAddEventForm.bind(this);
@@ -47,11 +48,6 @@ class Calendar extends React.Component {
             currentMonth: "",
             currentYear: "",
             showTodayEvents: false,
-            events: [
-                { id: this.nextUniqueId(), isDone: false, eventTitle: "Standup", description: "Standup with mentees for project", date: "Thu Jul 04 2019 18:15:00 GMT+0530 (India Standard Time)" },
-                { id: this.nextUniqueId(), isDone: true, eventTitle: "Code Review", description: "Code Review For Project", date: "Wed Jul 03 2019 18:00:00 GMT+0530 (India Standard Time)" },
-                { id: this.nextUniqueId(), isDone: false, eventTitle: "Mentor Sync-up", description: "Arkesh Jaiswal is inviting you to a scheduled Zoom meeting.", date: "Tue Jul 02 2019 00:26:26 GMT+0530 (India Standard Time)" }
-            ],
             addEventFormState: {
                 isAddEventFormValid: true,
                 isTitleValid: true,
@@ -76,29 +72,34 @@ class Calendar extends React.Component {
     }
 
     componentDidMount() {
+
+
+
+        store.dispatch({
+            type: "FETCH_EVENTS"
+        })
+
         this.setState({
             currentMonth: this.month(),
             currentYear: this.year()
         })
-        // console.log(this.state.currentMonth)
+
     }
 
 
     onClickCheckBox(id, e) {
 
-        let index = this.state.events.findIndex((event) => {
-            return event.id === id
-        })
 
-        let event = Object.assign({}, this.state.events[index]);
 
-        let isDone = event.isDone;
-        event.isDone = !isDone;
+        let eventStatus = {
+            id: id,
+            isDone: e.target.checked
+        }
 
-        let events = Object.assign([], this.state.events);
-        events[index] = event;
-        this.setState({
-            events: events
+
+        store.dispatch({
+            type: 'EDIT_EVENT_CHECKBOX',
+            payLoadData: eventStatus
         })
     }
 
@@ -119,7 +120,7 @@ class Calendar extends React.Component {
         console.log(this.state.editEventDescription);
     }
     onClickEditEvent(id, e) {
-        //console.log("Edit Event Clicked");
+
         let index = this.state.events.findIndex((event) => {
             return event.id === id
         })
@@ -155,21 +156,16 @@ class Calendar extends React.Component {
         this.setState({
             addEventTitle: event.target.value
         })
-        // console.log(this.state.addEventTitle)
     }
 
     onChangeAddEventDescription(event) {
         this.setState({ addEventDescription: event.target.value })
-        // console.log(this.state.addEventDescription)
     }
 
     onChangeAddEventDate(date) {
-
         this.setState({
             addEventDate: moment(date).toDate()
         });
-        console.log(this.state.addEventDate)
-
     }
     validateAddEventForm() {
         let newFormState = {
@@ -217,10 +213,10 @@ class Calendar extends React.Component {
             date: this.state.addEventDate
         }
 
-        //var newEvents = this.state.events.concat(eventData)
-        var newEvents = [...this.state.events, eventData]
-        event.target.reset()
-        this.setState({ events: newEvents })
+        this.props.dispatch({
+            type: "ADD_EVENT",
+            formData: eventData
+        })
     }
 
     validateEditEventForm() {
@@ -256,60 +252,36 @@ class Calendar extends React.Component {
             console.log("Edit form is invalid ")
             return;
         }
-
-        // let editEventData = {
-        //     id: this.nextUniqueId(),
-        //     isDone: false,
-        //     editEventTitle: this.state.editEventTitle,
-        //     editEventDescription: this.state.editEventDescription
-        // }
-
-        // let index = this.state.events.findIndex((event)=>{
-        //     return event.id === id;
-        // })
-        // console.log("Index ===>",index);
     }
     changeEventTitle(id, e) {
 
-
-
-        let index = this.state.events.findIndex((event) => {
-            return event.id === id
+        let titleData = {
+            id: id,
+            title: e.target.value
+        }
+        store.dispatch({
+            type: 'EDIT_EVENT_TITLE',
+            payLoadData: titleData
         })
-        // console.log("index value :", index);
-        let event = Object.assign({}, this.state.events[index]);
-        event.eventTitle = e.target.value;
 
-        let events = Object.assign([], this.state.events);
-        events[index] = event;
-        this.setState({
-            events: events
-        })
     }
 
     changeEventDescription(id, e) {
 
-        let index = this.state.events.findIndex((event) => {
-            return event.id === id
+        let descriptionData = {
+            id: id,
+            description: e.target.value
+        }
+
+        store.dispatch({
+            type: 'EDIT_EVENT_DESCRIPTION',
+            payLoadData: descriptionData
         })
-        // console.log("index value :", index);
-        let event = Object.assign({}, this.state.events[index]);
 
-        event.description = e.target.value;
-
-
-        let events = Object.assign([], this.state.events);
-        events[index] = event;
-
-        this.setState({
-            events: events
-        })
     }
 
 
     editEventOnChangeDate(date) {
-        // console.log(date)
-        // let newDate = moment(date).toDate()
 
         this.setState({
             editDate: new Date(date)
@@ -358,10 +330,10 @@ class Calendar extends React.Component {
 
     renderEventsToday() {
         return (
-            this.state.events.map((e, index) => {
+            this.props.events.map((e, index) => {
 
-                    let isSame = moment().isSame(e.date, 'day')
-                    if (isSame) {
+                let isSame = moment().isSame(e.date, 'day')
+                if (isSame) {
                     return (
                         <Event
                             key={this.nextUniqueId()}
@@ -387,7 +359,7 @@ class Calendar extends React.Component {
 
 
         return (
-            this.state.events.map((e, index) => {
+            this.props.events.map((e, index) => {
 
                 return (
                     <Event
@@ -461,5 +433,5 @@ class Calendar extends React.Component {
     }
 
 }
-
+let Calendar = connect(stateMapper)(CalendarComponent)
 export default Calendar;
