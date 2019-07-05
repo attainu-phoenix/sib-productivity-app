@@ -27,13 +27,17 @@ class Calendar extends React.Component {
         this.onChangeSelect = this.onChangeSelect.bind(this);
         this.selectMonth = this.selectMonth.bind(this);
         this.handelSubmitAddEventForm = this.handelSubmitAddEventForm.bind(this);
+        this.handleSubmitEditEventForm = this.handleSubmitEditEventForm.bind(this);
+        this.changeEventTitle = this.changeEventTitle.bind(this);
+        this.changeEventDescription = this.changeEventDescription.bind(this);
+        this.showEventsTodayAndMonthly = this.showEventsTodayAndMonthly.bind(this);
         this.state = {
             dateContext: moment(),
             scheduleDate: moment().toDate(),
             editDate: moment().toDate(),
             isCheck: false,
-            editEventTitle: "",
-            editEventDescription: "",
+            title: "",
+            description: "",
             addEventTitle: "",
             addEventDescription: "",
             addEventDate: moment().toDate(),
@@ -41,6 +45,7 @@ class Calendar extends React.Component {
             selectedMonth: "",
             currentMonth: "",
             currentYear: "",
+            showTodayEvents: false,
             events: [
                 { id: this.nextUniqueId(), isDone: false, eventTitle: "Standup", description: "Standup with mentees for project", date: "Thu Jul 04 2019 18:15:00 GMT+0530 (India Standard Time)" },
                 { id: this.nextUniqueId(), isDone: true, eventTitle: "Code Review", description: "Code Review For Project", date: "Wed Jul 03 2019 18:00:00 GMT+0530 (India Standard Time)" },
@@ -78,43 +83,30 @@ class Calendar extends React.Component {
     }
 
 
-    onClickCheckBox(event) {
+    onClickCheckBox(id,e) {
 
-        let name = event.target.name;
-        let events = this.state.events;
-        let isChecked;
-        let index;
-        console.log(events)
-        for (var i = 0; i < events.length; i++) {
-            if (events[i].eventTitle === name) {
-                isChecked = events[i].isDone;
-                index = i;
-            }
+        let index = this.state.events.findIndex((event) => {
+            return event.id === id
+        })
+       
+        let event = Object.assign({}, this.state.events[index]);
+       
+        let isDone = event.isDone;
+        event.isDone = !isDone;
 
-        }
-        events[index].isDone = !isChecked;
+        let events = Object.assign([], this.state.events);
+        events[index] = event;
         this.setState({
             events: events
         })
     }
 
     scheduleEvent(date) {
-
-
-
         this.setState({
             scheduleDate: moment(date).toDate()
         });
-
-
     }
-    editEventOnChangeDate(date) {
-        this.setState({
-            editDate: moment(date).toDate()
-        });
-        console.log(this.state.editDate)
 
-    }
 
     editEventOnChangeTitle(event) {
         this.setState({ editEventTitle: event.target.value })
@@ -125,22 +117,24 @@ class Calendar extends React.Component {
         this.setState({ editEventDescription: event.target.value })
         console.log(this.state.editEventDescription);
     }
-    onClickEditEvent(id,e) {
+    onClickEditEvent(id, e) {
         //console.log("Edit Event Clicked");
-        let index = this.state.events.findIndex((event)=>{
+        let index = this.state.events.findIndex((event) => {
             return event.id === id
         })
-        console.log("index value :",index);
-        let event = Object.assign({},this.state.events[index]);
-        event.eventTitle = this.state.editEventTitle;
-        event.description = this.state.editEventDescription;
+        console.log("index value :", index);
+        let event = Object.assign({}, this.state.events[index]);
+        event.eventTitle = this.state.title;
+        event.description = this.state.description;
         event.date = this.state.editDate;
-        
+
         let events = Object.assign([], this.state.events);
         events[index] = event;
 
         this.setState({
-            events:events
+            events: events,
+            editEventTitle: "",
+            editEventDescription: ""
         })
 
 
@@ -160,12 +154,12 @@ class Calendar extends React.Component {
         this.setState({
             addEventTitle: event.target.value
         })
-        console.log(this.state.addEventTitle)
+        // console.log(this.state.addEventTitle)
     }
 
     onChangeAddEventDescription(event) {
         this.setState({ addEventDescription: event.target.value })
-        console.log(this.state.addEventDescription)
+        // console.log(this.state.addEventDescription)
     }
 
     onChangeAddEventDate(date) {
@@ -215,7 +209,7 @@ class Calendar extends React.Component {
             return;
         }
         let eventData = {
-            id: this.state.addEventTitle,
+            id: this.nextUniqueId(),
             isDone: false,
             eventTitle: this.state.addEventTitle,
             description: this.state.addEventDescription,
@@ -224,6 +218,7 @@ class Calendar extends React.Component {
 
         //var newEvents = this.state.events.concat(eventData)
         var newEvents = [...this.state.events, eventData]
+        event.target.reset()
         this.setState({ events: newEvents })
     }
 
@@ -244,7 +239,7 @@ class Calendar extends React.Component {
             newEditEventFormState.isEditEventFormVaid = false;
         }
 
-        this.state({
+        this.setState({
             editEventFormState: newEditEventFormState
         })
 
@@ -253,17 +248,72 @@ class Calendar extends React.Component {
     }
 
     handleSubmitEditEventForm(event) {
+        console.log("camed in handleSubmit edit form" + event);
         event.preventDefault();
 
         if (!this.validateEditEventForm()) {
+            console.log("Edit form is invalid ")
             return;
         }
 
-        let editEventData = {
-            id: this.state.editEventTitle,
-            editEventTitle: this.state.editEventTitle,
-            editEventDescription: this.state.editEventDescription
-        }
+        // let editEventData = {
+        //     id: this.nextUniqueId(),
+        //     isDone: false,
+        //     editEventTitle: this.state.editEventTitle,
+        //     editEventDescription: this.state.editEventDescription
+        // }
+
+        // let index = this.state.events.findIndex((event)=>{
+        //     return event.id === id;
+        // })
+        // console.log("Index ===>",index);
+    }
+    changeEventTitle(id, e) {
+
+
+
+        let index = this.state.events.findIndex((event) => {
+            return event.id === id
+        })
+        // console.log("index value :", index);
+        let event = Object.assign({}, this.state.events[index]);
+        event.eventTitle = e.target.value;
+
+        let events = Object.assign([], this.state.events);
+        events[index] = event;
+        this.setState({
+            events: events
+        })
+    }
+
+    changeEventDescription(id, e) {
+
+        let index = this.state.events.findIndex((event) => {
+            return event.id === id
+        })
+        // console.log("index value :", index);
+        let event = Object.assign({}, this.state.events[index]);
+
+        event.description = e.target.value;
+
+
+        let events = Object.assign([], this.state.events);
+        events[index] = event;
+
+        this.setState({
+            events: events
+        })
+    }
+
+
+    editEventOnChangeDate(date) {
+        console.log(date)
+        // let newDate = moment(date).toDate()
+
+        this.setState({
+            editDate: new Date(date)
+        });
+
     }
 
     onChangeSelect(event) {
@@ -282,32 +332,70 @@ class Calendar extends React.Component {
         this.setState({ currentMonth: event.target.value })
     }
 
+    showEventsTodayAndMonthly(e) {
+        console.log(e.target.value)
+        let value = e.target.value;
+        if (value === 'Today') {
+            this.setState({
+                showTodayEvents: true
+            })
+        }else{
+            this.setState({
+                showTodayEvents:false
+            })
+        }
 
-    renderEvents() {
+    }
 
-        console.log(this.state.events)
+    renderEventsToday() {
+        return (
+            this.state.events.map((e, index) => {
 
+                let isSame = moment().isSame(e.date, 'day')
+                if (isSame) {
+                    return (
+                        <Event
+                            key={this.nextUniqueId()}
+                            eventTitle={e.eventTitle}
+                            eventDate={moment(e.date).format("MMM Do YY")}
+                            onClickCheckBox={this.onClickCheckBox.bind(this,e.id)}
+                            checked={e.isDone}
+                            editEventStartDate={moment(e.date).toDate()}
+                            editEventOnChangeDate={this.editEventOnChangeDate}
+                            editEventTitle={e.eventTitle}
+                            editEventDescription={e.description}
+                            editEventOnChangeTitle={this.changeEventTitle.bind(this, e.id)}
+                            editEventOnChangeDescription={this.changeEventDescription.bind(this, e.id)}
+                            deleteEvent={this.deleteEvent.bind(this, index)}
+                        />
+                    )
+                }
+            })
+        )
+    }
+
+    renderEventsMonth() {
+
+        
         return (
             this.state.events.map((e, index) => {
 
                 return (
                     <Event
-                        key={e.id}
+                        key={this.nextUniqueId()}
                         eventTitle={e.eventTitle}
                         eventDate={moment(e.date).format("MMM Do YY")}
-                        onClickCheckBox={this.onClickCheckBox}
+                        onClickCheckBox={this.onClickCheckBox.bind(this,e.id)}
                         checked={e.isDone}
-                        scheduleEventStartDate={this.state.scheduleDate}
-                        scheduleEvent={this.scheduleEvent}
+                        // scheduleEventStartDate={this.state.scheduleDate}
+                        // scheduleEvent={this.scheduleEvent}
                         editEventStartDate={moment(e.date).toDate()}
                         editEventOnChangeDate={this.editEventOnChangeDate}
                         editEventTitle={e.eventTitle}
-                        eventEditOnChangeTitle={this.editEventOnChangeTitle}
                         editEventDescription={e.description}
-                        eventEditOnChangeDescription={this.eventEditOnChangeDescription}
-                        onClickEditEvent={this.onClickEditEvent.bind(this,e.id)}
+                        editEventOnChangeTitle={this.changeEventTitle.bind(this, e.id)}
+                        editEventOnChangeDescription={this.changeEventDescription.bind(this, e.id)}
                         deleteEvent={this.deleteEvent.bind(this, index)}
-
                     />
                 )
             })
@@ -317,13 +405,23 @@ class Calendar extends React.Component {
 
     render() {
 
-        let events = this.renderEvents()
+        let events;
+        if(this.state.showTodayEvents){
+            events = this.renderEventsToday();
+        }else{
+            events = this.renderEventsMonth();
+        }
+        
 
         return (
             <div>
                 <h5>Calendar</h5>
                 <hr />
-                <CalendarHeader selectMonth={this.selectMonth} currentMonth={this.state.currentMonth} currentYear={this.state.currentYear} />
+                <CalendarHeader selectMonth={this.selectMonth}
+                    currentMonth={this.state.currentMonth}
+                    currentYear={this.state.currentYear}
+                    renderEvents={this.showEventsTodayAndMonthly}
+                />
                 <hr />
                 <CalendarActionButtons
                     onChangeAddEventTitle={this.onChangeAddEventTitle}
@@ -340,22 +438,7 @@ class Calendar extends React.Component {
                 <div className="card" style={CalendarStyles.card}>
                     <div className="card-body">
 
-                        {/* <Event
-                            eventDate={this.state.events[0].time}
-                            onChangeCheckBox={this.onCheckboxChanged}
-                            checked={this.state.isCheck}
-                            scheduleEventStartDate={this.state.scheduleDate}
-                            scheduleEvent={this.scheduleEvent}
-                            editEventStartDate={this.state.editDate}
-                            editEventOnChangeDate={this.editEventOnChangeDate}
-                            editEventTitle={this.state.events[0].eventTitle}
-                            eventEditOnChangeTitle={this.editEventOnChangeTitle}
-                            editEventDescription={this.state.events[0].description}
-                            eventEditOnChangeDescription={this.eventEditOnChangeDescription}
-                            onClickEditEvent={this.onClickEditEvent}
-                            deleteEvent={this.deleteEvent}
 
-                        /> */}
 
                         {events}
 

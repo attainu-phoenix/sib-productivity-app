@@ -25,7 +25,15 @@ class CalendarHeader extends React.Component {
         return (
             <div className="row justify-content-around align-items-center">
 
-                <button type="button" className="btn btn-light border">Today</button>
+                {/* <button type="button" className="btn btn-light border" onClick={this.props.showTodayEvents}>Today</button> */}
+                <div className="col-md-2">
+                    <select onChange={this.props.renderEvents} className="custom-select my-1 mr-sm-2 btn btn-light">
+                        <option key="Month" defaultValue="Month">Month</option>
+                        <option key="Today" value="Today">Today</option>
+                    </select>
+                </div>
+
+
                 <div className="col-md-2">
                     <div className="row justify-content-between align-items-start">
                         <span></span>

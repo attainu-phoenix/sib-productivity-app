@@ -21,13 +21,13 @@ class Event extends React.Component {
         // let currentDate = new Date();
         // console.log(currentDate.getDate()+" "+currentDate.getMonth()+" "+currentDate.getFullYear())
 
-        
-            let optionPopoverId = this.nextUniqueId();
-            let editModalId = this.nextUniqueId();
-            let deleteModalId = this.nextUniqueId();
-            
-            console.log(editModalId+" "+deleteModalId)
-        
+
+        let optionPopoverId = this.nextUniqueId();
+        let editModalId = this.nextUniqueId();
+        let deleteModalId = this.nextUniqueId();
+
+
+
         return (
             <div className="row justify-content-between align-items-center border  bg-light ">
                 <div className="col-md-1">
@@ -60,7 +60,7 @@ class Event extends React.Component {
                     </PopoverBody>
                 </UncontrolledPopover> */}
 
-                <div className="col-md-1" id="popover">
+                <div className="col-md-1" id={this.nextUniqueId()} >
                     <span id={optionPopoverId} className="oi oi-ellipses">
 
                     </span>
@@ -69,9 +69,9 @@ class Event extends React.Component {
                         <PopoverBody>
                             <div id="popover_content">
                                 <div>
-                                   
+
                                     <a className="nav-item nav-link" href="/#" style={CalendarStyles.navLink} data-toggle="modal"
-                                        data-target={"#" +editModalId}><span className="oi oi-pencil">      Edit</span></a>
+                                        data-target={"#" + editModalId}><span className="oi oi-pencil">      Edit</span></a>
                                     <a className="nav-item nav-link" href="/#" style={CalendarStyles.navLink} data-toggle="modal"
                                         data-target={"#" + deleteModalId}><span className="oi oi-trash">       Delete</span></a>
                                 </div>
@@ -91,14 +91,16 @@ class Event extends React.Component {
                                     <span aria-hidden="true" style={CalendarStyles.closeIcon}>&times;</span>
                                 </button>
                             </div>
-                            
+                           
                                 <div className="modal-body">
-                                    <input type="text" className="form-control" defaultValue={this.props.editEventTitle}
-                                        onChange={this.props.eventEditOnChangeTitle} /><br />
-                                    <input type="text" className="form-control" defaultValue={this.props.editEventDescription}
-                                        onChange={this.props.eventEditOnChangeDescription} /><br />
+
+                                    <input type="text" name="title" className="form-control" defaultValue={this.props.editEventTitle}
+                                        onChange={this.props.editEventOnChangeTitle} /><br />
+                                    <input type="text" name="description" className="form-control" defaultValue={this.props.editEventDescription}
+                                        onChange={this.props.editEventOnChangeDescription} /><br />
 
                                     <DatePicker
+                                        
                                         selected={this.props.editEventStartDate}
                                         onChange={this.props.editEventOnChangeDate}
                                         showTimeSelect
@@ -111,9 +113,10 @@ class Event extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-light border" data-dismiss="modal"  onClick={this.props.onClickEditEvent}>Save</button>
+                                    <button type="submit" className="btn btn-light border" data-dismiss="modal" onClick={this.props.onClickEditEvent}>Save</button>
                                 </div>
-                            
+                           
+
                         </div>
                     </div>
                 </div>

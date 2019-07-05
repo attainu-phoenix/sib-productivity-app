@@ -45,7 +45,7 @@ class CalendarActionButtons extends React.Component {
                                     <span aria-hidden="true" style={CalendarStyles.closeIcon}>&times;</span>
                                 </button>
                             </div>
-                            <form onSubmit={this.props.handelSubmitAddEventForm}>
+                            <form  onSubmit={this.props.handelSubmitAddEventForm}>
                             <div className="modal-body">
                                 
                                 <input type="text" name="title"  className={this.props.classNameEventTitle} placeholder="Enter Event"
@@ -68,7 +68,7 @@ class CalendarActionButtons extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-light border" >Add</button>
+                                <button type="submit" className="btn btn-light border"  >Add</button>
                                 
                             </div>
                             </form>
