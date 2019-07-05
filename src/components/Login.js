@@ -1,7 +1,10 @@
 import React from 'react';
 import './login.css'
-
-export default class LoginComponent extends React.Component {
+import {connect} from 'react-redux'
+import {stateMapper} from '../store/store.js'
+import GoogleLoginComponent from './GoogleLogin.js'
+import HeaderComponent from './Header.js';
+ class LoginComponent extends React.Component {
     constructor(props) {
         super(props)
 
@@ -34,7 +37,11 @@ export default class LoginComponent extends React.Component {
             return;
         } else {
 
-            alert("LOGIN SUCCESS");
+           this.props.dispatch({
+            type:"LOGIN",
+            formData:this.state
+
+            })  
         }
 
 
@@ -67,6 +74,8 @@ export default class LoginComponent extends React.Component {
 
     render() {
         return (
+        	<div>
+        	<HeaderComponent/>
             <div className="container">
 				<div className="row justify-content-center">
 					<div className="col-4">
@@ -110,7 +119,8 @@ export default class LoginComponent extends React.Component {
 						</div>
               <button class="btn btn-lg btn-primary btn-block  btn-circle text-uppercase" type="submit">Sign in</button>
               <hr class="my-4"/>
-              <button class="btn btn-lg btn-google  btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+              <GoogleLoginComponent/>
+              
    
            </div>
             </form>
@@ -119,8 +129,12 @@ export default class LoginComponent extends React.Component {
 					</div>
 				</div>		
 			</div>
+			</div>
 
         );
     }
 
 }
+
+let Login = connect(stateMapper)(LoginComponent)
+export default Login;

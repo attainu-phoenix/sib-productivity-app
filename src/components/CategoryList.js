@@ -27,7 +27,9 @@ class CategoryListComponent extends React.Component {
                     <div className="card-body">
                         <form>
                             <h6> Categories:</h6>
-                           < ListComponent />
+
+
+                           
                            
 
 

@@ -1,21 +1,57 @@
-import React from 'react';
-import AddTodoComponent from './Addtodos.js';
-import { BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom';
+import MenuStyles from '../styles/MenuStyles.js'
+
+
+
 class Menu extends React.Component {
+
+
 
     render() {
         return (
-            
+
             <ul className="list-group">
-              <Link to="/app/categories"> <li className="list-group-item list-group-item-action"><span className="oi oi-plus"> Categories</span></li></Link>
-              <Link to="/app/listofcat"><li className="list-group-item list-group-item-action"><span className="oi oi-menu">  View Categories</span></li></Link>
-              <Link to="/app/todos"><li className="list-group-item list-group-item-action"><span className="oi oi-task">  Todos</span></li></Link>
-              <Link to=""><li className="list-group-item list-group-item-action"><span className="oi oi-calendar">  Calender</span></li></Link>
-              
-               
+                <li className="list-group-item">
+
+                    <Link to="/app" style={MenuStyles.Link}>
+                        <span className="oi oi-task" >
+                            Categories
+                        </span>
+                    </Link>
+
+                </li>
+                <li className="list-group-item ">
+
+                    <Link to="/app/listofcat" style={MenuStyles.Link}>
+                        <span className="oi oi-task">
+                         View Categories
+                         </span>
+                    </Link>
+
+                </li>
+                <li className="list-group-item ">
+
+                    <Link to="/app/addToDo" style={MenuStyles.Link}>
+                        <span className="oi oi-task">
+                            Todo
+                        </span>
+                    </Link>
+
+                </li>
+                <li className="list-group-item">
+
+                    <Link to="/app/calendar" style={MenuStyles.Link}>
+                        <span className="oi oi-calendar">
+                            Calendar
+                        </span>
+                    </Link>
+
+                </li>
+
             </ul>
-            
-            
+
+
         )
     }
 }
