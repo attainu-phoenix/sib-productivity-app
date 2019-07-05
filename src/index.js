@@ -3,29 +3,36 @@ import ReactDOM from 'react-dom';
 import App from './components/App.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
-import {Provider} from 'react-redux';
-import {store} from './store/store.js';
+import { Provider } from 'react-redux';
+import { store } from './store/store.js';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 class Home extends React.Component {
 
     doRedirect() {
-        return (
-            <Redirect to="/signup" />
-        )
 
+        let loggedIn = localStorage.getItem("user");
+
+        if (loggedIn) {
+
+            return <Redirect to="/app" />
+
+        } else {
+
+            return <Redirect to="/login" />
+        }
     }
 
     render() {
         return (
-                <Provider store = {store}>
+            <Provider store={store}>
                 <Router>
-            <Route>
-                <Route path="/signup" component={Signup} />
-                <Route path="/app" component={App} />
-                <Route path="/login" component={Login} />
-               {/* {this.doRedirect()}*/}
-            </Route>
-            </Router>
+                    <Route>
+                        <Route path="/signup" component={Signup} />
+                        <Route path="/app" component={App} />
+                        <Route path="/login" component={Login} />
+                        {this.doRedirect()}
+                    </Route>
+                </Router>
             </Provider>
         )
     }
