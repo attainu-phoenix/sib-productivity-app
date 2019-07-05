@@ -1,7 +1,11 @@
 import React from 'react';
 import Header from '../components/Header.js'
-import Menu from './Menu.js'
+import Menu from './Menu.js';
+import {Route } from 'react-router-dom';
+import AddtodoComponent from './Addtodos.js';
 
+import AddCategoryComponent from './AddCategory.js';
+import CategoryListComponent from './CategoryList.js';
 const style = {
 
     container:{
@@ -14,6 +18,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                
                 <Header />
                 <div className="container" style={style.container}>
                     <div className="row">
@@ -21,25 +26,15 @@ class App extends React.Component {
                             <Menu/>
                         </div>
                         <div className="col-md-9">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1>Component Will Come Here.</h1>
-                                    <h1>Component Will Come Here.</h1>
-                                    <h1>Component Will Come Here.</h1>
-                                    <h1>Component Will Come Here.</h1>
-
+                            {/* <AddCategoryComponent /> */}
+                            <Route path="/app/todos" component={AddtodoComponent} />  
+                             <Route path="/app/categories" component={AddCategoryComponent} />
+                             <Route path="/app/listofcat" component={CategoryListComponent} />     
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-
-
-
-
-        )
+        );
     }
 }
 

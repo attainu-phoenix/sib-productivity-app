@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.js';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 class Home extends React.Component {
 
@@ -11,15 +12,19 @@ class Home extends React.Component {
 
     }
 
+
     render() {
         return (
-            <Route>
+            <Router>
                 <Route path="/app" component={App} />
                 {this.doRedirect()}
-            </Route>
+
+               
+
+            </Router>
         )
     }
 }
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
