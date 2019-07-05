@@ -1,7 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import {stateMapper} from '../store/store.js'
 import './signup.css'
-
-export default class SignupComponent extends React.Component {
+ class SignupComponent extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -40,7 +41,10 @@ export default class SignupComponent extends React.Component {
 		}
 		else {
 
-			alert("SIGNUP SUCCESS");
+		  this.props.dispatch({
+		  	type:"SIGNUP",
+		  	formdata:this.state
+		  })
 		}
 
 
@@ -176,3 +180,6 @@ export default class SignupComponent extends React.Component {
 	}
 
 }
+
+let Signup = connect(stateMapper)(SignupComponent)
+export default Signup;
