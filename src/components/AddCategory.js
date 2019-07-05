@@ -27,16 +27,21 @@ class AddCategoryComponent extends React.Component {
     }
 
     addCategory = () => {
+        
         this.id = this.categoryID + 1;
         const copyCategories=Object.assign([], this.state.categories);
         copyCategories.push({
             id: this.categoryID,
                 name: this.state.categoryName
         })
-
+    
         this.setState({
             categories: copyCategories
         })
+
+        if(this.categoryName === "") {
+            alert("please!");
+        }
         
     }
 
