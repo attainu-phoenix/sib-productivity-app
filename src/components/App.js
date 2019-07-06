@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
 import AddTodoComponent from '../components/Addtodos'
 
-import AddCategoryComponent from './AddCategory.js';
+import AddCategory from './AddCategory.js';
 import CategoryListComponent from './CategoryList.js';
 const style = {
 
@@ -30,7 +30,7 @@ class App extends React.Component {
                             <div className="card">
                                 <div className="card-body">
                                     <Route path="/app/addToDo" component={AddTodoComponent} />
-                                    <Route path="/app" exact={true} component={AddCategoryComponent} />
+                                    <Route path="/app" exact={true} component={AddCategory} />
                                      <Route path="/app/listofcat" component={CategoryListComponent} /> 
                                     
 

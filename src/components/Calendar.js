@@ -90,13 +90,10 @@ class CalendarComponent extends React.Component {
     onClickCheckBox(id, e) {
 
 
-
         let eventStatus = {
             id: id,
             isDone: e.target.checked
         }
-
-
         store.dispatch({
             type: 'EDIT_EVENT_CHECKBOX',
             payLoadData: eventStatus

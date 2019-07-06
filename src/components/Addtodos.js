@@ -1,15 +1,13 @@
 import React from 'react';
 
 import Header from '../components/Header.js'
-import Menu from './Menu.js';
-import AddCategoryComponent from './AddCategory.js';
 
-const style = {
+// const style = {
 
-    container: {
-        marginTop: '10%'
-    }
-}
+//     container: {
+//         marginTop: '10%'
+//     }
+// }
 
 class AddTodoComponent extends React.Component {
 
