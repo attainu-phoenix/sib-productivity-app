@@ -89,14 +89,10 @@ class CalendarComponent extends React.Component {
 
     onClickCheckBox(id, e) {
 
-
-
         let eventStatus = {
             id: id,
             isDone: e.target.checked
         }
-
-
         store.dispatch({
             type: 'EDIT_EVENT_CHECKBOX',
             payLoadData: eventStatus
@@ -142,12 +138,11 @@ class CalendarComponent extends React.Component {
 
     }
     deleteEvent(index, e) {
-        console.log("Delete Event Clicked ")
+        console.log("Delete Event Clicked index :",index);
 
-        let events = Object.assign([], this.state.events);
-        events.splice(index, 1);
-        this.setState({
-            events: events
+        store.dispatch({
+            type:"DELETE_EVENT",
+            payLoadData:index
         })
 
     }

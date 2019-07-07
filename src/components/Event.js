@@ -35,7 +35,7 @@ class EventComponent extends React.Component {
             <div className="row justify-content-between align-items-center border  bg-light ">
                 <div className="col-md-1">
                     <input type="checkbox" aria-label="Checkbox for following text input"
-                        name={this.props.eventTitle} checked={this.props.checked}
+                        name={this.props.eventTitle} checked={this.props.checked} value={this.props.checked}
                         onChange={this.props.onClickCheckBox} key={this.props.eventTitle} />
                 </div>
                 <div className="col-md-8">
