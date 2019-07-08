@@ -29,7 +29,6 @@ class EventsComponent extends React.Component {
 
 
     onChange(event) {
-        // console.log(event.target.name)
         let name = event.target.name;
         let value = event.target.value;
 
@@ -44,7 +43,7 @@ class EventsComponent extends React.Component {
     }
 
     saveEvent(event, e) {
-        console.log("Value of e ===>", event)
+      
         let $ = window.$;
         let modal = this.modal.current;
         $(modal).modal("hide");
@@ -65,7 +64,7 @@ class EventsComponent extends React.Component {
     }
 
     deleteEvent(index,e) {
-        console.log("Delete Event called  index ",index);
+        
         
         let $ = window.$;
         let deleteModal = this.deleteModal.current;
@@ -78,7 +77,7 @@ class EventsComponent extends React.Component {
     }
 
     onChangeCheckBox(id, e) {
-        console.log("onChangeCheckBox Called ..")
+    
         let eventStatus = {
             id: id,
             isDone: e.target.checked
