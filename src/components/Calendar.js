@@ -28,6 +28,7 @@ class CalendarComponent extends React.Component {
         this.showEventsTodayAndMonthly = this.showEventsTodayAndMonthly.bind(this);
         this.keyCount = 0;
         this.getKey = this.getKey.bind(this);
+        
 
         this.state = {
             dateContext: moment(),
