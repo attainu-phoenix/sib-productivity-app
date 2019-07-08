@@ -79,9 +79,31 @@ function eventReducer(events = [], action) {
         return newEventsArray;
     }
 
+    if(action.type === 'EDIT_EVENT'){
+        let eventData ={
+            id:action.payLoadData.id,
+            title:action.payLoadData.title,
+            description:action.payLoadData.description,
+            
+        }
+        console.log(eventData)
+        let index = events.findIndex((event)=>{
+            return event.id === eventData.id;
+        }) 
+        let event = Object.assign({},events[index]);
+        event.eventTitle = eventData.title;
+        event.description = eventData.description;
+        let newEventsArray = Object.assign([],events);
+        newEventsArray[index] = event;
+        return newEventsArray;
+        
+    }
+
     if (action.type === 'DELETE_EVENT'){
+       
+        console.log("Delete Index ",action.index)
         let eventState = events.slice();
-        eventState.splice(action.payLoadData.index,1);
+        eventState.splice(action.index,1);
         return eventState;
     }
     return events;
