@@ -39,13 +39,14 @@ class ListCategoryComponent extends React.Component {
     }
 
     renderCatergories() {
+        console.log(this.props)
         return this.props.categories.map((c) => {
             return (
 
                 <div key={c} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
                     <div className="col-md-8">
-                        <Link to={`/app/addToDo`} style={style.link}>{c}</Link>
+                        <Link to={`/app/addToDo/${c}`} style={style.link}>{c}</Link>
                     </div>
                     <div className="col-md-1">
                         <span className="oi oi-trash" name={c} onClick={this.delete.bind(this, c)} defaultValue={c}></span>
