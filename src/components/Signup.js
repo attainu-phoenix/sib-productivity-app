@@ -78,7 +78,7 @@ import './signup.css'
 			newFormState.isCpasswordValid = false;
 			newFormState.isFormValid = false;
 		}
-		if (this.state.password != this.state.cpassword) {
+		if (this.state.password !== this.state.cpassword) {
 			newFormState.isPassMatch = false;
 			newFormState.isFormValid = true;
 		}
