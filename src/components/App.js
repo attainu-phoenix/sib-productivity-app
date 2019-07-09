@@ -28,14 +28,14 @@ class App extends React.Component {
                         </div>
                         <div className="col-md-9">
                             <div className="card">
-                                <div className="card-body">
+                                
                                     <Route path="/app/addToDo" component={AddTodoComponent} />
                                     <Route path="/app" exact={true} component={AddCategoryComponent} />
                                      <Route path="/app/listofcat" component={CategoryListComponent} /> 
                                     
 
                                     <Route path="/app/calendar" component={Calendar} />
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

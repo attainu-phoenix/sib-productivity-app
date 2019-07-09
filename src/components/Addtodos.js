@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import Header from '../components/Header.js'
 import Menu from './Menu.js';
 import AddCategoryComponent from './AddCategory.js';
@@ -18,44 +18,25 @@ class AddTodoComponent extends React.Component {
             <div>
                 <Header />
                 <div className="col-md-9">
-                    <div className="card">
-                        <div className="card-body">
+                    
                             <h6>Category Name</h6>
                             
-
+                                <input type="text" className="form-cntrol"></input>
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                        </input>
                                         <label class="form-check-label" for="exampleCheck1">Todo 1</label>
                                 </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                       </input>
-                                        <label class="form-check-label" for="exampleCheck1">Todo 2</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                       </input>
-                                        <label class="form-check-label" for="exampleCheck1">Todo 3</label>
-                                </div>
-                            
-                            
-                        
+                               
 
 
-
-                                <a href="/app/todos" className="btn btn-secondary" role="button">Add Todo</a>&nbsp;
-                            <a href="/app/todos" className="btn btn-secondary" role="button">View Todo</a>&nbsp;
-                            <a href="/app/todos" className="btn btn-secondary" role="button">Go to Todo</a>&nbsp;
+                                <Link to="/app/addToDo" className="btn btn-danger" role="button">Add Todo</Link>&nbsp;
+                            <Link to="/app/addToDo" className="btn btn-danger" role="button">View Todo</Link>&nbsp;
+                            <Link to="/app/addToDo" className="btn btn-danger" role="button">Delete Todo</Link>&nbsp;
         
                             
     
                         </div>
-
-                        </div>
-                    </div>
-
-
                 </div>
                 );
             }
