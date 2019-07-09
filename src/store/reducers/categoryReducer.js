@@ -3,13 +3,15 @@ function categoryReduer(categories = [], action) {
 
     if (action.type === "FETCH_CATEGORES") {
         return categories = ['shopping', 'Excersise', 'study', 'Household Chores']
+        
     }
 
     if (action.type === "ADD_CATEGORIES") {
         let category = action.categoryName
-
-        categories.push(category)
-        return categories;
+        let newCatergoryArray = Object.assign([],categories);
+        newCatergoryArray.push(category);
+ 
+        return newCatergoryArray;
     }
 
     if (action.type === "DELETE_CATEGORY") {
@@ -19,8 +21,7 @@ function categoryReduer(categories = [], action) {
         console.log(index);
         let newCatergories = categories.slice();
         newCatergories.splice(index, 1);
-        return newCatergories;
-       
+        return newCatergories;  
     }
     return categories;
 }

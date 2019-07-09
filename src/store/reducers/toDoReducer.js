@@ -5,14 +5,17 @@ function toDoReducer(toDos = [], action) {
     if (action.type === 'ADD_TODO') {
         let toDoData = {
             toDo: action.payLoadData.toDo,
-            categoryName: action.payLoadData.categoryName
+            categoryName: action.payLoadData.categoryName,
+            description:action.payLoadData.description,
+            date:action.payLoadData.date
         }
-        toDos.push(toDoData);
-        return toDos;
+        let newToDosArray = Object.assign([],toDos);
+        newToDosArray.push(toDoData)
+        return newToDosArray;
     }
 
     if (action.type === 'FETCH_TODOS_OF_CATEGORY') {
-        console.log("PayloadData in toDoReducer while fetching todos =>"+action.payLoadData)
+       console.log("PayloadData in toDoReducer while fetching todos =>"+action.payLoadData)
         let categoryName = action.payLoadData;
         function filterByCategoryName(toDos,categoryName){
             return toDos.filter(function(item){
@@ -20,7 +23,8 @@ function toDoReducer(toDos = [], action) {
             })
         }
         let newToDosArray = filterByCategoryName(toDos,categoryName);
-        return newToDosArray;
+        return newToDosArray
+        // return toDos;
     }
 
     if (action.type === 'DELETE_TODO') {

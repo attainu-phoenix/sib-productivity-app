@@ -28,6 +28,7 @@ class AddCategoryComponent extends React.Component {
         };
     }
     componentDidMount() {
+        console.log("FETCH_CATEGORES called ..")
         store.dispatch({
             type: "FETCH_CATEGORES"
         })
@@ -57,7 +58,7 @@ class AddCategoryComponent extends React.Component {
             newFormState.isFormValid = false
             newFormState.isNameValid = false
         }
-        console.log(newFormState)
+
         this.setState({
             formState: newFormState
         })
@@ -75,7 +76,6 @@ class AddCategoryComponent extends React.Component {
             type: "ADD_CATEGORIES",
             categoryName: this.state.name
         })
-
     }
 
     addCategory = () => {
@@ -111,20 +111,6 @@ class AddCategoryComponent extends React.Component {
             <div>
                 <h6>Category </h6>
                 <form onSubmit={this.handleFormSubmit}>
-                    {/* 
-                    <div className="form-row">
-                        <div className="col-6">
-                            <input type="text" className="form-control" onChange={this.categoryName}></input>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         <div className="col">
-                            <button type="button" onClick={this.addCategory} className="btn btn-secondary">
-                                <span className="oi oi-plus"></span>
-                            </button>
-                        </div>
-                    </div> */}
 
                     <div className="input-group mb-3">
                         <input type="text" name="name" className={`form-control ${!this.state.formState.isNameValid && 'is-invalid'}`} onChange={this.onChange} placeholder="Enter Categories" aria-label="Recipient's username" aria-describedby="button-addon2" />
@@ -135,25 +121,7 @@ class AddCategoryComponent extends React.Component {
 
 
                 </form>
-                {/* 
-                    <ul className="list-group list-group-flush">
-                        {
-                            this.state.categories.map((category, index) => {
-
-                                return (
-                                    <ListComponent
-                                        key={category.id}
-                                        id={category.id}
-                                        name={category.name}
-                                        delete={this.deleteCategory}
-
-                                    />
-                                );
-
-                            })
-                        }
-                    </ul> */}
-                    <ListCategory/>
+                <ListCategory />
             </div>
 
 

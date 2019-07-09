@@ -23,8 +23,14 @@ class ToDosComponent extends React.Component {
     constructor(props){
         super(props)
         this.delete = this.delete.bind(this);
+        this.keyCount = 0;
+        this.getKey = this.getKey.bind(this);
     }
 
+
+    getKey() {
+        return this.keyCount++;
+    }
 
     delete(name, e) {
         // console.log(name)
@@ -38,7 +44,7 @@ class ToDosComponent extends React.Component {
         return this.props.toDos.map((t) => {
            
             return (
-                <div key={t.toDo} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
+                <div key={this.getKey()} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
                     <div className="col-md-8">
                         <Link to={`/app/addToDo/${t.toDo}`} style={style.link}>{t.toDo}</Link>
