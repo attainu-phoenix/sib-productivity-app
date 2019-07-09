@@ -9,6 +9,8 @@ class CalendarActionButtons extends React.Component {
     constructor(props) {
         super(props)
         this.onChange = this.onChange.bind(this);
+        this.addEventModal = React.createRef();
+        this.addButtonClicked = this.addButtonClicked.bind(this);
         this.state = {
             date: new Date(),
         }
@@ -18,6 +20,12 @@ class CalendarActionButtons extends React.Component {
     onChange(date) {
 
         
+    }
+
+    addButtonClicked(){
+        let $ = window.$;
+        let modal = this.addEventModal.current;
+        $(modal).modal("hide");
     }
 
     render() {
@@ -36,7 +44,7 @@ class CalendarActionButtons extends React.Component {
                 <p></p>
                 <button type="button" className="btn btn-danger" style={CalendarStyles.marginRight} data-toggle="modal" data-target="#exampleModalCenter">Add Event</button>
 
-                <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div ref={this.addEventModal} className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header" style={CalendarStyles.modalHeadeBackgroundColor}>
@@ -68,7 +76,7 @@ class CalendarActionButtons extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-light border"  >Add</button>
+                                <button type="submit" className="btn btn-light border"  onClick={this.addButtonClicked}>Add</button>
                                 
                             </div>
                             </form>
