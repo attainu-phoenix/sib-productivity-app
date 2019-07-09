@@ -66,7 +66,8 @@ class CalendarComponent extends React.Component {
 
 
         store.dispatch({
-            type: "FETCH_EVENTS"
+            type: "FETCH_EVENTS",
+            email:"shivam@gmail.com"
         })
 
         this.setState({
@@ -184,6 +185,7 @@ class CalendarComponent extends React.Component {
         }
         let eventData = {
             id: this.getKey(),
+            email:"shivam@gmail.com",
             isDone: false,
             eventTitle: this.state.addEventTitle,
             description: this.state.addEventDescription,
@@ -259,7 +261,7 @@ class CalendarComponent extends React.Component {
                     <div className="card-body">
 
 
-
+                        
                         <Events isTodayEvents={this.state.isTodayEvents} />
 
                     </div>

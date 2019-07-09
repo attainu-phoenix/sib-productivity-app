@@ -7,6 +7,7 @@ import UniqueId from 'react-html-id';
 import { stateMapper, store } from '../store/store.js'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import Spinner from './Spinner.js'
 
 class EventsComponent extends React.Component {
 
@@ -89,6 +90,7 @@ class EventsComponent extends React.Component {
     }
 
     renderEvents() {
+       
         return this.props.events.map((e, index) => {
 
             let optionPopoverId = this.nextUniqueId();
@@ -333,9 +335,9 @@ class EventsComponent extends React.Component {
         let events;
         let isToday = this.props.isTodayEvents;
         if (isToday) {
-            events = this.renderTodayEvents()
+            events = this.props.isEventLoading ? <Spinner/> :this.renderTodayEvents();
         } else {
-            events = this.renderEvents();
+            events = this.props.isEventLoading ? <Spinner/> : this.renderEvents();
         }
         return (
             <div>
