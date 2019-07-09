@@ -4,7 +4,7 @@ import Menu from './Menu.js'
 import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
 import AddTodoComponent from '../components/Addtodos'
-
+import ToDo from '../components/ToDo'
 import AddCategory from './AddCategory.js';
 import CategoryListComponent from './CategoryList.js';
 const style = {
@@ -31,9 +31,9 @@ class App extends React.Component {
                                 <div className="card-body">
                                     <Route path="/app/addToDo/:categoryName" component={AddTodoComponent} />
                                     <Route path="/app" exact={true} component={AddCategory} />
-                                     <Route path="/app/listofcat" component={CategoryListComponent} /> 
+                                    <Route path="/app/listofcat" component={CategoryListComponent} />
                                     
-
+                                    <Route path="/app/toDo/" component={ToDo} />
                                     <Route path="/app/calendar" component={Calendar} />
                                 </div>
                             </div>
