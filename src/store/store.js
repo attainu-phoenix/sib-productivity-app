@@ -5,10 +5,12 @@ import categoryReduer  from './reducers/categoryReducer.js';
 
 
 
+
 let reducer = combineReducers({
     userReducer : userReducer,
     events:eventReducer,
-    categories:categoryReduer
+    categories:categoryReduer,
+
 
 })
 

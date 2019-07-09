@@ -72,4 +72,4 @@ class ListCategoryComponent extends React.Component {
 }
 
 let ListCategory = connect(stateMapper)(ListCategoryComponent)
-export default ListCategory;                      
+export default ListCategory; 
