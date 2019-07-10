@@ -44,19 +44,22 @@ class EventsComponent extends React.Component {
     }
 
     saveEvent(event, e) {
-      
+
         let $ = window.$;
         let modal = this.modal.current;
         $(modal).modal("hide");
+        $('.modal-backdrop').remove();
         let data = {
             id: event.id,
             title: this.state.title === "" ? event.eventTitle : this.state.title,
             description: this.state.description === "" ? event.description : this.state.description,
+            objectId: event.objectId
 
         }
         if (this.state.title === '' && this.state.description === '') {
             return;
         }
+
         store.dispatch({
             type: 'EDIT_EVENT',
             payLoadData: data
@@ -64,9 +67,9 @@ class EventsComponent extends React.Component {
 
     }
 
-    deleteEvent(index,e) {
-        
-        
+    deleteEvent(index, e) {
+
+
         let $ = window.$;
         let deleteModal = this.deleteModal.current;
         $(deleteModal).modal("hide");
@@ -78,7 +81,7 @@ class EventsComponent extends React.Component {
     }
 
     onChangeCheckBox(id, e) {
-    
+
         let eventStatus = {
             id: id,
             isDone: e.target.checked
@@ -90,7 +93,7 @@ class EventsComponent extends React.Component {
     }
 
     renderEvents() {
-       
+
         return this.props.events.map((e, index) => {
 
             let optionPopoverId = this.nextUniqueId();
@@ -335,9 +338,9 @@ class EventsComponent extends React.Component {
         let events;
         let isToday = this.props.isTodayEvents;
         if (isToday) {
-            events = this.props.isEventLoading ? <Spinner/> :this.renderTodayEvents();
+            events = this.props.isEventLoading ? <Spinner /> : this.renderTodayEvents();
         } else {
-            events = this.props.isEventLoading ? <Spinner/> : this.renderEvents();
+            events = this.props.isEventLoading ? <Spinner /> : this.renderEvents();
         }
         return (
             <div>

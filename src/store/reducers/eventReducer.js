@@ -1,4 +1,4 @@
-import { addEvent, fetchEventsByEmail } from '../api/eventApi'
+import { addEvent, fetchEventsByEmail ,editEvent} from '../api/eventApi'
 import { store } from '../store.js'
 
 function eventReducer(events = [], action) {
@@ -37,22 +37,25 @@ function eventReducer(events = [], action) {
     }
 
     if (action.type === 'EDIT_EVENT') {
-        let eventData = {
-            id: action.payLoadData.id,
-            title: action.payLoadData.title,
-            description: action.payLoadData.description,
+        // let eventData = {
+        //     id: action.payLoadData.id,
+        //     title: action.payLoadData.title,
+        //     description: action.payLoadData.description,
+        //     objectId:action.payLoadData.objectId
 
-        }
-        console.log(eventData)
-        let index = events.findIndex((event) => {
-            return event.id === eventData.id;
-        })
-        let event = Object.assign({}, events[index]);
-        event.eventTitle = eventData.title;
-        event.description = eventData.description;
-        let newEventsArray = Object.assign([], events);
-        newEventsArray[index] = event;
-        return newEventsArray;
+        // }
+        editEvent(store,action)
+        // console.log(eventData)
+        // let index = events.findIndex((event) => {
+        //     return event.id === eventData.id;
+        // })
+        // let event = Object.assign({}, events[index]);
+        // event.eventTitle = eventData.title;
+        // event.description = eventData.description;
+        // let newEventsArray = Object.assign([], events);
+        // newEventsArray[index] = event;
+        // return newEventsArray;
+        return events;
 
     }
 

@@ -19,7 +19,7 @@ function fetchEventsByEmail(store, action) {
             return data.json()
         })
         .then(function (data) {
-          
+            //   console.log(data)
             store.dispatch({
                 type: "EVENTS_LOADED",
                 events: data.results
@@ -44,7 +44,7 @@ function addEvent(store, action) {
     }
 
     let data = JSON.stringify(eventData)
-    
+
 
     fetch(url, {
         method: "POST",
@@ -55,20 +55,47 @@ function addEvent(store, action) {
             return data.json()
         })
         .then(function (data) {
-           
-            // store.dispatch({
-            //     type: "EVENTS_LOADED",
-            //     events: data.results
-            // })
-
             store.dispatch({
                 type: "FETCH_EVENTS",
-                email:action.formData.email
+                email: action.formData.email
             })
 
         })
         .catch(error => console.log(error))
 }
 
+function editEvent(store, action) {
+    let objectId = action.payLoadData.objectId;
 
-export { addEvent,fetchEventsByEmail }
+    let eventData = {
+        // id: action.payLoadData.id,
+        eventTitle: action.payLoadData.title,
+        description: action.payLoadData.description
+    }
+    let data = JSON.stringify(eventData);
+    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+    fetch(url, {
+        method: "put",
+        headers:HEADERS,
+        body:data
+    })
+    .then(function(data){
+       
+        return data.json();
+    })
+    .then(function(data){
+       
+        store.dispatch({
+            type:"FETCH_EVENTS",
+            email:"shivam@gmail.com"
+
+        })
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+
+}
+
+
+export { addEvent, fetchEventsByEmail, editEvent }
