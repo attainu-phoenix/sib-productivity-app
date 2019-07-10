@@ -76,26 +76,58 @@ function editEvent(store, action) {
     let url = `http://localhost:1337/parse/classes/events/${objectId}`;
     fetch(url, {
         method: "put",
-        headers:HEADERS,
-        body:data
+        headers: HEADERS,
+        body: data
     })
-    .then(function(data){
-       
-        return data.json();
-    })
-    .then(function(data){
-       
-        store.dispatch({
-            type:"FETCH_EVENTS",
-            email:"shivam@gmail.com"
+        .then(function (data) {
 
+            return data.json();
         })
-    })
-    .catch(function(error){
-        console.log(error);
-    })
+        .then(function (data) {
+
+            store.dispatch({
+                type: "FETCH_EVENTS",
+                email: "shivam@gmail.com"
+
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
 
 }
 
 
-export { addEvent, fetchEventsByEmail, editEvent }
+function editCheckBox(store, action) {
+    let objectId = action.payLoadData.id;
+
+    let eventStatus = {
+       
+        isDone: action.payLoadData.isDone
+    }
+    let data = JSON.stringify(eventStatus);
+    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+    fetch(url, {
+        method: "put",
+        headers: HEADERS,
+        body: data
+    })
+        .then(function (data) {
+
+            return data.json();
+        })
+        .then(function (data) {
+
+            store.dispatch({
+                type: "FETCH_EVENTS",
+                email: "shivam@gmail.com"
+
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+
+export { addEvent, fetchEventsByEmail, editEvent, editCheckBox }

@@ -86,6 +86,7 @@ class EventsComponent extends React.Component {
             id: id,
             isDone: e.target.checked
         }
+        console.log(eventStatus)
         store.dispatch({
             type: 'EDIT_EVENT_CHECKBOX',
             payLoadData: eventStatus
@@ -107,7 +108,7 @@ class EventsComponent extends React.Component {
                     <div className="col-md-1">
                         <input type="checkbox" aria-label="Checkbox for following text input"
                             name="isCheck" checked={e.isDone} value={e.isDone}
-                            onChange={this.onChangeCheckBox.bind(this, e.id)} key={e.eventTitle} />
+                            onChange={this.onChangeCheckBox.bind(this, e.objectId)} key={e.eventTitle} />
                     </div>
                     <div className="col-md-8">
                         <p style={CalendarStyles.content}>{e.eventTitle}</p>
