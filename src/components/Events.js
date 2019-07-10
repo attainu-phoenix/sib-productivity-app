@@ -7,6 +7,7 @@ import UniqueId from 'react-html-id';
 import { stateMapper, store } from '../store/store.js'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import Spinner from './Spinner.js'
 
 class EventsComponent extends React.Component {
 
@@ -43,19 +44,22 @@ class EventsComponent extends React.Component {
     }
 
     saveEvent(event, e) {
-      
+
         let $ = window.$;
         let modal = this.modal.current;
         $(modal).modal("hide");
+        $('.modal-backdrop').remove();
         let data = {
             id: event.id,
             title: this.state.title === "" ? event.eventTitle : this.state.title,
             description: this.state.description === "" ? event.description : this.state.description,
+            objectId: event.objectId
 
         }
         if (this.state.title === '' && this.state.description === '') {
             return;
         }
+
         store.dispatch({
             type: 'EDIT_EVENT',
             payLoadData: data
@@ -63,25 +67,27 @@ class EventsComponent extends React.Component {
 
     }
 
-    deleteEvent(index,e) {
-        
-        
+    deleteEvent(objectId, e) {
+
+
         let $ = window.$;
         let deleteModal = this.deleteModal.current;
         $(deleteModal).modal("hide");
+        $('.modal-backdrop').remove();
         store.dispatch({
             type: "DELETE_EVENT",
-            index: index
+            objectId: objectId
         })
 
     }
 
     onChangeCheckBox(id, e) {
-    
+
         let eventStatus = {
             id: id,
             isDone: e.target.checked
         }
+        console.log(eventStatus)
         store.dispatch({
             type: 'EDIT_EVENT_CHECKBOX',
             payLoadData: eventStatus
@@ -89,6 +95,7 @@ class EventsComponent extends React.Component {
     }
 
     renderEvents() {
+
         return this.props.events.map((e, index) => {
 
             let optionPopoverId = this.nextUniqueId();
@@ -102,7 +109,7 @@ class EventsComponent extends React.Component {
                     <div className="col-md-1">
                         <input type="checkbox" aria-label="Checkbox for following text input"
                             name="isCheck" checked={e.isDone} value={e.isDone}
-                            onChange={this.onChangeCheckBox.bind(this, e.id)} key={e.eventTitle} />
+                            onChange={this.onChangeCheckBox.bind(this, e.objectId)} key={e.eventTitle} />
                     </div>
                     <div className="col-md-8">
                         <p style={CalendarStyles.content}>{e.eventTitle}</p>
@@ -193,7 +200,7 @@ class EventsComponent extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-light border" onClick={this.deleteEvent.bind(this, index)}>Delete</button>
+                                    <button type="button" className="btn btn-light border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +228,7 @@ class EventsComponent extends React.Component {
                         <div className="col-md-1">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 name={e.eventTitle} checked={e.isDone} value={e.isDone}
-                                onChange={this.onChangeCheckBox} key={e.eventTitle} />
+                                onChange={this.onChangeCheckBox.bind(this, e.objectId)} key={e.eventTitle} />
                         </div>
                         <div className="col-md-8">
                             <p style={CalendarStyles.content}>{e.eventTitle}</p>
@@ -283,7 +290,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="submit" className="btn btn-light border" onClick={this.saveEvent}>Save</button>
+                                        <button type="submit" className="btn btn-light border" onClick={this.saveEvent.bind(this, e)}>Save</button>
                                     </div>
 
 
@@ -312,7 +319,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-light border" onClick={this.deleteEvent}>Delete</button>
+                                        <button type="button" className="btn btn-light border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -333,9 +340,9 @@ class EventsComponent extends React.Component {
         let events;
         let isToday = this.props.isTodayEvents;
         if (isToday) {
-            events = this.renderTodayEvents()
+            events = this.props.isEventLoading ? <Spinner /> : this.renderTodayEvents();
         } else {
-            events = this.renderEvents();
+            events = this.props.isEventLoading ? <Spinner /> : this.renderEvents();
         }
         return (
             <div>
