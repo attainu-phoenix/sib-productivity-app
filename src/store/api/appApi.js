@@ -1,5 +1,9 @@
 'use strict'
 let events;
+const HEADERS = {
+      "X-Parse-Application-Id": "checklist",
+      "Content-Type": "application/json"           
+                 }
 
 function fetchEvent(store, action) {
     events = [
@@ -29,5 +33,30 @@ function addEvent(store, action) {
     
 }
 
+function Do_signup(store,action){
+     let url = "http://localhost:1337/parse/users";                             
 
-export { addEvent ,fetchEvent}
+      fetch(url,{
+          method: "post",
+          headers:HEADERS,
+          body: JSON.stringify({
+                   username: action.formdata.email,
+                   password:action.formdata.password,
+                   email: action.formdata.email,
+                   name:action.formdata.name
+                                })       
+                 })
+      .then(data => data.json())
+      .then(json =>{
+                      console.log("DATA CREATED",json);
+       store.dispatch({
+                type:"USER_CREATED",
+                newuser:json
+
+            })
+                    })
+       .catch(err => console.log(err));                                                               
+}
+
+
+export { addEvent ,fetchEvent, Do_signup}

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {stateMapper} from '../store/store.js'
+import HeaderComponent from './Header.js';
 import './signup.css'
  class SignupComponent extends React.Component {
 	constructor(props) {
@@ -24,6 +25,7 @@ import './signup.css'
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.validateForm = this.validateForm.bind(this);
 	}
+	 
 
 	onChange(event) {
 		let name = event.target.name;
@@ -91,12 +93,27 @@ import './signup.css'
 
 	}
 
+    didsignup(){
+    	if (this.props.objectId) {
+            return "<h1>CREATED</h1>";
+        } 
 
+
+    }
 	render() {
+		/*if(this.props.newUser.objectId){
+            return "<h1>Hello</h1>";
+        }*/
 		return (
+			<div>
+
+			 <HeaderComponent/>
 			<div className="container">
 				<div className="row justify-content-center">
+				
 					<div className="col-4">
+                       {this.didsignup()}
+                  
 						<label for="show" class="title">sign up<i className="flag left"></i><i className="flag right"></i></label>
 						<form onSubmit={this.handleSubmit} className="shadow p-3 mb-5 bg-white roundedshadow p-3 mb-5 bg-white rounded">
 							{
@@ -175,6 +192,7 @@ import './signup.css'
 
 					</div>
 				</div>
+			</div>
 			</div>
 		);
 	}

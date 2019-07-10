@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './header.css';
 
 
@@ -21,10 +22,10 @@ class HeaderComponent extends React.Component {
             </form>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link text-white" href="/#">Signup</a>
+                <Link className="nav-link text-white" to="/signup">Signup</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white" href="/#">Login</a>
+                <Link className="nav-link text-white" to="/login">Login</Link>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

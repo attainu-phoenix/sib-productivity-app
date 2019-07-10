@@ -25,7 +25,7 @@ class Home extends React.Component {
 
         } else {
 
-            return <Redirect to="/login" />
+            return <Redirect to="/" />
         }
     }
 
@@ -37,7 +37,7 @@ class Home extends React.Component {
                 <Router>
 
             <Route>
-                 <Route path="/" component={HomeComponent} />
+                 <Route path="/" exact = {true} component={HomeComponent} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/app" component={App} />
                 <Route path="/login" component={Login} />
