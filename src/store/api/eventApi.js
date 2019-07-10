@@ -102,7 +102,7 @@ function editCheckBox(store, action) {
     let objectId = action.payLoadData.id;
 
     let eventStatus = {
-       
+
         isDone: action.payLoadData.isDone
     }
     let data = JSON.stringify(eventStatus);
@@ -129,5 +129,31 @@ function editCheckBox(store, action) {
         })
 }
 
+function deleteEvent(store, action) {
 
-export { addEvent, fetchEventsByEmail, editEvent, editCheckBox }
+    let objectId = action.objectId
+    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+
+    fetch(url, {
+        method: "delete",
+        headers: HEADERS
+    })
+        .then(function (data) {
+            return data.json();
+        })
+        .then(function (json) {
+            console.log(json)
+            store.dispatch({
+                type: "FETCH_EVENTS",
+                email: "shivam@gmail.com"
+
+            })
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+
+}
+
+
+export { addEvent, fetchEventsByEmail, editEvent, editCheckBox, deleteEvent }

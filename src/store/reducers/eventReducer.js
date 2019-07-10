@@ -1,4 +1,4 @@
-import { addEvent, fetchEventsByEmail, editEvent, editCheckBox } from '../api/eventApi'
+import { addEvent, fetchEventsByEmail, editEvent, editCheckBox,deleteEvent } from '../api/eventApi'
 import { store } from '../store.js'
 
 function eventReducer(events = [], action) {
@@ -32,10 +32,8 @@ function eventReducer(events = [], action) {
 
     if (action.type === 'DELETE_EVENT') {
 
-        console.log("Delete Index ", action.index)
-        let eventState = events.slice();
-        eventState.splice(action.index, 1);
-        return eventState;
+        deleteEvent(store,action)
+        return events;
     }
     return events;
 }
