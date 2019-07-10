@@ -213,12 +213,12 @@ class CalendarComponent extends React.Component {
     }
 
     selectMonth(event) {
-        console.log(event.target.value)
+      
         this.setState({ currentMonth: event.target.value })
     }
 
     showEventsTodayAndMonthly(e) {
-        console.log(e.target.value)
+       
         let value = e.target.value;
         if (value === 'Today') {
             this.setState({
@@ -233,7 +233,7 @@ class CalendarComponent extends React.Component {
     }
 
     render() {
-
+       
 
         return (
             <div>
@@ -262,7 +262,7 @@ class CalendarComponent extends React.Component {
 
 
                         
-                        <Events isTodayEvents={this.state.isTodayEvents} />
+                        <Events isTodayEvents={this.state.isTodayEvents} currentMonth={this.state.currentMonth}/>
 
                     </div>
                 </div>

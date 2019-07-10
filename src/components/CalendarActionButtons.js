@@ -32,17 +32,17 @@ class CalendarActionButtons extends React.Component {
         return (
             <div className="row justify-content-around">
                 {/* <input type="text" className="form-control"/> */}
-                <div className="btn-group">
+                {/* <div className="btn-group">
                     <select className="custom-select my-1 mr-sm-2 btn btn-light" onChange={this.props.onChangeSelect} id="inlineFormCustomSelectPref">
                         <option defaultValue>Events</option>
                         <option value="ToDos">ToDos</option>
 
                     </select>
-                </div>
+                </div> */}
                 <p></p>
                 <p></p>
                 <p></p>
-                <button type="button" className="btn btn-danger" style={CalendarStyles.marginRight} data-toggle="modal" data-target="#exampleModalCenter">Add Event</button>
+                <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add Event</button>
 
                 <div ref={this.addEventModal} className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
