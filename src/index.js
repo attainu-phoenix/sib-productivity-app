@@ -6,9 +6,13 @@ import Signup from './components/Signup.js';
 import { Provider } from 'react-redux';
 import { store } from './store/store.js';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
+
 class Home extends React.Component {
 
     doRedirect() {
+
+
 
         let loggedIn = localStorage.getItem("user");
 
@@ -24,6 +28,8 @@ class Home extends React.Component {
 
 
     render() {
+
+
         return (
             <Provider store={store}>
                 <Router>

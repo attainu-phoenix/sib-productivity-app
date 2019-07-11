@@ -13,6 +13,24 @@ const style = {
 
 class AddTodoComponent extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state ={
+            id: "",
+            name: ""
+        }
+
+        this.addTodo = this.addTodo.bind(this);
+    }
+
+    addTodo(event) {
+
+        this.setState({
+            name: event.target.value 
+        });
+        
+    }
     render() {
         return (
             <div>
@@ -21,7 +39,7 @@ class AddTodoComponent extends React.Component {
                     
                             <h6>Category Name</h6>
                             
-                                <input type="text" className="form-cntrol"></input>
+                                <input type="text" onChange={this.addTodo} className="form-cntrol"></input>
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                        </input>
