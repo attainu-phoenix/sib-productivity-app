@@ -1,48 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.js';
-import Login from './components/Login.js';
-import Signup from './components/Signup.js';
-import { Provider } from 'react-redux';
-import { store } from './store/store.js';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-
-
-class Home extends React.Component {
-
-    doRedirect() {
+// import App from './components/App.js';
+// import Login from './components/Login.js';
+// import Signup from './components/Signup.js';
+// import { Provider } from 'react-redux';
+// import { store } from './store/store.js';
+// import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import LandingPage from './components/crome-extension/LandingPage'
 
 
 
-        let loggedIn = localStorage.getItem("user");
+// class Home extends React.Component {
 
-        if (loggedIn) {
-
-            return <Redirect to="/app" />
-
-        } else {
-
-            return <Redirect to="/login" />
-        }
-    }
-
-    render() {
+//     doRedirect() {
 
 
-        return (
-            <Provider store={store}>
-                <Router>
-                    <Route>
-                        <Route path="/signup" component={Signup} />
-                        <Route path="/app" component={App} />
-                        <Route path="/login" component={Login} />
-                        {this.doRedirect()}
-                    </Route>
-                </Router>
-            </Provider>
-        )
-    }
-}
+
+//         let loggedIn = localStorage.getItem("user");
+
+//         if (loggedIn) {
+
+//             return <Redirect to="/app" />
+
+//         } else {
+
+//             return <Redirect to="/login" />
+//         }
+//     }
+
+//     render() {
 
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+//         return (
+//             <Provider store={store}>
+//                 <Router>
+//                     <Route>
+//                         <Route path="/signup" component={Signup} />
+//                         <Route path="/app" component={App} />
+//                         <Route path="/login" component={Login} />
+//                         {this.doRedirect()}
+//                     </Route>
+//                 </Router>
+//             </Provider>
+//         )
+//     }
+// }
+
+
+ReactDOM.render(<LandingPage />, document.getElementById('root'));
