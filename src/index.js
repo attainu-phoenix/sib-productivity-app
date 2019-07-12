@@ -6,7 +6,9 @@ import ReactDOM from 'react-dom';
 // import { Provider } from 'react-redux';
 // import { store } from './store/store.js';
 // import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import LandingPage from './components/crome-extension/LandingPage'
+// import LandingPage from './components/crome-extension/LandingPage'
+// import Login from './components/crome-extension/Login'
+import ToDoList from './components/crome-extension/ToDoList'
 
 
 
@@ -47,4 +49,6 @@ import LandingPage from './components/crome-extension/LandingPage'
 // }
 
 
-ReactDOM.render(<LandingPage />, document.getElementById('root'));
+ReactDOM.render(<ToDoList/>, document.getElementById('root'));
+// ReactDOM.render(<LandingPage/>, document.getElementById('root'));
+// ReactDOM.render(<Login/>, document.getElementById('root'));
