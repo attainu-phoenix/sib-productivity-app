@@ -26,7 +26,7 @@ function fetchEventsByEmail(store, action) {
             })
         })
         .catch(function (error) {
-            console.log(error)
+            // console.log(error)
         })
 }
 
@@ -59,9 +59,30 @@ function addEvent(store, action) {
                 type: "FETCH_EVENTS",
                 email: action.formData.email
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Event Added Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+
+            })
 
         })
-        .catch(error => console.log(error))
+        .catch(function (error) {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Failed Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+
+            })
+        })
 }
 
 function editEvent(store, action) {
@@ -70,9 +91,11 @@ function editEvent(store, action) {
     let eventData = {
         // id: action.payLoadData.id,
         eventTitle: action.payLoadData.title,
-        description: action.payLoadData.description
+        description: action.payLoadData.description,
+        date: action.payLoadData.date
     }
     let data = JSON.stringify(eventData);
+
     let url = `http://localhost:1337/parse/classes/events/${objectId}`;
     fetch(url, {
         method: "put",
@@ -84,15 +107,35 @@ function editEvent(store, action) {
             return data.json();
         })
         .then(function (data) {
-
+         
             store.dispatch({
                 type: "FETCH_EVENTS",
                 email: "shivam@gmail.com"
 
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Event Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+
+            })
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Error Updating Event Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+
+            })
         })
 
 }
@@ -123,9 +166,30 @@ function editCheckBox(store, action) {
                 email: "shivam@gmail.com"
 
             })
+
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Event Status Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+
+            })
         })
         .catch(function (error) {
-            console.log(error);
+           
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Event",
+                    toastMessage: "Error Updating Event Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+
+            })
         })
 }
 
@@ -142,7 +206,7 @@ function deleteEvent(store, action) {
             return data.json();
         })
         .then(function (json) {
-            console.log(json)
+           
             store.dispatch({
                 type: "FETCH_EVENTS",
                 email: "shivam@gmail.com"
