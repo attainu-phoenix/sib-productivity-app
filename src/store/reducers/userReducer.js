@@ -1,4 +1,4 @@
-import {Do_signup} from '../api/appApi.js';
+import {Do_signup, Do_login} from '../api/appApi.js';
 import {store} from '../store.js'
 function userReducer(newUser={},action){
 	if(action.type === "SIGNUP"){
@@ -14,7 +14,14 @@ function userReducer(newUser={},action){
 
 	if(action.type === "LOGIN"){
 		//console.log(action);
-		console.log("LOGIN WORKS");
+		Do_login(store,action);
+		return newUser
+	}
+	if(action.type === "LOGIN_DONE"){
+		//console.log(action);
+		console.log(action.login);
+		return action.login;
+		
 	}
   return newUser;
 

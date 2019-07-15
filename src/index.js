@@ -17,7 +17,7 @@ class Home extends React.Component {
 
 
 
-        let loggedIn = localStorage.getItem("user");
+        let loggedIn = localStorage.getItem("login");
 
         if (loggedIn) {
 
@@ -41,6 +41,8 @@ class Home extends React.Component {
                 <Route path="/signup" component={Signup} />
                 <Route path="/app" component={App} />
                 <Route path="/login" component={Login} />
+                <Route path="/login/:status" component={Login} />
+
                {this.doRedirect()}
             </Route>
             </Router>

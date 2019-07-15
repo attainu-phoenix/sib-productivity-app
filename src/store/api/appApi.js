@@ -58,5 +58,28 @@ function Do_signup(store,action){
        .catch(err => console.log(err));                                                               
 }
 
+function Do_login(store,action){
+      
+     let username = action.formData.email;
+     let password = action.formData.password; 
+     let params = encodeURI(`username=${username}&password=${password}`);                         
+     let url = `http://localhost:1337/parse/login?${params}`;  
+      fetch(url,{
+          method: "get",
+          headers:HEADERS,       
+                 })
+      .then(data => data.json())
+      .then(json =>{
+                      console.log("LOGIN",json.sessionToken);
+   let user = json;
+                      localStorage.setItem("user",JSON.stringify(user));
+       store.dispatch({
+                type:"LOGIN_DONE",
+                login:json
 
-export { addEvent ,fetchEvent, Do_signup}
+            })
+                    })
+       .catch(err => console.log(err));                                                               
+}
+
+export { addEvent ,fetchEvent, Do_signup,Do_login}

@@ -4,7 +4,7 @@ import eventReducer from './reducers/eventReducer.js';
 
 
 let reducer = combineReducers({
-    userReducer : userReducer,
+    newUser : userReducer,
     events:eventReducer
 
 })
