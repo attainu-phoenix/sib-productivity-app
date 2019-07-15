@@ -5,16 +5,7 @@ const HEADERS = {
 
 function createCategories(data) {
     let url = "http://localhost:1337/parse/classes/categories";
-
-    let category = {
-        id: "1",
-        name: "todos",
-        formState: {
-            isFormValid: true,
-            isNameValid: true
-        }
-    }
-    let data = JSON.stringify(category);
+    data = JSON.stringify(data);
 
     fetch(url, {
         method: "post",
@@ -23,8 +14,72 @@ function createCategories(data) {
     })
     .then(data => data.json())
     .then(json => {
+        console.log("CAME HEREERERER")
         console.log(json);
     })
     .catch(err => console.log(err));
 }
-createCategories(data);
+
+let dummyData = {
+    name: "todo",
+    userId: "",
+    formState: {
+        isFormValid: true,
+        isNameValid: true
+    }
+};
+createCategories(dummyData);
+
+function deleteCategory() {
+    let objectId = "fOITuv49QE";
+
+
+    let url = `http://localhost:1337/parse/classes/charts/${objectId}`;
+
+    fetch(url, {
+        method: "delete",
+        headers: HEADERS
+    })
+    .then(data => data.json())
+    .then(json => {
+        console.log("deleted")
+        console.log(json);
+    })
+    .catch(err => console.log(err));
+}
+
+
+function retrieveCategory() {
+    let  userId= " ";
+
+
+    let url = `http://localhost:1337/parse/classes/charts/${userId}`;
+
+    fetch(url, {
+        method: "get",
+        headers: HEADERS
+    })
+    .then(data => data.json())
+    .then(json => {
+        console.log("retrieving the data from parse dashboard");
+        console.log(json);
+    })
+    .catch(err => console.log(err));
+}
+
+
+function editCategory() {
+    let objectId = "";
+    let url = `http://localhost:1337/parse/classes/charts/${objectId}`;
+
+    fetch(url, {
+        method: "put",
+        headers: HEADERS,
+       
+    })
+    .then(data => data.json())
+    .then(json => {
+        console.log(json);
+    })
+    .catch(err => console.log(err));
+}

@@ -124,7 +124,7 @@ class AddCategoryComponent extends React.Component {
 
 
 
-        );
+       );
 
     }
 }

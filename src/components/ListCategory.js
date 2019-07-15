@@ -40,8 +40,13 @@ class ListComponent extends React.Component {
     }
 
     renderCatergories() {
-        return this.props.categories.map((c) => {
+        return this.props.categories.map(function(c) {
             return (
+
+                // <tr key={c.name}>
+                //    <td>{c.name}</td>
+                //   <td><span clas="oi oi-trash"></span></td>
+                // </tr>
 
                 <div key={c} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
@@ -60,8 +65,13 @@ class ListComponent extends React.Component {
 
             <div className="card" style={style.card}>
                 <div className="card-body">
-
+                <table className="table table-striped">
+                    <tbody>
                     {this.renderCatergories()}
+                    </tbody>
+                </table>
+                    
+                
                 </div>
             </div>
 
