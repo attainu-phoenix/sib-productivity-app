@@ -83,5 +83,103 @@ function Do_login(store,action){
        .catch(err => console.log(err));                                                               
 }
 
-export { addEvent ,fetchEvent, Do_signup,Do_login}
+function Add_TODO(store,action){    
+    let category_id;                                
+    let todotext ;
+    let tododescription;
+    let duedate;
+    let status;
+    let notes =[]; 
+
+    let url = "http://localhost:1337/parse/classes/todos";
+    fetch(url,{
+     method: "post",
+     headers:HEADERS,,
+     body: JSON.stringify({
+            category_id:category_id,
+            todotext:todotext,
+            tododescription:tododescription,
+            duedate:duedate,
+            status:status,
+            notes:notes
+                           })
+               })
+    .then(data => data.json())
+    .then(json => {
+         console.log("Added Todo");
+         store.dispatch({
+                 type:"TODO_ADDED",
+                 todo:json
+                         })
+                   })
+    .catch(err => console.log(err));
+ }
+
+ function retriveTODO(){
+      let catID;
+      let params = encodeURI(`where={"category_id":"${catID}"}`);
+      let url = `http://localhost:1337/parse/classes/todos?${params}`;
+      fetch(url, {
+        method:"get",
+        headers:HEADERS
+                  })
+      .then(data => data.json())
+      .then(json => {
+            store.dispatch({
+                type:"FETCH_TODOS",
+                todo:json
+                            })
+                     })
+      .catch(err => console.log(err));
+                        }   
+
+function updateTODO(){
+    let todoId;
+    let category_id;                                
+    let todotext ;
+    let tododescription;
+    let duedate;
+    let status;
+    let notes =[];
+       let url = `http://localhost:1337/parse/classes/todos/${todoId}`;
+       fetch(url, {
+           method:"put",
+           headers:HEADERS,
+           body: JSON.stringify({
+            category_id:category_id,
+            todotext:todotext,
+            tododescription:tododescription,
+            duedate:duedate,
+            status:status,
+            notes:notes
+                           })
+
+                   })   
+        .then(data => data.json())
+        .then(json => {
+            store.dispatch({
+                type:"TODO_UPDATED",
+                todo:json
+                            })
+                       })
+        .catch(err => console.log(err));                                      
+                      }                 
+
+  function deleteTODO(){
+        let todoID;
+        let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
+        fetch(url, {
+             method:"delete",
+             header:HEADERS
+                    })
+        .then(data =>data.json());
+        .then(json => {
+            store.dispatch({
+                type:"TODO_DELETED"
+                            })
+                       }) 
+        .catch(err => console.log(err));                                         
+                        }                                                           
+
+export { addEvent ,fetchEvent, Do_signup,Do_login, Add_TODO,retriveTODO,updateTODO,deleteTODO}
 
