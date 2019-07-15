@@ -1,11 +1,15 @@
 import {createStore,combineReducers} from 'redux';
 import userReducer from './reducers/userReducer.js';
 import eventReducer from './reducers/eventReducer.js';
+import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
 
 
 let reducer = combineReducers({
-    newUser : userReducer,
-    events:eventReducer
+
+    userReducer : userReducer,
+    events:eventReducer,
+    isEventLoading:isEventLoadingReducer
+
 
 })
 

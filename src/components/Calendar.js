@@ -66,7 +66,8 @@ class CalendarComponent extends React.Component {
 
 
         store.dispatch({
-            type: "FETCH_EVENTS"
+            type: "FETCH_EVENTS",
+            email:"shivam@gmail.com"
         })
 
         this.setState({
@@ -184,6 +185,7 @@ class CalendarComponent extends React.Component {
         }
         let eventData = {
             id: this.getKey(),
+            email:"shivam@gmail.com",
             isDone: false,
             eventTitle: this.state.addEventTitle,
             description: this.state.addEventDescription,
@@ -211,12 +213,12 @@ class CalendarComponent extends React.Component {
     }
 
     selectMonth(event) {
-        console.log(event.target.value)
+      
         this.setState({ currentMonth: event.target.value })
     }
 
     showEventsTodayAndMonthly(e) {
-        console.log(e.target.value)
+       
         let value = e.target.value;
         if (value === 'Today') {
             this.setState({
@@ -231,7 +233,7 @@ class CalendarComponent extends React.Component {
     }
 
     render() {
-
+       
 
         return (
             <div>
@@ -259,8 +261,8 @@ class CalendarComponent extends React.Component {
                     <div className="card-body">
 
 
-
-                        <Events isTodayEvents={this.state.isTodayEvents} />
+                        
+                        <Events isTodayEvents={this.state.isTodayEvents} currentMonth={this.state.currentMonth}/>
 
                     </div>
                 </div>
