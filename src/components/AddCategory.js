@@ -27,6 +27,14 @@ class AddCategoryComponent extends React.Component {
             }
         };
     }
+
+    componentDidMount() {
+        console.log(" I am componetDidMOUnt of Add Category Page.")
+        store.dispatch({
+            type: "FETCH_CATEGORES",
+            userId:'dcghkj564'
+        })
+    }
     
     // categoryName = (event) => {
     //     this.setState({

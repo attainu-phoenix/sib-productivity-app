@@ -31,33 +31,29 @@ class ListComponent extends React.Component {
     }
 
 
-    delete(name, e) {
-        // console.log(name)
+    delete(objectId) {
+        
         store.dispatch({
             type: "DELETE_CATEGORY",
-            categoryName: name
+            objectId: objectId
         })
+        console.log(objectId);
     }
 
     renderCatergories() {
+        console.log(this.props.categories);
         return this.props.categories.map(function(c) {
             return (
-
-                // <tr key={c.name}>
-                //    <td>{c.name}</td>
-                //   <td><span clas="oi oi-trash"></span></td>
-                // </tr>
-
-                <div key={c} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
+                <div key={c.objectId} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
                     <div className="col-md-8">
-                        <Link to={`/app/addToDo`} style={style.link}>{c}</Link>
+                        <Link to={`/app/addToDo`} style={style.link}>{c.categoryName}</Link>
                     </div>
                     <div className="col-md-1">
-                        <span className="oi oi-trash" name={c} onClick={this.delete.bind(this, c)} defaultValue={c}></span>
+                        <span className="oi oi-trash" onClick={this.delete.bind(this,c.objectId)} ></span>
                     </div>
                 </div>
-            )
+            );
         })
     }
     render() {
@@ -65,11 +61,7 @@ class ListComponent extends React.Component {
 
             <div className="card" style={style.card}>
                 <div className="card-body">
-                <table className="table table-striped">
-                    <tbody>
                     {this.renderCatergories()}
-                    </tbody>
-                </table>
                     
                 
                 </div>

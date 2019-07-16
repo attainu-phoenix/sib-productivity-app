@@ -3,35 +3,51 @@ const HEADERS = {
     "Content-Type": "application/json"
 };
 
-function createCategories(data) {
+function createCategories(store, action) {
+    
     let url = "http://localhost:1337/parse/classes/categories";
-    data = JSON.stringify(data);
+            
+            let data ={
+                categoryName:action.categoryName,
+                userId:'dcghkj564'
+            }
+            console.log(data)
+            let categoryName = JSON.stringify(data);
+
 
     fetch(url, {
         method: "post",
         headers: HEADERS,
-        body: data
+        body:categoryName
     })
-    .then(data => data.json())
-    .then(json => {
-        console.log("CAME HEREERERER")
-        console.log(json);
+    .then(function(categoryName){
+        return categoryName.json();
     })
-    .catch(err => console.log(err));
+    .then(function(categoryName){
+        console.log("Success ",categoryName);
+        store.dispatch({
+            type: "FETCH_CATEGORES",
+            userId:'dcghkj564'
+        })
+    })
+
+    .catch(function(error){
+        console.log(error);
+    })
 }
 
-let dummyData = {
-    name: "todo",
-    userId: "",
-    formState: {
-        isFormValid: true,
-        isNameValid: true
-    }
-};
-createCategories(dummyData);
+// let dummyData = {
+//     name: "todo",
+//     userId: "",
+//     formState: {
+//         isFormValid: true,
+//         isNameValid: true
+//     }
+// };
+//createCategories(dummyData);
 
-function deleteCategory() {
-    let objectId = "fOITuv49QE";
+function deleteCategory(store, action) {
+    let objectId = "";
 
 
     let url = `http://localhost:1337/parse/classes/charts/${objectId}`;
@@ -49,11 +65,11 @@ function deleteCategory() {
 }
 
 
-function retrieveCategory() {
-    let  userId= " ";
+function retrieveCategory(store,action) {
+    let  userId= action.userId;
+    let params = encodeURI(`where={"userId":"${userId}"}`);
 
-
-    let url = `http://localhost:1337/parse/classes/charts/${userId}`;
+    let url = `http://localhost:1337/parse/classes/categories/?${params}`;
 
     fetch(url, {
         method: "get",
@@ -61,8 +77,12 @@ function retrieveCategory() {
     })
     .then(data => data.json())
     .then(json => {
-        console.log("retrieving the data from parse dashboard");
-        console.log(json);
+       
+        console.log(json.results);
+        store.dispatch({
+            type:"CATERGORIES_LOADED",
+            categories:json.results
+        })
     })
     .catch(err => console.log(err));
 }
@@ -83,3 +103,5 @@ function editCategory() {
     })
     .catch(err => console.log(err));
 }
+
+export {createCategories, deleteCategory,retrieveCategory};
