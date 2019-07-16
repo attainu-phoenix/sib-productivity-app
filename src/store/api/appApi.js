@@ -89,7 +89,7 @@ function Add_TODO(store,action){
     let tododescription;
     let duedate;
     let status;
-    let notes =[]; 
+    let notes; 
 
     let url = "http://localhost:1337/parse/classes/todos";
     fetch(url,{
@@ -115,7 +115,7 @@ function Add_TODO(store,action){
     .catch(err => console.log(err));
  }
 
- function retriveTODO(){
+ function retriveTODO(store,action){
       let catID;
       let params = encodeURI(`where={"category_id":"${catID}"}`);
       let url = `http://localhost:1337/parse/classes/todos?${params}`;
@@ -133,7 +133,7 @@ function Add_TODO(store,action){
       .catch(err => console.log(err));
                         }   
 
-function updateTODO(){
+function updateTODO(store,action){
     let todoId;
     let category_id;                                
     let todotext ;
@@ -165,7 +165,7 @@ function updateTODO(){
         .catch(err => console.log(err));                                      
                       }                 
 
-  function deleteTODO(){
+  function deleteTODO(store,action){
         let todoID;
         let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
         fetch(url, {
