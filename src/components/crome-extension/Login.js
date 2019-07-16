@@ -15,7 +15,40 @@ const style = {
 
 class Login extends React.Component {
 
-    
+
+    constructor(props){
+        super(props);
+
+       
+        this.state={
+            email:"",
+            password:"",
+            formState:{
+                isEmailValid:true,
+                isPasswordValid:true,
+                isFormValid:true
+            }
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event){
+        let name= event.target.name;
+        let value = event.target.value;
+
+        this.setState({
+            [name]:value
+        })
+
+        console.log("email :"+this.state.email+" password :"+this.state.password)
+    }
+
+    handleSubmit(event){
+        event.preventDefault()
+        console.log("handleSubmit called ..")
+    }
+
 
     render() {
         return (
@@ -24,14 +57,14 @@ class Login extends React.Component {
                 <div className="container-fluid" style={style.container}>
                     <div className="card">
                         <div className="card-body">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="from-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" required className="form-control" placeholder="Email" />
+                                    <label htmlFor="exampleInputEmail1" >Email</label>
+                                    <input type="email" name="email" onChange={this.handleChange} required className="form-control" placeholder="Email" />
                                 </div>
                                 <div className="from-group">
-                                    <label for="exampleInputEmail1">Password</label>
-                                    <input type="password" required className="form-control" placeholder="password" />
+                                    <label htmlFor="exampleInputEmail1" >Password</label>
+                                    <input type="password" name="password"  onChange={this.handleChange} required className="form-control" placeholder="password" />
                                 </div><p></p>
                                 <div className="row justify-content-center">
                                     <button type="submit" className="btn btn-danger">Login</button>

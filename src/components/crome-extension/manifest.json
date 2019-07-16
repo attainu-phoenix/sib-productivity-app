@@ -1,0 +1,9 @@
+{
+    "name": "Checklist",
+    "version": "2.1",
+    "description": "Shows Number Of ToDos",
+    "permissions": ["https://*.google.com/", "activeTab"],
+    "browser_action": {
+      "default_popup": "popup.html"
+    }
+  }
