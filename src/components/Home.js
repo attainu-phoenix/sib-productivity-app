@@ -1,10 +1,12 @@
 import React from 'react'
+import HeaderComponent from './Header.js'
 import './home.css'
 
 class HomeComponent extends React.Component{
 	render() {
 		return (
 			  <div>
+        <HeaderComponent/>
 			<div id="myCarousel" className="carousel slide" data-ride="carousel">
             <ol className="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" className="active"></li>

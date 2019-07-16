@@ -5,9 +5,11 @@ import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
 
 
 let reducer = combineReducers({
+
     userReducer : userReducer,
     events:eventReducer,
     isEventLoading:isEventLoadingReducer
+
 
 })
 
