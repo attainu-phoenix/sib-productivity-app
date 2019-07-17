@@ -17,7 +17,7 @@ class Home extends React.Component {
 
 
 
-        let loggedIn = localStorage.getItem("login");
+        let loggedIn = localStorage.getItem("user");
 
         if (loggedIn) {
 
@@ -28,6 +28,7 @@ class Home extends React.Component {
             return <Redirect to="/" />
         }
     }
+
 
     render() {
 
