@@ -47,11 +47,13 @@ function createCategories(store, action) {
 //createCategories(dummyData);
 
 function deleteCategory(store, action) {
-    let objectId = "";
+    
+            let objectId = action.objectId;
+            console.log(objectId);
 
-
-    let url = `http://localhost:1337/parse/classes/charts/${objectId}`;
-
+            
+            let url = `http://localhost:1337/parse/classes/categories/${objectId}`;
+    console.log("this is the url ====>", url);
     fetch(url, {
         method: "delete",
         headers: HEADERS

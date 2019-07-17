@@ -33,6 +33,7 @@ function categoryReduer(categories = [], action) {
         // newCatergories.splice(index, 1);
         // return newCatergories;
        deleteCategory(store, action);
+       return categories;
     }
     return categories;
 }

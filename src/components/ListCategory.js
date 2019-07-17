@@ -37,11 +37,12 @@ class ListComponent extends React.Component {
             type: "DELETE_CATEGORY",
             objectId: objectId
         })
-        console.log(objectId);
+       // console.log(objectId);
     }
 
     renderCatergories() {
         console.log(this.props.categories);
+        let context = this;
         return this.props.categories.map(function(c) {
             return (
                 <div key={c.objectId} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
@@ -50,7 +51,7 @@ class ListComponent extends React.Component {
                         <Link to={`/app/addToDo`} style={style.link}>{c.categoryName}</Link>
                     </div>
                     <div className="col-md-1">
-                        <span className="oi oi-trash" onClick={this.deleteCategory(c.objectId)} ></span>
+                        <span className="oi oi-trash" onClick={this.deleteCategory( this,c.objectId)} ></span>
                     </div>
                 </div>
             );
