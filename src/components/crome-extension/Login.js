@@ -119,6 +119,10 @@ class Login extends React.Component {
 
         let show;
 
+        if(this.props.userReducer){
+                return <Redirect to="/app/toDoList"/>
+        }
+
         show = this.showLoginForm();
         return (
             <div>
