@@ -3,10 +3,14 @@ import Header from '../components/Header.js'
 import Menu from './Menu.js'
 import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
-import AddToDo from '../components/AddToDo.js'
+import AddTodoComponent from '../components/Addtodos'
+
+
 import { Provider } from 'react-redux'
 import {store} from '../store/store.js'
 
+import AddCategoryComponent from './AddCategory.js';
+import CategoryListComponent from './CategoryList.js';
 const style = {
 
     container: {
@@ -18,6 +22,9 @@ class App extends React.Component {
 
     render() {
         return (
+            <div>
+
+                
             <Provider store={store}> 
                 <div>
                     <Header />
@@ -29,7 +36,9 @@ class App extends React.Component {
                             <div className="col-md-9">
                                 <div className="card">
                                     <div className="card-body">
-                                        <Route path="/app/addToDo" component={AddToDo} />
+                                    <Route path="/app" exact={true} component={AddCategoryComponent} />
+                                    <Route path="/app/listofcat" component={CategoryListComponent} /> 
+                                        <Route path="/app/addToDo" component={AddTodoComponent} />
                                         <Route path="/app/calendar" component={Calendar} />
                                     </div>
                                 </div>
@@ -37,9 +46,13 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-            </Provider>
+                </Provider>
+                </div>
+            
+        );
+            
 
-        )
+        
     }
 }
 

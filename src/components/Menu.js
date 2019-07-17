@@ -10,13 +10,23 @@ class Menu extends React.Component {
 
     render() {
         return (
+
             <ul className="list-group">
                 <li className="list-group-item">
 
                     <Link to="/app" style={MenuStyles.Link}>
                         <span className="oi oi-task" >
-                            Add Categories
+                            Categories
                         </span>
+                    </Link>
+
+                </li>
+                <li className="list-group-item ">
+
+                    <Link to="/app/listofcat" style={MenuStyles.Link}>
+                        <span className="oi oi-task">
+                         View Categories
+                         </span>
                     </Link>
 
                 </li>
@@ -24,7 +34,7 @@ class Menu extends React.Component {
 
                     <Link to="/app/addToDo" style={MenuStyles.Link}>
                         <span className="oi oi-task">
-                            Add Todo
+                            Todo
                         </span>
                     </Link>
 
@@ -40,6 +50,8 @@ class Menu extends React.Component {
                 </li>
 
             </ul>
+
+
         )
     }
 }

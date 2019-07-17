@@ -25,7 +25,7 @@ function userReducer(newUser={},action){
 	}
   return newUser;
 
-  console.log("Newuser =>",newUser);
+  //console.log("Newuser =>",newUser);
 
 }
 
