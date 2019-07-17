@@ -3,7 +3,7 @@ import './list.css';
 import { connect } from 'react-redux'
 import { stateMapper, store } from '../store/store.js'
 import { Link } from 'react-router-dom'
-import CalendarStyles from '../styles/CalendarStyles.js'
+
 
 const style={
     card :{
@@ -41,7 +41,7 @@ class ListComponent extends React.Component {
     }
 
     renderCatergories() {
-        console.log(this.props.categories);
+        
         let context = this;
         return this.props.categories.map(function(c) {
             return (
@@ -51,7 +51,7 @@ class ListComponent extends React.Component {
                         <Link to={`/app/addToDo`} style={style.link}>{c.categoryName}</Link>
                     </div>
                     <div className="col-md-1">
-                        <span className="oi oi-trash" onClick={this.deleteCategory( this,c.objectId)} ></span>
+                        <span className="oi oi-trash" onClick={context.deleteCategory.bind(this, c.objectId)} ></span>
                     </div>
                 </div>
             );

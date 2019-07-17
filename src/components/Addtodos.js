@@ -1,15 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../components/Header.js'
-import Menu from './Menu.js';
-import AddCategoryComponent from './AddCategory.js';
 
-const style = {
 
-    container: {
-        marginTop: '10%'
-    }
-}
+
+// const style = {
+
+//     container: {
+//         marginTop: '10%'
+//     }
+// }
 
 class AddTodoComponent extends React.Component {
 

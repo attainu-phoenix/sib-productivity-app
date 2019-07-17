@@ -4,8 +4,8 @@ import Menu from './Menu.js'
 import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
 import AddTodoComponent from '../components/Addtodos'
-import createCategories from '../store/api/categoryApi.js'
-import deleteCategory from '../store/api/categoryApi.js';
+
+
 import { Provider } from 'react-redux'
 import {store} from '../store/store.js'
 

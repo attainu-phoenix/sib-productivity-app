@@ -1,5 +1,5 @@
 
-'use strict'
+
 let events;
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",

@@ -60,8 +60,11 @@ function deleteCategory(store, action) {
     })
     .then(data => data.json())
     .then(json => {
-        console.log("deleted")
-        console.log(json);
+        
+        store.dispatch({
+            type: "FETCH_CATEGORES",
+            userId: "dcghkj564"
+        })
     })
     .catch(err => console.log(err));
 }
@@ -80,7 +83,7 @@ function retrieveCategory(store,action) {
     .then(data => data.json())
     .then(json => {
        
-        console.log(json.results);
+        
         store.dispatch({
             type:"CATERGORIES_LOADED",
             categories:json.results
@@ -106,4 +109,4 @@ function editCategory() {
     .catch(err => console.log(err));
 }
 
-export {createCategories, deleteCategory,retrieveCategory};
+export {createCategories, deleteCategory,retrieveCategory, editCategory};
