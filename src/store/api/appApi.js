@@ -1,5 +1,5 @@
 
-'use strict'
+
 let events;
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
@@ -125,10 +125,10 @@ function retriveTODO() {
     })
         .then(data => data.json())
         .then(json => {
-            store.dispatch({
-                type: "FETCH_TODOS",
-                todo: json
-            })
+            // store.dispatch({
+            //     type: "FETCH_TODOS",
+            //     todo: json
+            // })
         })
         .catch(err => console.log(err));
 }
@@ -157,10 +157,10 @@ function updateTODO() {
     })
         .then(data => data.json())
         .then(json => {
-            store.dispatch({
-                type: "TODO_UPDATED",
-                todo: json
-            })
+            // store.dispatch({
+            //     type: "TODO_UPDATED",
+            //     todo: json
+            // })
         })
         .catch(err => console.log(err));
 }
@@ -174,9 +174,9 @@ function deleteTODO() {
     })
         .then(data => data.json())
         .then(json => {
-            store.dispatch({
-                type: "TODO_DELETED"
-            })
+            // store.dispatch({
+            //     type: "TODO_DELETED"
+            // })
         })
         .catch(err => console.log(err));
 }

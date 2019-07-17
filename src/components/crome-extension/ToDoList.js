@@ -23,12 +23,19 @@ class ToDoList extends React.Component {
         this.state = {
             todos: ['ToDo_1', 'ToDo_2', 'ToDo_3', 'ToDo_4']
         }
+        this.keyCount = 0;
+        this.getKey = this.getKey.bind(this);
+    }
+
+    getKey() {
+        return this.keyCount++;
     }
 
     renderToDos() {
+        let thisClassContext = this;
         return this.state.todos.map((todo) => {
             return (
-                <div className="row justify-content-between align-items-center border  bg-light" style={style.toDoContainer}>
+                <div key={thisClassContext.getKey} className="row justify-content-between align-items-center border  bg-light" style={style.toDoContainer}>
                     {/* <h4>Dummy Element</h4> */}
 
                     <div className="col-1">
