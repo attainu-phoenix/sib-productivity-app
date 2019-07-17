@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './components/App.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
-import { Provider } from 'react-redux';
-import { store } from './store/store.js';
+import HomeComponent from './components/Home.js';
+import {Provider} from 'react-redux';
+import {store} from './store/store.js';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
@@ -14,7 +16,8 @@ class Home extends React.Component {
 
 
 
-        let loggedIn = localStorage.getItem("user");
+
+        let loggedIn = localStorage.getItem("login");
 
         if (loggedIn) {
 
@@ -22,7 +25,7 @@ class Home extends React.Component {
 
         } else {
 
-            return <Redirect to="/login" />
+            return <Redirect to="/" />
         }
     }
 
@@ -33,13 +36,18 @@ class Home extends React.Component {
         return (
             <Provider store={store}>
                 <Router>
-                    <Route>
-                        <Route path="/signup" component={Signup} />
-                        <Route path="/app" component={App} />
-                        <Route path="/login" component={Login} />
-                        {this.doRedirect()}
-                    </Route>
-                </Router>
+
+            <Route>
+                 <Route path="/" exact = {true} component={HomeComponent} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/app" component={App} />
+                <Route path="/login" component={Login} />
+                <Route path="/login/:status" component={Login} />
+
+               {this.doRedirect()}
+            </Route>
+            </Router>
+
             </Provider>
         )
     }
