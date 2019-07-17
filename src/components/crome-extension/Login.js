@@ -1,10 +1,8 @@
 import React from 'react';
 import Header from './Header'
-import { store } from '../../store/store'
+import { store, stateMapper } from '../../store/store'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import ToDoList from './ToDoList'
-
-
 
 const style = {
     container: {
@@ -17,7 +15,7 @@ const style = {
     }
 }
 
-class Login extends React.Component {
+class LoginComponent extends React.Component {
 
 
     constructor(props) {
@@ -57,8 +55,8 @@ class Login extends React.Component {
             formData: this.state
 
         })
-        
- }
+
+    }
 
 
 
@@ -115,14 +113,19 @@ class Login extends React.Component {
 
     render() {
 
-
-
         let show;
+        let user = JSON.parse(localStorage.getItem("user"));
+        // Checking  whether loggedIn user information is not null, that means user information 
+        // is stored in localStorage 
+        if (user !== null) {
+            // checking email from userReducer to localStorage user email
+            // This condition becomes true when user is logged in first time
+            // After clicking on Login Button user is redirected to toDoList component or page.
+            if (this.props.userReducer.email === user.email) {
+                return <Redirect to="/app/toDoList" />
+            }
 
-        if(this.props.userReducer){
-                return <Redirect to="/app/toDoList"/>
         }
-
         show = this.showLoginForm();
         return (
             <div>
@@ -132,5 +135,5 @@ class Login extends React.Component {
         )
     }
 }
-
+let Login = connect(stateMapper)(LoginComponent)
 export default Login 

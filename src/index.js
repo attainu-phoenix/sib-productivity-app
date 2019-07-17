@@ -16,12 +16,9 @@ class Home extends React.Component {
 
     doRedirect() {
 
-
-
-
         let loggedIn = localStorage.getItem("user");
 
-        if (loggedIn) {
+        if (!loggedIn) {
 
             return <Redirect to="/app" />
 

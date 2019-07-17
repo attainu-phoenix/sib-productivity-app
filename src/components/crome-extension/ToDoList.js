@@ -1,5 +1,7 @@
 import React from 'react'
 import Header from './Header'
+import { store ,stateMapper} from '../../store/store'
+import {connect} from 'react-redux'
 
 
 const style = {
@@ -15,7 +17,7 @@ const style = {
         height: '55px'
     }
 }
-class ToDoList extends React.Component {
+class ToDoListComponent extends React.Component {
 
 
     constructor(props) {
@@ -35,7 +37,7 @@ class ToDoList extends React.Component {
         let thisClassContext = this;
         return this.state.todos.map((todo) => {
             return (
-                <div key={thisClassContext.getKey} className="row justify-content-between align-items-center border  bg-light" style={style.toDoContainer}>
+                <div key={thisClassContext.getKey()} className="row justify-content-between align-items-center border  bg-light" style={style.toDoContainer}>
                     {/* <h4>Dummy Element</h4> */}
 
                     <div className="col-1">
@@ -73,5 +75,5 @@ class ToDoList extends React.Component {
         )
     }
 }
-
+let ToDoList = connect(stateMapper)(ToDoListComponent)
 export default ToDoList;
