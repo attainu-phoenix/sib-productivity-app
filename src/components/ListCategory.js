@@ -27,11 +27,11 @@ class ListComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.delete = this.delete.bind(this);
+        this.deleteCategory = this.deleteCategory.bind(this);
     }
 
 
-    delete(objectId) {
+    deleteCategory(objectId) {
         
         store.dispatch({
             type: "DELETE_CATEGORY",
@@ -50,7 +50,7 @@ class ListComponent extends React.Component {
                         <Link to={`/app/addToDo`} style={style.link}>{c.categoryName}</Link>
                     </div>
                     <div className="col-md-1">
-                        <span className="oi oi-trash" onClick={this.delete.bind(this,c.objectId)} ></span>
+                        <span className="oi oi-trash" onClick={this.deleteCategory(c.objectId)} ></span>
                     </div>
                 </div>
             );
