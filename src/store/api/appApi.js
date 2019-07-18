@@ -115,23 +115,7 @@ function Add_TODO(store,action){
     .catch(err => console.log(err));
  }
 
- function retriveTODO(store,action){
-      let catID;
-      let params = encodeURI(`where={"category_id":"${catID}"}`);
-      let url = `http://localhost:1337/parse/classes/todos?${params}`;
-      fetch(url, {
-        method:"get",
-        headers:HEADERS
-                  })
-      .then(data => data.json())
-      .then(json => {
-            store.dispatch({
-                type:"FETCH_TODOS",
-                todo:json
-                            })
-                     })
-      .catch(err => console.log(err));
-                        }   
+    
 
 function updateTODO(store,action){
     let todoId;
@@ -172,11 +156,12 @@ function updateTODO(store,action){
         let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
         console.log("DELETE URL" ,url);
         fetch(url, {
-             method:"delete",
-             header:HEADERS
+             method:"DELETE",
+             headers:HEADERS
                     })
-        .then(data =>data.json())
+        .then(data => data.json())
         .then(json => {
+              console.log(json);          
             store.dispatch({
             type:"FETCH_TODOS_BY_CATEGORY_ID",
             payLoadData: category_id
@@ -210,5 +195,5 @@ function updateTODO(store,action){
             console.log(error)
         })
                                                 }
-export { addEvent ,fetchEvent, Do_signup,Do_login, Add_TODO,retriveTODO,updateTODO,deleteTODO,fetchTodoByCategoryId}
+export { addEvent ,fetchEvent, Do_signup,Do_login, Add_TODO, updateTODO,deleteTODO,fetchTodoByCategoryId}
 
