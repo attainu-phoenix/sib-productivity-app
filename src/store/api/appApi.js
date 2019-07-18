@@ -84,17 +84,17 @@ function Do_login(store,action){
 }
 
 function Add_TODO(store,action){    
-    let category_id;                                
-    let todotext ;
-    let tododescription;
-    let duedate;
-    let status;
-    let notes; 
+    let category_id = action.payLoadData.categoryName;                                
+    let todotext = action.payLoadData.toDo ;
+    let tododescription = action.payLoadData.description;
+    let duedate = action.payLoadData.date;
+    let status = action.payLoadData.status;
+    let notes =  action.payLoadData.notes; 
 
     let url = "http://localhost:1337/parse/classes/todos";
     fetch(url,{
      method: "post",
-     headers:HEADERS,,
+     headers:HEADERS,
      body: JSON.stringify({
             category_id:category_id,
             todotext:todotext,
@@ -109,7 +109,7 @@ function Add_TODO(store,action){
          console.log("Added Todo");
          store.dispatch({
                  type:"TODO_ADDED",
-                 todo:json
+                 toDos:json
                          })
                    })
     .catch(err => console.log(err));
@@ -172,7 +172,7 @@ function updateTODO(store,action){
              method:"delete",
              header:HEADERS
                     })
-        .then(data =>data.json());
+        .then(data =>data.json())
         .then(json => {
             store.dispatch({
                 type:"TODO_DELETED"

@@ -63,7 +63,7 @@ class CalendarComponent extends React.Component {
     }
     componentDidMount() {
 
-
+      
 
         store.dispatch({
             type: "FETCH_EVENTS",
