@@ -27,6 +27,8 @@ function categoryReduer(categories = [], action) {
         return categories;
     }
 
+   
+
     if (action.type === "DELETE_CATEGORY") {
         // let index = categories.findIndex((c) => {
         //     return c === action.categoryName

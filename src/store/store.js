@@ -4,7 +4,7 @@ import eventReducer from './reducers/eventReducer.js';
 
 import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
 import isCategoryLoadingReducer from './reducers/isCategoryLoadingReducer.js';
-
+import CurrentCategoryReducer from './reducers/CurrentCategoryReducer.js';
 import categoryReduer  from './reducers/categoryReducer.js';
 import toDoReducer from './reducers/toDoReducer.js';
 import currentToDoDataReducer from './reducers/currentToDoDataReducer'
@@ -17,7 +17,7 @@ let reducer = combineReducers({
     isEventLoading:isEventLoadingReducer,
     toDos:toDoReducer,
     currentToDoData:currentToDoDataReducer,
-
+    currentCategoryData:CurrentCategoryReducer,
     categories : categoryReduer,
     isCategoryLoading: isCategoryLoadingReducer
 })

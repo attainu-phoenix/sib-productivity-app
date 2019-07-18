@@ -34,11 +34,17 @@ class AddTodoComponent extends React.Component {
     componentDidMount() {
         // console.log("FETCH_TODOS called in componentDidMount in Addtodos")
 
-        let categoryName = this.props.match.params.categoryName;
+        let categoryID = this.props.match.params.categoryID;
+        console.log("CDM CAT ID", categoryID);
         store.dispatch({
-            type: "FETCH_TODOS_OF_CATEGORY",
-            payLoadData: categoryName
+            type: "FETCH_CATEGORY_DATA",
+            payLoadData: categoryID
         })
+
+        store.dispatch({
+            type:"FETCH_TODOS_BY_CATEGORY_ID",
+            payLoadData:categoryID
+                        })
     }
 
     onChange(event) {
@@ -88,12 +94,13 @@ class AddTodoComponent extends React.Component {
 
         let toDoData = {
             toDo: this.state.toDo,
-            categoryName: this.props.match.params.categoryName,
+            categoryID: this.props.currentCategoryData.objectId,
             description: this.state.description,
             date: this.state.date,
             notes:this.state.notes,
             status:false
         }
+       // console.log(toDoData);
         store.dispatch({
 
             type: "ADD_TODO",
@@ -103,18 +110,19 @@ class AddTodoComponent extends React.Component {
 
 
     render() {
-        let categoryName = this.props.match.params.categoryName
-         if(this.props.toDos.objectId){
+        let categoryID = this.props.match.params.categoryID
+        console.log("FROM ADD TODO",this.props.currentCategoryData);
+         /*if(this.props.toDos.objectId){
             let sucess =  <div className="alert alert-success"> Todo Added Sucessfuly.</div>;                              
             return sucess;
-        }
+        }*/
         return (
             <div>
-                {this.sucess}
-                <h4>{`To Dos In ${categoryName}`}</h4><br />
+                
+                <h4>{`To Dos In ${this.props.currentCategoryData.categoryName}`}</h4><br />
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="input-group mb-3">
-                        <input type="text" name="toDo" className={`form-control ${!this.state.formState.isToDoValid && 'is-invalid'}`} onChange={this.onChange} placeholder={`Enter ToDos In ${categoryName}`}  />
+                        <input type="text" name="toDo" className={`form-control ${!this.state.formState.isToDoValid && 'is-invalid'}`} onChange={this.onChange} placeholder={`Enter ToDos In ${this.props.currentCategoryData.categoryName}`}  />
                     </div>
                     <div className="input-group mb-3">
                         <input type="text" className={`form-control ${!this.state.formState.isDescriptionValid && 'is-invalid'}`} onChange={this.onChange} name="description" placeholder="Enter Description" />

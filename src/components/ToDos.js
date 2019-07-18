@@ -32,15 +32,22 @@ class ToDosComponent extends React.Component {
         return this.keyCount++;
     }
 
-    delete(name, e) {
-        // console.log(name)
+    delete(todoId, e) {
+         console.log(todoId);
+         let data = {
+             todoID:todoId,
+             categoryID:this.props.currentCategoryData.objectId
+                     }
+                     console.log("TODOS DELETE =>",data);
         store.dispatch({
             type: "DELETE_TODO",
-            toDoName: name
+           payLoadData : data
+
         })
     }
 
     renderToDos() {
+                       console.log("TODOS COMP =>",this.props.toDos);
         return this.props.toDos.map((t) => {
 
             return (
@@ -52,11 +59,11 @@ class ToDosComponent extends React.Component {
                         />
                     </div>
                     <div className="col-md-8">
-                        <Link to={`/app/toDo/${t.toDo}`} style={style.link}>{t.toDo}</Link>
+                        <Link to={`/app/toDo/${t.todotext}`} style={style.link}>{t.todotext}</Link>
                     </div>
 
                     <div className="col-md-1 offset-md-2">
-                        <span className="oi oi-trash" name={t.toDo} onClick={this.delete.bind(this, t.toDo)} defaultValue={t.toDo}></span>
+                        <span className="oi oi-trash" name={t.objectId} onClick={this.delete.bind(this, t.objectId)} defaultValue={t.objectId}></span>
                     </div>
                 </div>
             )

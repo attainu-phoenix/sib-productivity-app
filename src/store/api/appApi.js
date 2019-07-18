@@ -1,5 +1,5 @@
 
-'use strict'
+
 let events;
 const HEADERS = {
       "X-Parse-Application-Id": "checklist",
@@ -84,7 +84,7 @@ function Do_login(store,action){
 }
 
 function Add_TODO(store,action){    
-    let category_id = action.payLoadData.categoryName;                                
+    let category_id = action.payLoadData.categoryID;                                
     let todotext = action.payLoadData.toDo ;
     let tododescription = action.payLoadData.description;
     let duedate = action.payLoadData.date;
@@ -106,11 +106,11 @@ function Add_TODO(store,action){
                })
     .then(data => data.json())
     .then(json => {
-         console.log("Added Todo");
+         console.log("Added Todo", json);
          store.dispatch({
-                 type:"TODO_ADDED",
-                 toDos:json
-                         })
+            type:"FETCH_TODOS_BY_CATEGORY_ID",
+            payLoadData:category_id
+                        })
                    })
     .catch(err => console.log(err));
  }
@@ -166,8 +166,11 @@ function updateTODO(store,action){
                       }                 
 
   function deleteTODO(store,action){
-        let todoID;
+        let todoID = action.payLoadData.todoID;
+        let category_id = action.payLoadData.categoryID;
+        console.log("API DELETE >> ", todoID,category_id);
         let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
+        console.log("DELETE URL" ,url);
         fetch(url, {
              method:"delete",
              header:HEADERS
@@ -175,11 +178,37 @@ function updateTODO(store,action){
         .then(data =>data.json())
         .then(json => {
             store.dispatch({
-                type:"TODO_DELETED"
-                            })
+            type:"FETCH_TODOS_BY_CATEGORY_ID",
+            payLoadData: category_id
+                        })
                        }) 
         .catch(err => console.log(err));                                         
                         }                                                           
+   function fetchTodoByCategoryId(store,action){
+        let category_id = action.payLoadData;
 
-export { addEvent ,fetchEvent, Do_signup,Do_login, Add_TODO,retriveTODO,updateTODO,deleteTODO}
+        let params = encodeURI(`where={"category_id": "${category_id}"}`);
+    let url = `http://localhost:1337/parse/classes/todos/?${params}`;
+    console.log("URL=>",url);
+    fetch(url,{
+
+        method:"get",
+        headers:HEADERS,
+
+    })
+    .then(function (data) {
+            return data.json()
+        })
+        .then(function (data) {
+             console.log(data);
+            store.dispatch({
+                type: "TODOS_LOADED",
+                toDos: data.results
+            })
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+                                                }
+export { addEvent ,fetchEvent, Do_signup,Do_login, Add_TODO,retriveTODO,updateTODO,deleteTODO,fetchTodoByCategoryId}
 
