@@ -3,15 +3,15 @@ import userReducer from './reducers/userReducer.js';
 import eventReducer from './reducers/eventReducer.js';
 import categoryReducer from './reducers/categoryReducer.js';
 import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
-
+import isCategoryLoadingReducer from './reducers/isCategoryLoadingReducer.js';
 
 let reducer = combineReducers({
 
     userReducer : userReducer,
     events:eventReducer,
     isEventLoading:isEventLoadingReducer,
-    categories : categoryReducer
-
+    categories : categoryReducer,
+    isCategoryLoading: isCategoryLoadingReducer
 
 })
 
