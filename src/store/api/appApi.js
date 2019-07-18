@@ -94,7 +94,7 @@ function Add_TODO(store,action){
     let url = "http://localhost:1337/parse/classes/todos";
     fetch(url,{
      method: "post",
-     headers:HEADERS,,
+     headers:HEADERS,
      body: JSON.stringify({
             category_id:category_id,
             todotext:todotext,
@@ -172,7 +172,7 @@ function updateTODO(store,action){
              method:"delete",
              header:HEADERS
                     })
-        .then(data =>data.json());
+        .then(data =>data.json())
         .then(json => {
             store.dispatch({
                 type:"TODO_DELETED"

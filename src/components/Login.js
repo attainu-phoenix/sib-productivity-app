@@ -82,7 +82,7 @@ import HeaderComponent from './Header.js';
                     }
 
        doRedirect(){
-        let loggedIn = localStorage.getItem("login");
+        let loggedIn = localStorage.getItem("user");
 
         if(loggedIn){
             return(

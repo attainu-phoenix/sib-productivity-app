@@ -6,6 +6,7 @@ import Calendar from '../components/Calendar.js'
 import AddToDo from '../components/AddToDo.js'
 import { Provider } from 'react-redux'
 import {store} from '../store/store.js'
+import Logout from './Logout.js';
 
 const style = {
 
@@ -31,6 +32,7 @@ class App extends React.Component {
                                     <div className="card-body">
                                         <Route path="/app/addToDo" component={AddToDo} />
                                         <Route path="/app/calendar" component={Calendar} />
+                                        <Route path="/app/logout"  component={Logout}/>
                                     </div>
                                 </div>
                             </div>
