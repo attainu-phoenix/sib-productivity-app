@@ -3,7 +3,7 @@ import userReducer from './reducers/userReducer.js';
 import eventReducer from './reducers/eventReducer.js';
 
 import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
-
+import isCategoryLoadingReducer from './reducers/isCategoryLoadingReducer.js';
 
 import categoryReduer  from './reducers/categoryReducer.js';
 import toDoReducer from './reducers/toDoReducer.js';
@@ -15,9 +15,11 @@ let reducer = combineReducers({
     userReducer : userReducer,
     events:eventReducer,
     isEventLoading:isEventLoadingReducer,
-    categories:categoryReduer,
     toDos:toDoReducer,
-    currentToDoData:currentToDoDataReducer
+    currentToDoData:currentToDoDataReducer,
+
+    categories : categoryReduer,
+    isCategoryLoading: isCategoryLoadingReducer
 })
 
 let store = createStore(reducer);
