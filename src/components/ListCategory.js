@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { stateMapper, store } from '../store/store.js'
 import { Link } from 'react-router-dom'
 import CalendarStyles from '../styles/CalendarStyles';
-
+import Spinner from './Spinner';
 const style = {
     card: {
         border: '0px',
@@ -26,8 +26,8 @@ class ListComponent extends React.Component {
 
     constructor(props) {
         super(props);
-        this.modal=React.createRef();
-        this.state={
+        this.modal = React.createRef();
+        this.state = {
             categoryName: ""
         };
         this.saveCategory = this.saveCategory.bind(this);
@@ -47,28 +47,28 @@ class ListComponent extends React.Component {
 
     onChangeCategory(event) {
         let name = event.target.name;
-        let value= event.target.value;
+        let value = event.target.value;
         this.setState({
-                [name]: value
+            [name]: value
         });
-        
-    }
-     saveCategory(category, e) {
-         let $ = window.$;
-         let modal = this.modal.current;
-         $(modal).modal("hide");
-         $('.modal-backdrop').remove();
-            let data={
-                    objectId: category.objectId,
-                     categoryName: this.state.categoryName === "" ? category.categoryName : this.state.categoryName
-            };
-            store.dispatch({
-                type : "UPDATE_CATEGORY",
-                updatedCategory: data
-            })
-           
 
-     }
+    }
+    saveCategory(category, e) {
+        let $ = window.$;
+        let modal = this.modal.current;
+        $(modal).modal("hide");
+        $('.modal-backdrop').remove();
+        let data = {
+            objectId: category.objectId,
+            categoryName: this.state.categoryName === "" ? category.categoryName : this.state.categoryName
+        };
+        store.dispatch({
+            type: "UPDATE_CATEGORY",
+            updatedCategory: data
+        })
+
+
+    }
 
     renderCatergories() {
 
@@ -82,8 +82,8 @@ class ListComponent extends React.Component {
                     </div>
                     <div className="col-md-1">
                         <div className="row justify-content-around">
-                           <a href="#/" style={style.link} data-target={"#"+c.objectId} data-toggle="modal">  <span className="oi oi-pencil "></span></a>
-                           <a href="#/" style={style.link}> <span className="oi oi-trash" onClick={context.deleteCategory.bind(this, c.objectId)} ></span></a>
+                            <a href="#/" style={style.link} data-target={"#" + c.objectId} data-toggle="modal">  <span className="oi oi-pencil "></span></a>
+                            <a href="#/" style={style.link}> <span className="oi oi-trash" onClick={context.deleteCategory.bind(this, c.objectId)} ></span></a>
                         </div>
                     </div>
                     <div ref={context.modal} className="modal fade" id={c.objectId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -97,10 +97,10 @@ class ListComponent extends React.Component {
                                 </div>
                                 <div className="modal-body">
                                     <input className="form-control" name="categoryName" onChange={context.onChangeCategory} type="text" defaultValue={c.categoryName} />
-                                 </div>
+                                </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick= {context.saveCategory.bind(this, c)} className="btn btn-light border">Save</button>
+                                    <button type="button" onClick={context.saveCategory.bind(this, c)} className="btn btn-light border">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -110,11 +110,14 @@ class ListComponent extends React.Component {
         })
     }
     render() {
+        let categories;
+        categories = this.props.isCategoryLoading ? <Spinner /> : this.renderCatergories()
         return (
 
             <div className="card" style={style.card}>
                 <div className="card-body">
-                    {this.renderCatergories()}
+                    {categories}
+
 
 
                 </div>
