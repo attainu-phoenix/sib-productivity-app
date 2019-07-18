@@ -1,6 +1,6 @@
 
 
-import {deleteCategory, createCategories,retrieveCategory} from '../api/categoryApi';
+import {deleteCategory, createCategories,retrieveCategory, updateCategory} from '../api/categoryApi';
 
  import {store} from '../store.js';
 function categoryReduer(categories = [], action) {
@@ -21,6 +21,11 @@ function categoryReduer(categories = [], action) {
         // return categories;
 
         createCategories(store, action);
+        return categories;
+    }
+
+    if(action.type === "UPDATE_CATEGORY") {
+        updateCategory(store, action)
         return categories;
     }
 

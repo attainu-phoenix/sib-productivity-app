@@ -93,20 +93,29 @@ function retrieveCategory(store,action) {
 }
 
 
-function editCategory() {
-    let objectId = "";
-    let url = `http://localhost:1337/parse/classes/charts/${objectId}`;
+function updateCategory(store, action) {
+    let objectId = action.updatedCategory.objectId;
+    let url = `http://localhost:1337/parse/classes/categories/${objectId}`;
+    let data = {
+        objectId: objectId,
+        categoryName: action.updatedCategory.categoryName
+    };
 
     fetch(url, {
         method: "put",
         headers: HEADERS,
+        body: JSON.stringify(data)
        
     })
     .then(data => data.json())
     .then(json => {
         console.log(json);
+        store.dispatch({
+            type: "FETCH_CATEGORES",
+            userId: "dcghkj564"
+        })
     })
     .catch(err => console.log(err));
 }
 
-export {createCategories, deleteCategory,retrieveCategory, editCategory};
+export {createCategories, deleteCategory,retrieveCategory, updateCategory};
