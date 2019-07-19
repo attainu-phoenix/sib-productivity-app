@@ -1,11 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
+import {USER_DATA} from '../store/api/user_helper.js';
 
 
 class HeaderComponent extends React.Component {
-
+  
   render() {
+     let login;
+     let signup;
+     let logout;
+     let User = USER_DATA();
+     if (!User) {
+      signup =  <Link className="nav-link text-white" to="/signup">Signup</Link>;
+      login = <Link className="nav-link text-white" to="/login">Login</Link>;
+    } else {
+      logout = <Link className="dropdown-item" to="/app/logout">Logout</Link>;
+    }         
     return (
       <div>
         <nav className="navbar fixed-top navbar-expand-lg navbar-light head-color">
@@ -22,18 +33,20 @@ class HeaderComponent extends React.Component {
             </form>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <Link className="nav-link text-white" to="/signup">Signup</Link>
+
+                {signup}
+              
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/login">Login</Link>
+                {login}
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i className="fas fa-user search-col" aria-hidden="true"></i>
                 </a>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="/#">Settings</a>
-                  <a className="dropdown-item" href="/#">Logout</a>
+                 
+                  {logout}                                                                  
                 </div>
               </li>
             </ul>

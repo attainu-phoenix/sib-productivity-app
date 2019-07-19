@@ -4,18 +4,11 @@ import Menu from './Menu.js'
 import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
 import AddToDo from '../components/Addtodos'
-
 import ToDo from '../components/ToDo'
-import AddCategory from './AddCategory.js';
-
-
-
 import { Provider } from 'react-redux'
 import { store } from '../store/store.js'
 import Logout from './Logout.js';
-
 import AddCategoryComponent from './AddCategory.js';
-
 import CategoryListComponent from './CategoryList.js';
 import Toast from './Toast'
 const style = {
@@ -32,13 +25,11 @@ class App extends React.Component {
             <div>
 
                 <Header />
-
-
                 <Provider store={store}>
                     <div>
                         <Header />
                         <div className="container" style={style.container}>
-                            <Toast/>
+                            <Toast />
                             <div className="row">
                                 <div className="col-md-3">
                                     <Menu />
@@ -59,10 +50,6 @@ class App extends React.Component {
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </Provider>
             </div>
 
