@@ -26,18 +26,20 @@ class ToDosComponent extends React.Component {
 
     constructor(props) {
         super(props)
+        this.modal = React.createRef();
         this.delete = this.delete.bind(this);
         this.keyCount = 0;
         this.getKey = this.getKey.bind(this);
-        this.onChangeTodo =this.onChangeTodo.bind(this);
+        // this.onChangeTodo = this.onChangeTodo.bind(this);
         this.updateTodo = this.updateTodo.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.state = {
-            toDo: "",
-            description: "",
+            updatedToDo: "Samsung Mobile updated",
+            updatedDescription: "Samsung Mobile updated",
             date: moment().toDate(),
-            notes:""
-         }   
+            updatedNotes: "Samsung Galaxy Note updated"
+        }
     }
 
 
@@ -46,107 +48,138 @@ class ToDosComponent extends React.Component {
     }
 
     delete(todoId, e) {
-         console.log(todoId);
-         let data = {
-             todoID:todoId,
-             categoryID:this.props.currentCategoryData.objectId
-                     }
-                     console.log("TODOS DELETE =>",data);
+        console.log(todoId);
+        let data = {
+            todoID: todoId,
+            categoryID: this.props.currentCategoryData.objectId
+        }
+        console.log("TODOS DELETE =>", data);
         store.dispatch({
             type: "DELETE_TODO",
-           payLoadData : data
+            payLoadData: data
 
         })
     }
 
-    onChangeTodo(event){
-   /*   let name = event.target.name;
-      let value = event.target.value;
-        this.setState({
-            [name]: value
+    // onChangeTodo(event) {
+    //     let name = event.target.name
+    //     let value = event.target.value
+
+    //     this.setState({
+    //         [name]: value
+    //     })
+    //     // let $ = window.$;
+    //     // let modal = this.modal.current;
+
+    //     // let modalId = `#${modal.id}`
+    //     // console.log(modalId)
+    //     // $(modalId).modal({
+    //     //     backdrop: 'static',
+    //     //     keyboard: false
+    //     // });
+    //     // $('.modal-backdrop').remove();
+
+    //     console.log(name, value);
+    // }
+
+    onChange(event) {
+        console.log("came inside onChange..")
+        let name = event.target.name;
+        let value = event.target.value;
+        let $ = window.$;
+        let modal = this.modal.current;
+        // $(modal).modal('focus')
+
+        let modalId = `#${modal.id}`
+
+
+        console.log("Name :", name + " Value :", value);
+
+    }
+
+
+    updateTodo() {
+
+        let data = {
+            categoryID: this.props.currentCategoryData.objectId,
+            objectId: 'ff4kOMwhRk',
+            updatedToDo: this.state.updatedToDo,
+            updatedDescription: this.state.updatedDescription,
+            updatedNotes: this.state.updatedNotes
+        }
+        let $ = window.$;
+        let modal = this.modal.current;
+        $(modal).modal("hide");
+        $('.modal-backdrop').remove();
+
+
+
+        store.dispatch({
+            type: "UPDATE_TODO",
+            payLoadData: data
         })
+    }
 
-        console.log("FROM TODO.jS", this.state);*/
+    onChangeCheckBox(id, e) {
+        let toDoStatus = {
+            categoryID: this.props.currentCategoryData.objectId,
+            objectId: id,
+            status: e.target.checked
+        }
 
-         let name = event.target.name
-        let value = event.target.value
-        this.setState({
-            [name]: value
+        console.log(toDoStatus)
+        store.dispatch({
+            type: 'UPDATE_TODO_STATUS',
+            payLoadData: toDoStatus
         })
-       console.log(name,value);
-
-                   }
-    updateTodo(){}
-    onChangeDate(){}
+    }
+    onChangeDate(date) {
+        console.log("onChangeDate is called ...")
+    }
 
     renderToDos() {
-                       console.log("TODOS COMP =>",this.props.toDos);
+        let context = this;
+
         return this.props.toDos.map((t) => {
 
             return (
                 <div key={this.getKey()} className="row justify-content-start align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
                     <div className="col-md-1">
-                        <input type="checkbox" aria-label="Checkbox for following text input"
-                            name="isCheck" 
+                        <input type="checkbox" aria-label="Checkbox for following text input" checked={t.status} value={t.status}
+                            onChange={this.onChangeCheckBox.bind(this, t.objectId)} name="isCheck"
                         />
                     </div>
                     <div className="col-md-8">
                         <Link to={`/app/toDo/${t.objectId}`} style={style.link}>{t.todotext}</Link>
                     </div>
-            
+
                     <div className="col-md-1 offset-md-2">
-                     <div className="row justify-content-around">
-                       <a href="#/" style={style.link} data-target={"#" + t.objectId} data-toggle="modal">  <span className="oi oi-pencil "></span></a>
-                        <span className="oi oi-trash" name={t.objectId} onClick={this.delete.bind(this, t.objectId)} defaultValue={t.objectId}></span>
-                     </div>
-                        
+                        <div className="row justify-content-around">
+                            <a href="#/" style={style.link} data-target={"#" + t.objectId} data-toggle="modal" data-backdrop="static" data-keyboard="false">  <span className="oi oi-pencil "></span></a>
+                            <span className="oi oi-trash" name={t.objectId} onClick={this.delete.bind(this, t.objectId)} defaultValue={t.objectId}></span>
+                        </div>
                     </div>
-                     <div  className="modal fade" id={t.objectId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div ref={this.modal} className="modal fade " id={t.objectId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">
                                 <div className="modal-header" style={CalendarStyles.modalHeadeBackgroundColor}>
-                                    <h5 className="modal-title" id="exampleModalCenterTitle">Update Todo</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <h5 className="modal-title" id="exampleModalCenterTitle">Update ToDo</h5>
+                                    <a href="#/" className="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    </a>
                                 </div>
                                 <div className="modal-body">
-                                    
-                                    <div className="input-group mb-3">
-                        <input type="text" name="toDo" className="form-control" onChange={this.onChangeTodo} defaultValue={t.todotext}  />
-                    </div>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" onChange={this.onChangeTodo} name="description" defaultValue={t.tododescription} />
-
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <DatePicker
-                            className="form-control"
-                            selected={moment(t.duedate).toDate()}
-                            onChange={this.onChangeDate}
-                            // onSelect={this.props.onSelectDay}
-                            showTimeSelect
-                            timeFormat="HH:mm"
-                            timeIntervals={15}
-                            dateFormat="MMMM d, yyyy h:mm aa"
-                            timeCaption="time"
-
-                        />
-                    </div>
-                    <div className="form-group">
-  
-    <textarea className="form-control" onChange={this.onChangeTodo} defaultValue={t.notes} name="notes" rows="3"></textarea>
-  </div>
+                                    <input className="form-control" type="text" name="updatedToDo" onChange={context.onChange} value={t.todotext} />
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={this.updateTodo.bind(this, t)} className="btn btn-light border">Save</button>
+                                    <button type="button" className="btn btn-light border" onClick={context.updateTodo}>Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             )
         })

@@ -86,7 +86,7 @@ class ListComponent extends React.Component {
                             <a href="#/" style={style.link}> <span className="oi oi-trash" onClick={context.deleteCategory.bind(this, c.objectId)} ></span></a>
                         </div>
                     </div>
-                    <div ref={context.modal} className="modal fade" id={c.objectId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div ref={context.modal} className="modal fade" id={c.objectId} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> 
                         <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">
                                 <div className="modal-header" style={CalendarStyles.modalHeadeBackgroundColor}>

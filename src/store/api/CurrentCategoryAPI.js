@@ -1,25 +1,25 @@
 const HEADERS = {
-      "X-Parse-Application-Id": "checklist",
-      "Content-Type": "application/json"           
-                 }
+    "X-Parse-Application-Id": "checklist",
+    "Content-Type": "application/json"
+}
 
-function fetchcategorydata(store,action){
-	let categoryId = action.payLoadData;
-	console.log("CAT ID FROM API=>",categoryId);
-	  let params = encodeURI(`where={"objectId": "${categoryId}"}`);
+function fetchcategorydata(store, action) {
+    let categoryId = action.payLoadData;
+    console.log("CAT ID FROM API=>", categoryId);
+    let params = encodeURI(`where={"objectId": "${categoryId}"}`);
     let url = `http://localhost:1337/parse/classes/categories/?${params}`;
-    console.log("URL=>",url);
-	fetch(url,{
+    console.log("URL=>", url);
+    fetch(url, {
 
-		method:"get",
-		headers:HEADERS,
+        method: "get",
+        headers: HEADERS,
 
-	})
-	.then(function (data) {
+    })
+        .then(function (data) {
             return data.json()
         })
         .then(function (data) {
-             console.log(data);
+            console.log(data);
             store.dispatch({
                 type: "CATEGORY_DATA_LOADED",
                 currentCategoryData: data.results[0]
@@ -28,6 +28,6 @@ function fetchcategorydata(store,action){
         .catch(function (error) {
             console.log(error)
         })
-}                 
+}
 
-export  {fetchcategorydata};
+export { fetchcategorydata };
