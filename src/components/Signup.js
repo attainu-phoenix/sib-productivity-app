@@ -96,7 +96,7 @@ import './signup.css'
 
    
 	render() {
-		if(this.props.newUser && this.props.newUser.objectId ){
+		if(this.props.userReducer && this.props.userReducer.objectId ){
             return (
             	<div>
             

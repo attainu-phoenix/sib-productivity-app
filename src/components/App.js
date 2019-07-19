@@ -12,6 +12,7 @@ import AddCategory from './AddCategory.js';
 
 import { Provider } from 'react-redux'
 import {store} from '../store/store.js'
+import Logout from './Logout.js';
 
 import AddCategoryComponent from './AddCategory.js';
 
@@ -48,6 +49,7 @@ class App extends React.Component {
                                     <Route path="/app/toDo/:todoID" component={ToDo} />
                                        <Route path="/app/addToDo/:categoryID" component={AddToDo} />
                                         <Route path="/app/calendar" component={Calendar} />
+                                        <Route path="/app/logout"  component={Logout}/>
                                     </div>
 
                                 </div>
