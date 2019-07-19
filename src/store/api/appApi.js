@@ -115,58 +115,63 @@ function Add_TODO(store, action) {
         .catch(err => console.log(err));
 }
 
-function retriveTODO(store, action) {
-    let catID;
-    let params = encodeURI(`where={"category_id":"${catID}"}`);
-    let url = `http://localhost:1337/parse/classes/todos?${params}`;
-    fetch(url, {
-        method: "get",
-        headers: HEADERS
-    })
-        .then(data => data.json())
-        .then(json => {
-            store.dispatch({
-                type: "FETCH_TODOS",
-                todo: json
-            })
-        })
-        .catch(err => console.log(err));
-}
 
 
 function updateTODO(store, action) {
-    let todoId;
-    let category_id;
-    let todotext;
-    let tododescription;
-    let duedate;
-    let status;
-    let notes = [];
-    let url = `http://localhost:1337/parse/classes/todos/${todoId}`;
+    let objectId = action.payLoadData.objectId;
+    let categoryID = action.payLoadData.categoryID;
+    let data = {
+        todotext: action.payLoadData.updatedToDo,
+        tododescription: action.payLoadData.updatedDescription,
+        notes: action.payLoadData.updatedNotes
+    }
+    let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
+
     fetch(url, {
         method: "put",
         headers: HEADERS,
-        body: JSON.stringify({
-            category_id: category_id,
-            todotext: todotext,
-            tododescription: tododescription,
-            duedate: duedate,
-            status: status,
-            notes: notes
-        })
+        body: JSON.stringify(data)
 
     })
         .then(data => data.json())
         .then(json => {
             store.dispatch({
-                type: "TODO_UPDATED",
-                todo: json
+                type: "FETCH_TODOS_BY_CATEGORY_ID",
+                payLoadData: categoryID
             })
         })
         .catch(err => console.log(err));
 }
 
 
+function updateToDoStatus(store, action) {
+    let categoryID = action.payLoadData.categoryID;
+    let objectId = action.payLoadData.objectId;
+
+    let toDoStatus = {
+        status: action.payLoadData.status
+    }
+    let data = JSON.stringify(toDoStatus);
+    let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
+
+    fetch(url, {
+        method: "put",
+        headers: HEADERS,
+        body: data
+    })
+        .then(function (data) {
+            return data.json()
+        })
+        .then(function (data) {
+            store.dispatch({
+                type: "FETCH_TODOS_BY_CATEGORY_ID",
+                payLoadData: categoryID
+            })
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+}
 
 function deleteTODO(store, action) {
     let todoID = action.payLoadData.todoID;
@@ -175,11 +180,12 @@ function deleteTODO(store, action) {
     let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
     console.log("DELETE URL", url);
     fetch(url, {
-        method: "delete",
-        header: HEADERS
+        method: "DELETE",
+        headers: HEADERS
     })
         .then(data => data.json())
         .then(json => {
+            console.log(json);
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
@@ -216,8 +222,5 @@ function fetchTodoByCategoryId(store, action) {
             console.log(error)
         })
 }
-
-
-
-export { addEvent, fetchEvent, Do_signup, Do_login, Add_TODO, retriveTODO, updateTODO, deleteTODO, fetchTodoByCategoryId }
+export { addEvent, fetchEvent, Do_signup, Do_login, Add_TODO, updateTODO, deleteTODO, fetchTodoByCategoryId, updateToDoStatus }
 

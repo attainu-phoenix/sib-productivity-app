@@ -45,7 +45,7 @@ class App extends React.Component {
                                     <div className="card-body">
                                     <Route path="/app" exact={true} component={AddCategoryComponent} />
                                     <Route path="/app/listofcat" component={CategoryListComponent} /> 
-                                    <Route path="/app/toDo/" component={ToDo} />
+                                    <Route path="/app/toDo/:todoID" component={ToDo} />
                                        <Route path="/app/addToDo/:categoryID" component={AddToDo} />
                                         <Route path="/app/calendar" component={Calendar} />
                                     </div>

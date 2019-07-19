@@ -27,8 +27,23 @@ class ToDoComponent extends React.Component {
         }
     }
 
+    componentDidMount() {
+        // console.log("FETCH_TODOS called in componentDidMount in Addtodos")
+
+        let TODOID = this.props.match.params.todoID;
+        
+        store.dispatch({
+            type: "FETCH_TODO_DATA",
+            payLoadData: TODOID
+        })
+
+       
+    }
+
 
     render() {
+                
+
         return (
             <div>
                 <h4>To Do</h4><br />
