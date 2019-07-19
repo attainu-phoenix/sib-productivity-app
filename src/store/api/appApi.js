@@ -168,7 +168,7 @@ function updateToDoStatus(store, action) {
                 payLoadData: categoryID
             })
         })
-        .catch(function(error){
+        .catch(function (error) {
             console.log(error);
         })
 }

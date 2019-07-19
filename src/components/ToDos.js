@@ -61,36 +61,13 @@ class ToDosComponent extends React.Component {
         })
     }
 
-    // onChangeTodo(event) {
-    //     let name = event.target.name
-    //     let value = event.target.value
-
-    //     this.setState({
-    //         [name]: value
-    //     })
-    //     // let $ = window.$;
-    //     // let modal = this.modal.current;
-
-    //     // let modalId = `#${modal.id}`
-    //     // console.log(modalId)
-    //     // $(modalId).modal({
-    //     //     backdrop: 'static',
-    //     //     keyboard: false
-    //     // });
-    //     // $('.modal-backdrop').remove();
-
-    //     console.log(name, value);
-    // }
-
     onChange(event) {
         console.log("came inside onChange..")
         let name = event.target.name;
         let value = event.target.value;
-        let $ = window.$;
-        let modal = this.modal.current;
-        // $(modal).modal('focus')
-
-        let modalId = `#${modal.id}`
+        // let $ = window.$;
+        // let modal = this.modal.current;
+        // let modalId = `#${modal.id}`
 
 
         console.log("Name :", name + " Value :", value);
