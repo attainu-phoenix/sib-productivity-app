@@ -78,7 +78,7 @@ class ListComponent extends React.Component {
                 <div key={c.objectId} className="row justify-content-between align-items-center border  bg-light" style={style.categoryContainer}>
                     {/* <h4>Dummy Element</h4> */}
                     <div className="col-md-8">
-                        <Link to={`/app/addToDo`} style={style.link}>{c.categoryName}</Link>
+                        <Link to={`/app/addToDo/${c.objectId}`} style={style.link}>{c.categoryName}</Link>
                     </div>
                     <div className="col-md-1">
                         <div className="row justify-content-around">

@@ -32,7 +32,7 @@ class Menu extends React.Component {
                 </li>
                 <li className="list-group-item ">
 
-                    <Link to="/app/addToDo" style={MenuStyles.Link}>
+                    <Link to="/app/addToDo/" style={MenuStyles.Link}>
                         <span className="oi oi-task">
                             Todo
                         </span>

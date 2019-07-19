@@ -1,5 +1,3 @@
-
-
 import {deleteCategory, createCategories,retrieveCategory, updateCategory} from '../api/categoryApi';
 
  import {store} from '../store.js';
@@ -28,6 +26,8 @@ function categoryReduer(categories = [], action) {
         updateCategory(store, action)
         return categories;
     }
+
+   
 
     if (action.type === "DELETE_CATEGORY") {
         // let index = categories.findIndex((c) => {

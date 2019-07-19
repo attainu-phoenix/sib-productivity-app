@@ -3,13 +3,18 @@ import Header from '../components/Header.js'
 import Menu from './Menu.js'
 import { Route } from 'react-router-dom'
 import Calendar from '../components/Calendar.js'
-import AddTodoComponent from '../components/Addtodos'
+import AddToDo from '../components/Addtodos'
+
+import ToDo from '../components/ToDo'
+import AddCategory from './AddCategory.js';
+
 
 
 import { Provider } from 'react-redux'
 import {store} from '../store/store.js'
 
 import AddCategoryComponent from './AddCategory.js';
+
 import CategoryListComponent from './CategoryList.js';
 const style = {
 
@@ -24,6 +29,8 @@ class App extends React.Component {
         return (
             <div>
 
+                <Header />
+                
                 
             <Provider store={store}> 
                 <div>
@@ -38,14 +45,20 @@ class App extends React.Component {
                                     <div className="card-body">
                                     <Route path="/app" exact={true} component={AddCategoryComponent} />
                                     <Route path="/app/listofcat" component={CategoryListComponent} /> 
-                                        <Route path="/app/addToDo" component={AddTodoComponent} />
+                                    <Route path="/app/toDo/:todoID" component={ToDo} />
+                                       <Route path="/app/addToDo/:categoryID" component={AddToDo} />
                                         <Route path="/app/calendar" component={Calendar} />
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+        
+  
+
                 </Provider>
                 </div>
             
@@ -53,6 +66,7 @@ class App extends React.Component {
             
 
         
+
     }
 }
 
