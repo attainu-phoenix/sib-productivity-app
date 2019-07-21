@@ -8,6 +8,7 @@ import CurrentCategoryReducer from './reducers/CurrentCategoryReducer.js';
 import categoryReduer  from './reducers/categoryReducer.js';
 import toDoReducer from './reducers/toDoReducer.js';
 import currentToDoDataReducer from './reducers/currentToDoDataReducer'
+import isToDoLoadingReducer from './reducers/isToDoLoadingReducer'
 
 
 let reducer = combineReducers({
@@ -19,7 +20,8 @@ let reducer = combineReducers({
     currentToDoData:currentToDoDataReducer,
     currentCategoryData:CurrentCategoryReducer,
     categories : categoryReduer,
-    isCategoryLoading: isCategoryLoadingReducer
+    isCategoryLoading: isCategoryLoadingReducer,
+    isToDoLoading:isToDoLoadingReducer
 })
 
 let store = createStore(reducer);

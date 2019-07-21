@@ -11,7 +11,7 @@ import AddCategory from './AddCategory.js';
 
 
 import { Provider } from 'react-redux'
-import {store} from '../store/store.js'
+import { store } from '../store/store.js'
 
 import AddCategoryComponent from './AddCategory.js';
 
@@ -30,42 +30,42 @@ class App extends React.Component {
             <div>
 
                 <Header />
-                
-                
-            <Provider store={store}> 
-                <div>
-                    <Header />
-                    <div className="container" style={style.container}>
-                        <div className="row">
-                            <div className="col-md-3">
-                                <Menu />
-                            </div>
-                            <div className="col-md-9">
-                                <div className="card">
-                                    <div className="card-body">
-                                    <Route path="/app" exact={true} component={AddCategoryComponent} />
-                                    <Route path="/app/listofcat" component={CategoryListComponent} /> 
-                                    <Route path="/app/toDo/:todoID" component={ToDo} />
-                                       <Route path="/app/addToDo/:categoryID" component={AddToDo} />
-                                        <Route path="/app/calendar" component={Calendar} />
-                                    </div>
 
+
+                <Provider store={store}>
+                    <div>
+                        <Header />
+                        <div className="container" style={style.container}>
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <Menu />
+                                </div>
+                                <div className="col-md-9">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <Route path="/app" exact={true} component={AddCategoryComponent} />
+                                            <Route path="/app/listofcat" component={CategoryListComponent} />
+                                            <Route path="/app/toDo/:todoID" component={ToDo} />
+                                            <Route path="/app/addToDo/:categoryID" component={AddToDo} />
+                                            <Route path="/app/calendar" component={Calendar} />
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-        
-  
+
+
 
                 </Provider>
-                </div>
-            
-        );
-            
+            </div>
 
-        
+        );
+
+
+
 
     }
 }

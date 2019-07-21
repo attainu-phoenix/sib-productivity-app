@@ -4,12 +4,7 @@ import { stateMapper, store } from '../store/store.js'
 import ToDos from './ToDos.js'
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
-
-// const style = {
-//     buttonColor: {
-//         color: 'white'
-//     }
-// }
+import Spinner from './Spinner.js'
 class AddTodoComponent extends React.Component {
 
     constructor(props) {
@@ -32,7 +27,6 @@ class AddTodoComponent extends React.Component {
     }
 
     componentDidMount() {
-        // console.log("FETCH_TODOS called in componentDidMount in Addtodos")
 
         let categoryID = this.props.match.params.categoryID;
         
@@ -74,7 +68,7 @@ class AddTodoComponent extends React.Component {
             newFormState.isToDoValid = false;
         }
         if (!this.state.description) {
-            // console.log("description is checked ")
+          
             newFormState.isFormValid = false;
             newFormState.isDescriptionValid = false;
         }
@@ -100,7 +94,6 @@ class AddTodoComponent extends React.Component {
             notes: this.state.notes,
             status: false
         }
-        // console.log(toDoData);
         store.dispatch({
 
             type: "ADD_TODO",
@@ -110,12 +103,7 @@ class AddTodoComponent extends React.Component {
 
 
     render() {
-        let categoryID = this.props.match.params.categoryID
-     
-        /*if(this.props.toDos.objectId){
-           let sucess =  <div className="alert alert-success"> Todo Added Sucessfuly.</div>;                              
-           return sucess;
-       }*/
+       let toDos = this.props.isToDoLoading ? <Spinner/> :<ToDos/> ;
         return (
             <div>
 
@@ -152,13 +140,8 @@ class AddTodoComponent extends React.Component {
                     </div>
 
                 </form>
-
-                <ToDos />
-
+                {toDos} 
             </div>
-
-
-
 
         );
     }
