@@ -123,8 +123,10 @@ function updateTODO(store, action) {
     let data = {
         todotext: action.payLoadData.updatedToDo,
         tododescription: action.payLoadData.updatedDescription,
-        notes: action.payLoadData.updatedNotes
+        notes: action.payLoadData.updatedNotes,
+        duedate:action.payLoadData.updateDate
     }
+    console.log(data)
     let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
 
     fetch(url, {
@@ -201,7 +203,7 @@ function fetchTodoByCategoryId(store, action) {
 
     let params = encodeURI(`where={"category_id": "${category_id}"}`);
     let url = `http://localhost:1337/parse/classes/todos/?${params}`;
-    console.log("URL=>", url);
+  
     fetch(url, {
 
         method: "get",

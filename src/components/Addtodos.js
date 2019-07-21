@@ -35,7 +35,7 @@ class AddTodoComponent extends React.Component {
         // console.log("FETCH_TODOS called in componentDidMount in Addtodos")
 
         let categoryID = this.props.match.params.categoryID;
-        console.log("CDM CAT ID", categoryID);
+        
         store.dispatch({
             type: "FETCH_CATEGORY_DATA",
             payLoadData: categoryID
@@ -111,7 +111,7 @@ class AddTodoComponent extends React.Component {
 
     render() {
         let categoryID = this.props.match.params.categoryID
-        console.log("FROM ADD TODO", this.props.currentCategoryData);
+     
         /*if(this.props.toDos.objectId){
            let sucess =  <div className="alert alert-success"> Todo Added Sucessfuly.</div>;                              
            return sucess;

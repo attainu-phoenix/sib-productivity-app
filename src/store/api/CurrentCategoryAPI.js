@@ -5,10 +5,10 @@ const HEADERS = {
 
 function fetchcategorydata(store, action) {
     let categoryId = action.payLoadData;
-    console.log("CAT ID FROM API=>", categoryId);
+  
     let params = encodeURI(`where={"objectId": "${categoryId}"}`);
     let url = `http://localhost:1337/parse/classes/categories/?${params}`;
-    console.log("URL=>", url);
+  
     fetch(url, {
 
         method: "get",
