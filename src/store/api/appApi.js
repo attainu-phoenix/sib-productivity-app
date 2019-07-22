@@ -90,6 +90,7 @@ function Add_TODO(store, action) {
     let duedate = action.payLoadData.date;
     let status = action.payLoadData.status;
     let notes = action.payLoadData.notes;
+    let userId = action.payLoadData.userId;
 
     let url = "http://localhost:1337/parse/classes/todos";
     fetch(url, {
@@ -101,7 +102,8 @@ function Add_TODO(store, action) {
             tododescription: tododescription,
             duedate: duedate,
             status: status,
-            notes: notes
+            notes: notes,
+            userId:userId
         })
     })
         .then(data => data.json())
@@ -124,7 +126,7 @@ function updateTODO(store, action) {
         todotext: action.payLoadData.updatedToDo,
         tododescription: action.payLoadData.updatedDescription,
         notes: action.payLoadData.updatedNotes,
-        duedate:action.payLoadData.updateDate
+        duedate: action.payLoadData.updateDate
     }
     console.log(data)
     let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
@@ -203,7 +205,7 @@ function fetchTodoByCategoryId(store, action) {
 
     let params = encodeURI(`where={"category_id": "${category_id}"}`);
     let url = `http://localhost:1337/parse/classes/todos/?${params}`;
-  
+
     fetch(url, {
 
         method: "get",
@@ -224,5 +226,11 @@ function fetchTodoByCategoryId(store, action) {
             console.log(error)
         })
 }
-export { addEvent, fetchEvent, Do_signup, Do_login, Add_TODO, updateTODO, deleteTODO, fetchTodoByCategoryId, updateToDoStatus }
+
+
+export {
+    addEvent, fetchEvent, Do_signup, Do_login,
+    Add_TODO, updateTODO, deleteTODO, fetchTodoByCategoryId,
+    updateToDoStatus
+}
 

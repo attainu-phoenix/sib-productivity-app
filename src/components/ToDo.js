@@ -1,85 +1,34 @@
-import React from 'react';
-import DatePicker from 'react-datepicker';
-import { connect } from 'react-redux'
+import React from 'react'
 import { stateMapper, store } from '../store/store.js'
-import moment from 'moment'
+import { connect } from 'react-redux'
+import TodayTodo from './TodayTodo'
+import MonthlyTodo from './MonthlyTodo'
 
-const style = {
-    card: {
-        border: '0px',
 
-    },
-    link: {
-        color: 'black',
-        textDecoration: 'none',
-    },
-    categoryContainer: {
-        height: '55px'
-    }
-
-}
 class ToDoComponent extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.state={
-                
-        }
-    }
 
-    componentDidMount() {
-        // console.log("FETCH_TODOS called in componentDidMount in Addtodos")
-
-        let TODOID = this.props.match.params.todoID;
-        
-        store.dispatch({
-            type: "FETCH_TODO_DATA",
-            payLoadData: TODOID
-        })
-
-       
-    }
-
-
+   
     render() {
-                
-
         return (
             <div>
-                <h4>To Do</h4><br />
-                <form onSubmit={this.handleFormSubmit}>
-                    <div className="input-group mb-3">
-                        <input type="text" name="toDo" className="form-control" onChange={this.onChange}  />
-                    </div>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" onChange={this.onChange} name="description" />
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item">
+                        <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Today</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Monthly</a>
+                    </li>
 
-                    </div>
-                    <div className="input-group mb-3">
-                        <DatePicker
-                            className="form-control"
-                            selected={this.state.date}
-                            onChange={this.onChangeDate}
-                            // onSelect={this.props.onSelectDay}
-                            showTimeSelect
-                            timeFormat="HH:mm"
-                            timeIntervals={15}
-                            dateFormat="MMMM d, yyyy h:mm aa"
-                            timeCaption="time"
+                </ul>
+                <div className="tab-content" id="myTabContent">
+                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><TodayTodo /></div>
+                    <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><MonthlyTodo /></div>
 
-                        />
-                    </div>
-                    <div className="row justify-content-center">
-                        <button type="submit" className="btn btn-danger">Save</button>
-                    </div>
-
-                </form>
-
-                
-
+                </div>
             </div>
         )
     }
 }
-let ToDo = connect(stateMapper)(ToDoComponent)
+let ToDo = connect(stateMapper)(ToDoComponent);
 export default ToDo;

@@ -13,10 +13,16 @@ const style = {
     },
     link: {
         color: 'black',
-        textDecoration: 'none',
+        textDecoration: 'none', 
     },
     categoryContainer: {
         height: '55px'
+    },
+    debug:{
+        border:'1px solid red'
+    },
+    date:{
+        paddingRight:'20px'
     }
 
 }
@@ -115,7 +121,7 @@ class ToDosComponent extends React.Component {
     }
 
     onChange(event) {
-      
+
         let name = event.target.name;
         let value = event.target.value;
         this.setState({
@@ -174,18 +180,22 @@ class ToDosComponent extends React.Component {
         return this.props.toDos.map((t) => {
 
             return (
-                <div key={this.getKey()} className="row justify-content-start align-items-center border  bg-light" style={style.categoryContainer}>
+                <div key={this.getKey()} className="row justify-content-around align-items-center border  bg-light" style={style.categoryContainer}>
 
                     <div className="col-md-1">
                         <input type="checkbox" aria-label="Checkbox for following text input" checked={t.status} value={t.status}
                             onChange={this.onChangeCheckBox.bind(this, t.objectId)} name="isCheck"
                         />
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-7" >
                         <Link to="#" style={style.link}>{t.todotext}</Link>
                     </div>
 
-                    <div className="col-md-1 offset-md-2">
+                    <div className="row">
+                        <span>{moment(t.duedate).format("MMM Do YY")}</span>
+                    </div>
+
+                    <div className="col-md-1">
                         <div className="row justify-content-around">
                             <a href="#/" style={style.link} data-target={"#" + t.objectId} onClick={this.openModal.bind(this, t)} data-toggle="modal">  <span className="oi oi-pencil "></span></a>
                             <a href="#/" style={style.link}><span className="oi oi-trash" name={t.objectId} onClick={this.delete.bind(this, t.objectId)} defaultValue={t.objectId}></span></a>
