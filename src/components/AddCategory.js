@@ -3,6 +3,7 @@ import ListCategory from './ListCategory.js';
 import { connect } from 'react-redux'
 import { stateMapper, store } from '../store/store.js'
 import './list.css';
+import {USER_DATA} from '../store/api/user_helper'
 
 const style = {
     buttonColor: {
@@ -29,10 +30,10 @@ class AddCategoryComponent extends React.Component {
     }
 
     componentDidMount() {
-
+        let userId = USER_DATA().user;
         store.dispatch({
             type: "FETCH_CATEGORES",
-            userId: 'dcghkj564'
+            userId: userId
         })
     }
 
@@ -71,15 +72,18 @@ class AddCategoryComponent extends React.Component {
         store.dispatch({
 
             type: "ADD_CATEGORIES",
-            categoryName: this.state.name
+            categoryName: this.state.name,
+            userId:USER_DATA().user
+
         })
+        document.getElementById("addCategoryForm").reset();
 
     }
     render() {
         return (
             <div>
                 <h6>Category </h6>
-                <form onSubmit={this.handleFormSubmit}>
+                <form onSubmit={this.handleFormSubmit} id="addCategoryForm">
 
 
                     <div className="input-group mb-3">

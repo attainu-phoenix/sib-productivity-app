@@ -5,6 +5,8 @@ import ToDos from './ToDos.js'
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
 import Spinner from './Spinner.js'
+import {USER_DATA} from '../store/api/user_helper'
+
 class AddTodoComponent extends React.Component {
 
     constructor(props) {
@@ -93,13 +95,14 @@ class AddTodoComponent extends React.Component {
             date: this.state.date,
             notes: this.state.notes,
             status: false,
-            userId:'MDXxlbAHcn'
+            userId:USER_DATA().user
         }
         store.dispatch({
 
             type: "ADD_TODO",
             payLoadData: toDoData
         })
+        document.getElementById("toDoForm").reset();
     }
 
 
@@ -109,7 +112,7 @@ class AddTodoComponent extends React.Component {
             <div>
 
                 <h4>{`To Dos In ${this.props.currentCategoryData.categoryName}`}</h4><br />
-                <form onSubmit={this.handleFormSubmit}>
+                <form onSubmit={this.handleFormSubmit} id="toDoForm">
                     <div className="input-group mb-3">
                         <input type="text" name="toDo" className={`form-control ${!this.state.formState.isToDoValid && 'is-invalid'}`} onChange={this.onChange} placeholder={`Enter ToDos In ${this.props.currentCategoryData.categoryName}`} />
                     </div>

@@ -164,12 +164,17 @@ class EventsComponent extends React.Component {
                                     </div>
 
                                     <div className="modal-body">
-
-                                        <input type="text" name="title" className="form-control" defaultValue={e.eventTitle}
-                                            onChange={this.onChange} /><br />
-                                        <input type="text" name="description" className="form-control" defaultValue={e.description}
-                                            onChange={this.onChange} /><br />
-
+                                        <div className="form-group">
+                                        <label htmlFor="eventTitle">Event Title</label>
+                                        <input type="text" id="eventTitle" name="title" className="form-control" defaultValue={e.eventTitle}
+                                            onChange={this.onChange} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="eventDescription">Event Description</label>
+                                        <input type="text" name="description" id="eventDescription" className="form-control" defaultValue={e.description}
+                                            onChange={this.onChange} />
+                                        </div>
+                                        <label>Event Date</label>
                                         <div className="input-group mb-3">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text" id="inputGroup-sizing-default">{moment(e.date).format(' MMMM Do YYYY, h:mm:ss a')}</span>

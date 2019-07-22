@@ -1,3 +1,5 @@
+import {USER_DATA} from './user_helper';
+
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
     "Content-Type": "application/json"
@@ -9,7 +11,7 @@ function createCategories(store, action) {
 
     let data = {
         categoryName: action.categoryName,
-        userId: 'dcghkj564'
+        userId: action.userId
     }
     console.log(data)
     let categoryName = JSON.stringify(data);
@@ -27,7 +29,7 @@ function createCategories(store, action) {
 
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: 'dcghkj564'
+                userId: USER_DATA().user
             })
             store.dispatch({
                 type: "SHOW_TOAST_MESSAGE",
@@ -70,7 +72,7 @@ function deleteCategory(store, action) {
 
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: "dcghkj564"
+                userId: USER_DATA().user
             })
             store.dispatch({
                 type: "SHOW_TOAST_MESSAGE",
@@ -138,7 +140,7 @@ function updateCategory(store, action) {
             console.log(json);
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: "dcghkj564"
+                userId: USER_DATA().user
             })
             store.dispatch({
                 type: "SHOW_TOAST_MESSAGE",

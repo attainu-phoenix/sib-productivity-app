@@ -225,9 +225,13 @@ class ToDosComponent extends React.Component {
                                     </a>
                                 </div>
                                 <div className="modal-body">
+                                    <label>ToDo</label>
                                     <input className="form-control" type="text" value={this.state.toDo} name="toDo" onChange={this.onChange} /><br></br>
+                                    <label>ToDo Description</label>
                                     <input className="form-control" type="text" value={this.state.toDoDescription} name="toDoDescription" onChange={this.onChange} /><br></br>
+                                    <label>ToDo Note</label>
                                     <input className="form-control" type="text" value={this.state.toDoNote} name="toDoNote" onChange={this.onChange} /><br></br>
+                                    <label>Date</label>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="basic-addon3">{moment(this.state.toDoDueDate).format(' MMMM Do YYYY, h:mm:ss a')}</span>

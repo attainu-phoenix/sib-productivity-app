@@ -1,4 +1,4 @@
-
+import {USER_DATA} from './user_helper'
 
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
@@ -110,7 +110,7 @@ function editEvent(store, action) {
          
             store.dispatch({
                 type: "FETCH_EVENTS",
-                email: "shivam@gmail.com"
+                email: USER_DATA().email
 
             })
             store.dispatch({
@@ -163,7 +163,7 @@ function editCheckBox(store, action) {
 
             store.dispatch({
                 type: "FETCH_EVENTS",
-                email: "shivam@gmail.com"
+                email: USER_DATA().email
 
             })
 
@@ -209,7 +209,7 @@ function deleteEvent(store, action) {
            
             store.dispatch({
                 type: "FETCH_EVENTS",
-                email: "shivam@gmail.com"
+                email: USER_DATA().email
 
             })
         })
