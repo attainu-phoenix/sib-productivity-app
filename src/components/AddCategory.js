@@ -29,18 +29,12 @@ class AddCategoryComponent extends React.Component {
     }
 
     componentDidMount() {
-        
+
         store.dispatch({
             type: "FETCH_CATEGORES",
-            userId:'dcghkj564'
+            userId: 'dcghkj564'
         })
     }
-    
-    // categoryName = (event) => {
-    //     this.setState({
-    //         categoryName: event.target.value
-    //     });
-    // }
 
     onChange(event) {
 
@@ -81,41 +75,12 @@ class AddCategoryComponent extends React.Component {
         })
 
     }
-
-    // addCategory = () => {
-
-    //     this.id = this.categoryID + 1;
-    //     const copyCategories = Object.assign([], this.state.categories);
-    //     copyCategories.push({
-    //         id: this.categoryID,
-    //         name: this.state.categoryName
-    //     })
-
-    //     this.setState({
-    //         categories: copyCategories
-    //     })
-
-    //     if (this.categoryName === "") {
-    //         alert("please!");
-    //     }
-
-    // }
-
-    // deleteCategory = (index, e) => {
-    //     const categories = Object.assign([], this.state.categories);
-    //     categories.splice(index, 1);
-    //     this.setState({
-    //         categories: categories
-    //     })
-    // }
-
-
     render() {
         return (
             <div>
                 <h6>Category </h6>
                 <form onSubmit={this.handleFormSubmit}>
-                    
+
 
                     <div className="input-group mb-3">
                         <input type="text" name="name" className={`form-control ${!this.state.formState.isNameValid && 'is-invalid'}`} onChange={this.onChange} placeholder="Enter Categories" aria-label="Recipient's username" aria-describedby="button-addon2" />
@@ -126,13 +91,13 @@ class AddCategoryComponent extends React.Component {
 
 
                 </form>
-               
+
                 <ListCategory />
             </div>
 
 
 
-       );
+        );
 
     }
 }

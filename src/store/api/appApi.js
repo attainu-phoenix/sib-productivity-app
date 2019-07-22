@@ -103,7 +103,7 @@ function Add_TODO(store, action) {
             duedate: duedate,
             status: status,
             notes: notes,
-            userId:userId
+            userId: userId
         })
     })
         .then(data => data.json())
@@ -128,7 +128,7 @@ function updateTODO(store, action) {
         notes: action.payLoadData.updatedNotes,
         duedate: action.payLoadData.updateDate
     }
-    console.log(data)
+
     let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
 
     fetch(url, {
@@ -143,8 +143,27 @@ function updateTODO(store, action) {
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: categoryID
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Updating Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 
@@ -171,9 +190,26 @@ function updateToDoStatus(store, action) {
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: categoryID
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Status Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
         })
         .catch(function (error) {
-            console.log(error);
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Updating Status Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
         })
 }
 
@@ -189,13 +225,33 @@ function deleteTODO(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log(json);
+
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
             })
+
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Deleted Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Deleting Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 
