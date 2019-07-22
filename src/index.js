@@ -4,8 +4,10 @@ import App from './components/App.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import HomeComponent from './components/Home.js';
+import AuthToast from './components/AuthToastComponent.js';
 import {Provider} from 'react-redux';
 import {store} from './store/store.js';
+
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
@@ -36,7 +38,7 @@ class Home extends React.Component {
         return (
             <Provider store={store}>
                 <Router>
-
+                 <AuthToast />
             <Route>
                  <Route path="/" exact = {true} component={HomeComponent} />
                 <Route path="/signup" component={Signup} />

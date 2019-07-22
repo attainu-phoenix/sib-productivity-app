@@ -50,11 +50,18 @@ function Do_signup(store, action) {
         .then(data => data.json())
         .then(json => {
             console.log("DATA CREATED", json);
-            store.dispatch({
-                type: "USER_CREATED",
-                newuser: json
+           store.dispatch({
+                type: "SHOW_AUTH_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "SIGNUP SUCESS",
+                    toastMessage: "Signup Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
 
             })
+
+          
         })
         .catch(err => console.log(err));
 }

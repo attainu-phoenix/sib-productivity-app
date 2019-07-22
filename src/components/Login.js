@@ -148,7 +148,7 @@ import HeaderComponent from './Header.js';
 						</div>
               <button class="btn btn-lg btn-primary btn-block  btn-circle text-uppercase" type="submit">Sign in</button>
               <hr class="my-4"/>
-              <GoogleLoginComponent/>
+              
               
    
            </div>

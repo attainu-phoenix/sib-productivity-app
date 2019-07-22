@@ -4,6 +4,7 @@ import eventReducer from './reducers/eventReducer.js';
 
 import isEventLoadingReducer from './reducers/isEventsLoadingReducer.js'
 import showToastReducer from './reducers/toastMessageReducer';
+import showAuthToastReducer from './reducers/AuthToastReducer.js';
 import isCategoryLoadingReducer from './reducers/isCategoryLoadingReducer.js';
 import CurrentCategoryReducer from './reducers/CurrentCategoryReducer.js';
 import categoryReduer from './reducers/categoryReducer.js';
@@ -17,6 +18,7 @@ let reducer = combineReducers({
     events: eventReducer,
     isEventLoading: isEventLoadingReducer,
     showToast: showToastReducer,
+    showAuthToast:showAuthToastReducer,
     toDos: toDoReducer,
     currentToDoData: currentToDoDataReducer,
     currentCategoryData: CurrentCategoryReducer,

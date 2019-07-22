@@ -3,7 +3,10 @@ import {connect} from 'react-redux'
 import {stateMapper} from '../store/store.js'
 import {Redirect} from 'react-router-dom';
 import HeaderComponent from './Header.js';
+import AuthToast from './AuthToastComponent.js';
 import './signup.css'
+
+
  class SignupComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -96,22 +99,25 @@ import './signup.css'
 
    
 	render() {
-		if(this.props.userReducer && this.props.userReducer.objectId ){
+		/*if(this.props.userReducer && this.props.userReducer.objectId ){
             return (
             	<div>
             
              <Redirect to="/login/success"/>
              </div>
              );
-        }
+        }*/
 		return (
 			<div>
 
 			 <HeaderComponent/>
+			 
 			<div className="container">
 				<div className="row justify-content-center">
+				<AuthToast />
 				
 					<div className="col-4">
+					
                       
                   
 						<label  className="title">sign up<i className="flag left"></i><i className="flag right"></i></label>
