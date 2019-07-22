@@ -1,4 +1,4 @@
-import { Add_TODO, fetchTodoByCategoryId, deleteTODO ,updateTODO,updateToDoStatus,fetchAllTodoOfUser} from '../api/appApi.js';
+import { Add_TODO, fetchTodoByCategoryId, deleteTODO ,updateTODO,updateToDoStatus} from '../api/appApi.js';
 import { fetchtododata } from '../api/fetchCurrentTodo.js';
 import { store } from '../store.js'
 function toDoReducer(toDos = [], action) {

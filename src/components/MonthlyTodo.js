@@ -1,5 +1,5 @@
 import React from 'react'
-import { stateMapper, store } from '../store/store.js'
+import { stateMapper} from '../store/store.js'
 import { connect } from 'react-redux'
 
 class MonthlyTodoComponent extends React.Component{

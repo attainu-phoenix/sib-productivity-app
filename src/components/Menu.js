@@ -4,8 +4,8 @@ import MenuStyles from '../styles/MenuStyles.js'
 
 
 
-class Menu extends React.Component {
 
+class Menu extends React.Component {
 
 
     render() {
@@ -21,16 +21,7 @@ class Menu extends React.Component {
                     </Link>
 
                 </li>
-                <li className="list-group-item ">
-
-                    <Link to="/app/listofcat" style={MenuStyles.Link}>
-                        <span className="oi oi-task">
-                         View Categories
-                         </span>
-                    </Link>
-
-                </li>
-                <li className="list-group-item ">
+                {/* <li className="list-group-item ">
 
                     <Link to="/app/ToDo/" style={MenuStyles.Link}>
                         <span className="oi oi-task">
@@ -38,7 +29,7 @@ class Menu extends React.Component {
                         </span>
                     </Link>
 
-                </li>
+                </li> */}
                 <li className="list-group-item">
 
                     <Link to="/app/calendar" style={MenuStyles.Link}>

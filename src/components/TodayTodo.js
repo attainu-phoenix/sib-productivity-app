@@ -1,29 +1,7 @@
 import React from 'react';
 import { stateMapper, store } from '../store/store.js'
 import { connect } from 'react-redux'
-import ToDos from './ToDos'
 
-
-const style = {
-    card: {
-        border: '0px',
-
-    },
-    link: {
-        color: 'black',
-        textDecoration: 'none',
-    },
-    categoryContainer: {
-        height: '55px'
-    },
-    debug: {
-        border: '1px solid red'
-    },
-    date: {
-        paddingRight: '20px'
-    }
-
-}
 
 class TodayTodoComponent extends React.Component {
 
