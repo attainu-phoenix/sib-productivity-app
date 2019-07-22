@@ -1,10 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import {stateMapper} from '../store/store.js'
-import {Redirect} from 'react-router-dom';
+import { connect } from 'react-redux'
+import { stateMapper } from '../store/store.js'
+import { Redirect } from 'react-router-dom';
 import HeaderComponent from './Header.js';
 import './signup.css'
- class SignupComponent extends React.Component {
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+
+class SignupComponent extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -13,6 +16,7 @@ import './signup.css'
 			email: "",
 			password: "",
 			cpassword: "",
+			redirectToLogin: false,
 			formState: {
 				isFormValid: true,
 				isNameValid: true,
@@ -25,8 +29,9 @@ import './signup.css'
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.validateForm = this.validateForm.bind(this);
+		this.onConfirm = this.onConfirm.bind(this);
 	}
-	 
+
 
 	onChange(event) {
 		let name = event.target.name;
@@ -44,10 +49,10 @@ import './signup.css'
 		}
 		else {
 
-		  this.props.dispatch({
-		  	type:"SIGNUP",
-		  	formdata:this.state
-		  })
+			this.props.dispatch({
+				type: "SIGNUP",
+				formdata: this.state
+			})
 		}
 
 
@@ -94,105 +99,118 @@ import './signup.css'
 
 	}
 
-   
+	onConfirm() {
+		console.log("===== onConfirm ========")
+		this.setState({
+			redirectToLogin: true
+		})
+
+	}
+
+
 	render() {
-		if(this.props.userReducer && this.props.userReducer.objectId ){
-            return (
-            	<div>
-            
-             <Redirect to="/login/success"/>
-             </div>
-             );
-        }
+		let alertMessage;
+		if (this.props.userReducer && this.props.userReducer.objectId) {
+
+			alertMessage = <SweetAlert success title="Success" onConfirm={this.onConfirm}>Signup Successful !</SweetAlert>
+
+		}
+		if (this.state.redirectToLogin) {
+			return (
+				<Redirect to="/login" />
+			)
+
+		}
 		return (
 			<div>
 
-			 <HeaderComponent/>
-			<div className="container">
-				<div className="row justify-content-center">
-				
-					<div className="col-4">
-                      
-                  
-						<label  className="title">sign up<i className="flag left"></i><i className="flag right"></i></label>
-						<form onSubmit={this.handleSubmit} className="shadow p-3 mb-5 bg-white roundedshadow p-3 mb-5 bg-white rounded">
-							{
-								!this.state.formState.isFormValid &&
-								<div className="alert alert-danger"> Please fill all Fields and try again .</div>
-							}
-							{
-								!this.state.formState.isPassMatch &&
-								<div className="alert alert-danger"> Confirm Password does not match .</div>
-							}
+				<HeaderComponent />
+				<div className="container">
+					{alertMessage}
+					<div className="row justify-content-center">
 
-							<div className="input-group mb-3">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fas fa-user-tie"></i>
-									</span>
+						<div className="col-4">
+
+
+							<label className="title">sign up<i className="flag left"></i><i className="flag right"></i></label>
+							<form onSubmit={this.handleSubmit} className="shadow p-3 mb-5 bg-white roundedshadow p-3 mb-5 bg-white rounded">
+								{
+									!this.state.formState.isFormValid &&
+									<div className="alert alert-danger"> Please fill all Fields and try again .</div>
+								}
+								{
+									!this.state.formState.isPassMatch &&
+									<div className="alert alert-danger"> Confirm Password does not match .</div>
+								}
+
+								<div className="input-group mb-3">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fas fa-user-tie"></i>
+										</span>
+									</div>
+									<input className={`form-control ${
+										!this.state.formState.isNameValid && "is-invalid"
+										}`}
+										name="name"
+										type="text"
+										onChange={this.onChange}
+										placeholder="Full Name" />
 								</div>
-								<input className={`form-control ${
-									!this.state.formState.isNameValid && "is-invalid"
-									}`}
-									name="name"
-									type="text"
-									onChange={this.onChange}
-									placeholder="Full Name" />
-							</div>
 
-							<div className="input-group mb-3">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fas fa-envelope-square"></i>
-									</span>
+								<div className="input-group mb-3">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fas fa-envelope-square"></i>
+										</span>
+									</div>
+									<input className={`form-control ${
+										!this.state.formState.isEmailValid && "is-invalid"
+										}`}
+										type="text"
+										name="email"
+										onChange={this.onChange}
+										placeholder="Email address" />
 								</div>
-								<input className={`form-control ${
-									!this.state.formState.isEmailValid && "is-invalid"
-									}`}
-									type="text"
-									name="email"
-									onChange={this.onChange}
-									placeholder="Email address" />
-							</div>
 
-							<div className="input-group mb-3">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fas fa-key"></i>
-									</span>
+								<div className="input-group mb-3">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fas fa-key"></i>
+										</span>
+									</div>
+									<input className={`form-control ${
+										!this.state.formState.isPasswordValid && "is-invalid"
+										}`}
+										type="password"
+										name="password"
+										onChange={this.onChange}
+										placeholder="Password" />
 								</div>
-								<input className={`form-control ${
-									!this.state.formState.isPasswordValid && "is-invalid"
-									}`}
-									type="password"
-									name="password"
-									onChange={this.onChange}
-									placeholder="Password" />
-							</div>
 
-							<div className="input-group mb-3">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fas fa-key"></i>
-									</span>
+								<div className="input-group mb-3">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fas fa-key"></i>
+										</span>
+									</div>
+									<input className={`form-control ${
+										!this.state.formState.isCpasswordValid && "is-invalid"
+										}`}
+										type="password"
+										name="cpassword"
+										onChange={this.onChange}
+										placeholder="Confirm Password" />
 								</div>
-								<input className={`form-control ${
-									!this.state.formState.isCpasswordValid && "is-invalid"
-									}`}
-									type="password"
-									name="cpassword"
-									onChange={this.onChange}
-									placeholder="Confirm Password" />
-							</div>
 
-							<div className="text-center">
-								<button type="submit" className="btn btn-info btn-block">Signup</button>
-							</div>
-						</form>
+								<div className="text-center">
+									<button type="submit" className="btn btn-info btn-block">Signup</button>
+								</div>
+							</form>
 
+						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		);
 	}
