@@ -233,10 +233,11 @@ class CalendarComponent extends React.Component {
     }
 
     render() {
-       
+      
 
         return (
             <div>
+               
                 <h5>Calendar</h5>
                 <hr />
                 <CalendarHeader selectMonth={this.selectMonth}

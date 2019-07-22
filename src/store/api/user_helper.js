@@ -1,14 +1,15 @@
-function USER_DATA(){
+function USER_DATA() {
 
 	let user = localStorage.getItem("user");
-	if(!user) {return null; }
+	if (!user) { return null; }
 	user = JSON.parse(user);
 
-	if(!user) { return null; 
-		.}
+	if (!user) {
+		return null;
+	}
 
-	let userdata = {user: user.objectId, email: user.email, name:user.name};
+	let userdata = { user: user.objectId, email: user.email, name: user.name };
 	return userdata;
-} 
+}
 
-export {USER_DATA}
+export { USER_DATA }

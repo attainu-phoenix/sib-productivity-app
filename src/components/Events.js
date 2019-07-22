@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import Spinner from './Spinner.js'
 
+
 class EventsComponent extends React.Component {
 
     constructor(props) {
@@ -21,7 +22,8 @@ class EventsComponent extends React.Component {
         this.deleteEvent = this.deleteEvent.bind(this);
         UniqueId.enableUniqueIds(this);
         this.state = {
-            startDate: new Date(),
+            selectedDate: moment().toDate(),
+            isNewDateSelected: false,
             title: "",
             description: "",
             isCheck: false
@@ -40,7 +42,10 @@ class EventsComponent extends React.Component {
     }
 
     onChangeDate(event) {
-        console.log("onChangeDate called ...");
+        this.setState({
+            selectedDate: moment(event).toDate(),
+            isNewDateSelected: true
+        })
     }
 
     saveEvent(event, e) {
@@ -49,14 +54,17 @@ class EventsComponent extends React.Component {
         let modal = this.modal.current;
         $(modal).modal("hide");
         $('.modal-backdrop').remove();
+
         let data = {
             id: event.id,
             title: this.state.title === "" ? event.eventTitle : this.state.title,
             description: this.state.description === "" ? event.description : this.state.description,
-            objectId: event.objectId
+            objectId: event.objectId,
+            date: this.state.isNewDateSelected ? this.state.selectedDate.toString() : event.date
 
         }
-        if (this.state.title === '' && this.state.description === '') {
+
+        if (this.state.title === '' && this.state.description === '' && !this.state.isNewDateSelected) {
             return;
         }
 
@@ -64,12 +72,16 @@ class EventsComponent extends React.Component {
             type: 'EDIT_EVENT',
             payLoadData: data
         })
+        this.setState({
+            title: "",
+            description: "",
+            isNewDateSelected: false
+
+        })
 
     }
 
     deleteEvent(objectId, e) {
-
-
         let $ = window.$;
         let deleteModal = this.deleteModal.current;
         $(deleteModal).modal("hide");
@@ -102,8 +114,8 @@ class EventsComponent extends React.Component {
             let editModalId = this.nextUniqueId();
             let deleteModalId = this.nextUniqueId();
             let currentEventMonth = moment(e.date).format("MMM")
-          
-            let isSame = month === currentEventMonth ? true:false
+
+            let isSame = month === currentEventMonth ? true : false
             if (isSame) {
                 return (
 
@@ -158,18 +170,23 @@ class EventsComponent extends React.Component {
                                         <input type="text" name="description" className="form-control" defaultValue={e.description}
                                             onChange={this.onChange} /><br />
 
-                                        <DatePicker
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" id="inputGroup-sizing-default">{moment(e.date).format(' MMMM Do YYYY, h:mm:ss a')}</span>
+                                            </div>
+                                            <DatePicker
+                                                className="form-control"
+                                                selected={this.state.selectedDate}
+                                                onChange={this.onChangeDate}
+                                                showTimeSelect={true}
+                                                timeFormat="HH:mm"
+                                                timeIntervals={15}
+                                                dateFormat="MMMM d, yyyy h:mm aa"
+                                                timeCaption="time"
+                                                placeholderText="Select Date To Edit"
+                                            />
+                                        </div>
 
-                                            selected={moment(e.date).toDate()}
-                                            onChange={this.onChangeDate}
-                                            // onSelect={this.props.onSelectDay}
-                                            showTimeSelect={true}
-                                            timeFormat="HH:mm"
-                                            timeIntervals={15}
-                                            dateFormat="MMMM d, yyyy h:mm aa"
-                                            timeCaption="time"
-
-                                        />
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
@@ -279,18 +296,22 @@ class EventsComponent extends React.Component {
                                         <input type="text" name="description" className="form-control" defaultValue={e.description}
                                             onChange={this.onChange} /><br />
 
-                                        <DatePicker
-
-                                            selected={moment(e.date).toDate()}
-                                            onChange={this.onChangeDate}
-                                            // onSelect={this.props.onSelectDay}
-                                            showTimeSelect={true}
-                                            timeFormat="HH:mm"
-                                            timeIntervals={15}
-                                            dateFormat="MMMM d, yyyy h:mm aa"
-                                            timeCaption="time"
-
-                                        />
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">{moment(e.date).format(' MMMM Do YYYY, h:mm:ss a')}</span>
+                                            </div>
+                                            <DatePicker
+                                                className="form-control"
+                                                selected={this.state.selectedDate}
+                                                onChange={this.onChangeDate}
+                                                showTimeSelect={true}
+                                                timeFormat="HH:mm"
+                                                timeIntervals={15}
+                                                dateFormat="MMMM d, yyyy h:mm aa"
+                                                timeCaption="time"
+                                                placeholderText="Select Date To Edit"
+                                            />
+                                        </div>
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
@@ -343,7 +364,7 @@ class EventsComponent extends React.Component {
     render() {
 
         let month = this.props.currentMonth;
-       
+
         let events;
         let isToday = this.props.isTodayEvents;
         if (isToday) {
@@ -351,9 +372,11 @@ class EventsComponent extends React.Component {
         } else {
             events = this.props.isEventLoading ? <Spinner /> : this.renderEvents(month);
         }
+
         return (
             <div>
                 {events}
+
             </div>
         )
 

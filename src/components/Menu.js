@@ -4,8 +4,8 @@ import MenuStyles from '../styles/MenuStyles.js'
 
 
 
-class Menu extends React.Component {
 
+class Menu extends React.Component {
 
 
     render() {
