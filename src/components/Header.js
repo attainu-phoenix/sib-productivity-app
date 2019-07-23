@@ -1,22 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
-import {USER_DATA} from '../store/api/user_helper.js';
+import { USER_DATA } from '../store/api/user_helper.js';
 
 
 class HeaderComponent extends React.Component {
-  
+
   render() {
-     let login;
-     let signup;
-     let logout;
-     let User = USER_DATA();
-     if (!User) {
-      signup =  <Link className="nav-link text-white" to="/signup">Signup</Link>;
+    let login;
+    let signup;
+    let logout;
+    let User = USER_DATA();
+
+    if (!User) {
+      signup = <Link className="nav-link text-white" to="/signup">Signup</Link>;
       login = <Link className="nav-link text-white" to="/login">Login</Link>;
-    } else {
+    }
+    else if (!User.email) {
+      signup = <Link className="nav-link text-white" to="/signup">Signup</Link>;
+      login = <Link className="nav-link text-white" to="/login">Login</Link>;
+    } else if (User.email) {
       logout = <Link className="dropdown-item" to="/app/logout">Logout</Link>;
-    }         
+    }
     return (
       <div>
         <nav className="navbar fixed-top navbar-expand-lg navbar-light head-color">
@@ -35,7 +40,7 @@ class HeaderComponent extends React.Component {
               <li className="nav-item active">
 
                 {signup}
-              
+
               </li>
               <li className="nav-item">
                 {login}
@@ -45,8 +50,8 @@ class HeaderComponent extends React.Component {
                   <i className="fas fa-user search-col" aria-hidden="true"></i>
                 </a>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                 
-                  {logout}                                                                  
+
+                  {logout}
                 </div>
               </li>
             </ul>
