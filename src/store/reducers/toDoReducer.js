@@ -36,6 +36,7 @@ function toDoReducer(toDos = [], action) {
         deleteTODO(store, action);
         return toDos;
     }
+  
     return toDos;
 
 }

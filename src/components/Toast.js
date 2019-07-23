@@ -37,10 +37,10 @@ class ToastComponent extends React.Component {
     }
 
     componentDidMount() {
-        
-
+       
     }
     shouldComponentUpdate(){
+       
         if(this.props.showToast.isActive){
             let $ = window.$;
             let toast = this.toast.current;

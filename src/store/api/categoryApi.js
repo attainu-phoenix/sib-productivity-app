@@ -1,3 +1,5 @@
+import {USER_DATA} from './user_helper';
+
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
     "Content-Type": "application/json"
@@ -9,7 +11,7 @@ function createCategories(store, action) {
 
     let data = {
         categoryName: action.categoryName,
-        userId: 'dcghkj564'
+        userId: action.userId
     }
     console.log(data)
     let categoryName = JSON.stringify(data);
@@ -24,27 +26,34 @@ function createCategories(store, action) {
             return categoryName.json();
         })
         .then(function (categoryName) {
-            console.log("Success ", categoryName);
+
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: 'dcghkj564'
+                userId: USER_DATA().user
+            })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Category Added Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
             })
         })
 
         .catch(function (error) {
-            console.log(error);
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Failed Adding Category Please Try Again ",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
         })
 }
-
-// let dummyData = {
-//     name: "todo",
-//     userId: "",
-//     formState: {
-//         isFormValid: true,
-//         isNameValid: true
-//     }
-// };
-//createCategories(dummyData);
 
 function deleteCategory(store, action) {
 
@@ -63,10 +72,29 @@ function deleteCategory(store, action) {
 
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: "dcghkj564"
+                userId: USER_DATA().user
+            })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Category Deleted Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
             })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Failed Deleting Category Please Try Again ",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 
@@ -112,10 +140,30 @@ function updateCategory(store, action) {
             console.log(json);
             store.dispatch({
                 type: "FETCH_CATEGORES",
-                userId: "dcghkj564"
+                userId: USER_DATA().user
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Category Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
+
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "Category",
+                    toastMessage: "Failed Updating Category Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 export { createCategories, deleteCategory, retrieveCategory, updateCategory };

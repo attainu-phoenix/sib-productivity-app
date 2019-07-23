@@ -3,6 +3,7 @@ import ListCategory from './ListCategory.js';
 import { connect } from 'react-redux'
 import { stateMapper, store } from '../store/store.js'
 import './list.css';
+import {USER_DATA} from '../store/api/user_helper'
 
 const style = {
     buttonColor: {
@@ -29,18 +30,12 @@ class AddCategoryComponent extends React.Component {
     }
 
     componentDidMount() {
-        
+        let userId = USER_DATA().user;
         store.dispatch({
             type: "FETCH_CATEGORES",
-            userId:'dcghkj564'
+            userId: userId
         })
     }
-    
-    // categoryName = (event) => {
-    //     this.setState({
-    //         categoryName: event.target.value
-    //     });
-    // }
 
     onChange(event) {
 
@@ -77,45 +72,19 @@ class AddCategoryComponent extends React.Component {
         store.dispatch({
 
             type: "ADD_CATEGORIES",
-            categoryName: this.state.name
+            categoryName: this.state.name,
+            userId:USER_DATA().user
+
         })
+        document.getElementById("addCategoryForm").reset();
 
     }
-
-    // addCategory = () => {
-
-    //     this.id = this.categoryID + 1;
-    //     const copyCategories = Object.assign([], this.state.categories);
-    //     copyCategories.push({
-    //         id: this.categoryID,
-    //         name: this.state.categoryName
-    //     })
-
-    //     this.setState({
-    //         categories: copyCategories
-    //     })
-
-    //     if (this.categoryName === "") {
-    //         alert("please!");
-    //     }
-
-    // }
-
-    // deleteCategory = (index, e) => {
-    //     const categories = Object.assign([], this.state.categories);
-    //     categories.splice(index, 1);
-    //     this.setState({
-    //         categories: categories
-    //     })
-    // }
-
-
     render() {
         return (
             <div>
                 <h6>Category </h6>
-                <form onSubmit={this.handleFormSubmit}>
-                    
+                <form onSubmit={this.handleFormSubmit} id="addCategoryForm">
+
 
                     <div className="input-group mb-3">
                         <input type="text" name="name" className={`form-control ${!this.state.formState.isNameValid && 'is-invalid'}`} onChange={this.onChange} placeholder="Enter Categories" aria-label="Recipient's username" aria-describedby="button-addon2" />
@@ -126,13 +95,13 @@ class AddCategoryComponent extends React.Component {
 
 
                 </form>
-               
+
                 <ListCategory />
             </div>
 
 
 
-       );
+        );
 
     }
 }

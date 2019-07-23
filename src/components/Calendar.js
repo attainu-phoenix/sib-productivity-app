@@ -8,6 +8,7 @@ import moment from 'moment'
 import UniqueId from 'react-html-id';
 import { store, stateMapper } from '../store/store.js'
 import { connect } from 'react-redux'
+import {USER_DATA} from '../store/api/user_helper'
 
 class CalendarComponent extends React.Component {
 
@@ -67,7 +68,7 @@ class CalendarComponent extends React.Component {
 
         store.dispatch({
             type: "FETCH_EVENTS",
-            email:"shivam@gmail.com"
+            email:USER_DATA().email
         })
 
         this.setState({
@@ -185,7 +186,7 @@ class CalendarComponent extends React.Component {
         }
         let eventData = {
             id: this.getKey(),
-            email:"shivam@gmail.com",
+            email:USER_DATA().email,
             isDone: false,
             eventTitle: this.state.addEventTitle,
             description: this.state.addEventDescription,
