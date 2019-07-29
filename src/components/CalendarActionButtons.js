@@ -76,7 +76,7 @@ class CalendarActionButtons extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-light border"  onClick={this.addButtonClicked}>Add</button>
+                                <button type="submit" className="btn btn-danger border"  onClick={this.addButtonClicked}>Add</button>
                                 
                             </div>
                             </form>

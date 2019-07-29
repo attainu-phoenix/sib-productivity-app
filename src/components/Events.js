@@ -195,7 +195,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="submit" className="btn btn-light border" onClick={this.saveEvent.bind(this, e)}>Save</button>
+                                        <button type="submit" className="btn btn-danger border" onClick={this.saveEvent.bind(this, e)}>Save</button>
                                     </div>
 
 
@@ -224,7 +224,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-light border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
+                                        <button type="button" className="btn btn-danger border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="submit" className="btn btn-light border" onClick={this.saveEvent.bind(this, e)}>Save</button>
+                                        <button type="submit" className="btn btn-danger border" onClick={this.saveEvent.bind(this, e)}>Save</button>
                                     </div>
 
 
@@ -349,7 +349,7 @@ class EventsComponent extends React.Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary border" data-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-light border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
+                                        <button type="button" className="btn btn-danger border" onClick={this.deleteEvent.bind(this, e.objectId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>

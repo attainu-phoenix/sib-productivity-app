@@ -100,7 +100,7 @@ class ListComponent extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={context.saveCategory.bind(this, c)} className="btn btn-light border">Save</button>
+                                    <button type="button" onClick={context.saveCategory.bind(this, c)} className="btn btn-danger border">Save</button>
                                 </div>
                             </div>
                         </div>

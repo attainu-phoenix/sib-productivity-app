@@ -19,6 +19,8 @@ class Home extends React.Component {
     
         if(!user){
             return <Redirect to="/" />
+        }else{
+            return <Redirect to="/app"/>
         }
     }
 
