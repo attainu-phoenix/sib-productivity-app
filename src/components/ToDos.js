@@ -251,7 +251,7 @@ class ToDosComponent extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.closeModal}>Close</button>
-                                    <button type="button" className="btn btn-light border" onClick={this.updateTodo.bind(this, this.state.objectId)}>Save</button>
+                                    <button type="button" className="btn btn-danger border" onClick={this.updateTodo.bind(this, this.state.objectId)}>Save</button>
                                 </div>
                             </div>
                         </div>
