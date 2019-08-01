@@ -7,51 +7,8 @@ class HomeComponent extends React.Component{
 		return (
 			  <div>
         <HeaderComponent/>
-			<div id="myCarousel" className="carousel slide" data-ride="carousel">
-            <ol className="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div className="carousel-inner">
-                <div className="carousel-item active">
-                    <img className="first-slide" src="https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80" alt="First slide"/>
-                    <div className="container">
-                        <div className="carousel-caption text-left text-danger">
-                            <h1 className="myfont1">CREATE TODO.</h1>
-                            <p>Create Todo with checklist ,notes and much more.</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="carousel-item">
-                    <img className="second-slide" src="" alt="Second slide"/>
-                    <div className="container">
-                        <div className="carousel-caption text-warning">
-                            <h1 >Add Events.</h1>
-                            <p>Save your events to calender.</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="carousel-item">
-                    <img className="third-slide" src="https://images.pexels.com/photos/1020323/pexels-photo-1020323.jpeg" alt="Third slide"/>
-                    <div className="container">
-                        <div className="carousel-caption text-right text-warning">
-                            <h1 className="myfont">Add Events .</h1>
-                            <p>Save your events to calender.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="sr-only">Next</span>
-            </a>
-        </div>
-        <div className="waveWrapper waveAnimation">
+			<img src="../../mayur.jpg" width="100%" alt=""/>
+       {/*<div className="waveWrapper waveAnimation">
   <div className="waveWrapperInner bgTop">
     <div className="wave waveTop" ></div>
   </div>
@@ -61,7 +18,7 @@ class HomeComponent extends React.Component{
   <div className="waveWrapperInner bgBottom">
     <div className="wave waveBottom"></div>
   </div>
-</div>
+</div>*/}
        
         <section className="features-icons bg-light text-center">
     <div className="container">
