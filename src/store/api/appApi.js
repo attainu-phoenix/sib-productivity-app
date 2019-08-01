@@ -23,7 +23,7 @@ function addEvent(store, action) {
         eventTitle: action.formData.eventTitle,
         description: action.formData.description
     }
-    console.log(formData)
+    // console.log(formData)
 
     events.push(formData)
     return events;
@@ -49,7 +49,7 @@ function Do_signup(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("DATA CREATED", json);
+            // console.log("DATA CREATED", json);
             store.dispatch({
                 type: "USER_CREATED",
                 newuser: json
@@ -71,7 +71,7 @@ function Do_login(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("LOGIN", json.sessionToken);
+            // console.log("LOGIN", json.sessionToken);
             let user = json;
             localStorage.setItem("user", JSON.stringify(user));
             store.dispatch({
@@ -106,7 +106,7 @@ function Add_TODO(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("Added Todo", json);
+            // console.log("Added Todo", json);
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
@@ -196,14 +196,14 @@ function deleteTODO(store, action) {
     let category_id = action.payLoadData.categoryID;
     console.log("API DELETE >> ", todoID, category_id);
     let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
-    console.log("DELETE URL", url);
+    // console.log("DELETE URL", url);
     fetch(url, {
         method: "DELETE",
         headers: HEADERS
     })
         .then(data => data.json())
         .then(json => {
-            console.log(json);
+            // console.log(json);
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
