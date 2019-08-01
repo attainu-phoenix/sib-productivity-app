@@ -7,7 +7,7 @@ class HomeComponent extends React.Component{
 		return (
 			  <div>
         <HeaderComponent/>
-			<img src="../../mayur.jpg" width="100%" alt=""/>
+			<img src="../../slider.jpg" width="100%" alt=""/>
        {/*<div className="waveWrapper waveAnimation">
   <div className="waveWrapperInner bgTop">
     <div className="wave waveTop" ></div>
