@@ -164,12 +164,30 @@ function updateToDoStatus(store, action) {
         })
         .then(function (data) {
             store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
+            store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: categoryID
             })
         })
-        .catch(function(error){
+        .catch(function (error) {
             console.log(error);
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Updating Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
         })
 }
 
@@ -190,8 +208,27 @@ function deleteTODO(store, action) {
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Deleted Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Deleting Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 
@@ -201,7 +238,7 @@ function fetchTodoByCategoryId(store, action) {
 
     let params = encodeURI(`where={"category_id": "${category_id}"}`);
     let url = `http://localhost:1337/parse/classes/todos/?${params}`;
-    console.log("URL=>", url);
+    // console.log("URL=>", url);
     fetch(url, {
 
         method: "get",
@@ -212,7 +249,7 @@ function fetchTodoByCategoryId(store, action) {
             return data.json()
         })
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
             store.dispatch({
                 type: "TODOS_LOADED",
                 toDos: data.results

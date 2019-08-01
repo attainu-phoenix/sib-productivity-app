@@ -28,9 +28,9 @@ let reducer = combineReducers({
 
 let store = createStore(reducer);
 
-store.subscribe(function () {
-    console.log(store.getState());
-})
+// store.subscribe(function () {
+//     console.log(store.getState());
+// })
 
 function stateMapper(state) {
     return state;

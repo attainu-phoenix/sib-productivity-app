@@ -207,7 +207,7 @@ class ToDosComponent extends React.Component {
         })
     }
     render() {
-        console.log(this.state.toDo);
+        // console.log(this.state.toDo);
 
         return (
 
