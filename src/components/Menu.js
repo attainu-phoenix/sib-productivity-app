@@ -15,27 +15,30 @@ class Menu extends React.Component {
                 <li className="list-group-item">
 
                     <Link to="/app" style={MenuStyles.Link}>
-                        <span className="oi oi-task" >
-                            Categories
-                        </span>
+                        <div className="row justify-content-around">
+                            <div className="col">
+                                <span className="oi oi-task" ></span>
+                            </div>
+                            <div className="col">
+                                <span> Categories</span>
+                            </div>
+
+                        </div>
+
                     </Link>
 
                 </li>
-                {/* <li className="list-group-item ">
-
-                    <Link to="/app/ToDo/" style={MenuStyles.Link}>
-                        <span className="oi oi-task">
-                            Todo
-                        </span>
-                    </Link>
-
-                </li> */}
                 <li className="list-group-item">
 
                     <Link to="/app/calendar" style={MenuStyles.Link}>
-                        <span className="oi oi-calendar">
-                            Calendar
-                        </span>
+                        <div className="row jsutify-content-around">
+                            <div className="col">
+                                <span className="oi oi-calendar"> </span>
+                            </div>
+                            <div className="col">
+                                <span> Calendar</span>
+                            </div>
+                        </div>
                     </Link>
 
                 </li>
