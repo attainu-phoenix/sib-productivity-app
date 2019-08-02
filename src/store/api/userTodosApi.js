@@ -1,3 +1,4 @@
+import config from "../../config.js";
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
     "Content-Type": "application/json"
@@ -6,7 +7,7 @@ function fetchAllTodoOfUser(store, action) {
     let userId = action.userId;
     let params = encodeURI(`where={"userId": "${userId}"}`);
 
-    let url = `http://localhost:1337/parse/classes/todos/?${params}`;
+    let url = `${config.url}/classes/todos/?${params}`;
 
     fetch(url, {
 

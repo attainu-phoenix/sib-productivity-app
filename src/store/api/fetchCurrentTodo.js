@@ -1,3 +1,5 @@
+import config from "../../config.js";
+
 const HEADERS = {
       "X-Parse-Application-Id": "checklist",
       "Content-Type": "application/json"           
@@ -5,7 +7,7 @@ const HEADERS = {
 function fetchtododata(store,action){
       let TodoId =action.payLoadData;
       let params = encodeURI(`where={"category_id":"${TodoId}"}`);
-      let url = `http://localhost:1337/parse/classes/todos?${params}`;
+      let url = `${config.url}/classes/todos?${params}`;
       fetch(url, {
         method:"get",
         headers:HEADERS
