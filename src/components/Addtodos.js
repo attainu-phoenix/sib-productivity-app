@@ -7,6 +7,12 @@ import moment from 'moment'
 import Spinner from './Spinner.js'
 import {USER_DATA} from '../store/api/user_helper'
 
+const style={
+    addButton:{
+        marginRight:'5px'
+    }
+}
+
 class AddTodoComponent extends React.Component {
 
     constructor(props) {
@@ -139,7 +145,7 @@ class AddTodoComponent extends React.Component {
 
                         <textarea className="form-control" onChange={this.onChange} placeholder="Enter Notes" name="notes" rows="3"></textarea>
                     </div>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-end" style={style.addButton}>
                         <button type="submit" className="btn btn-danger">Add</button>
                     </div>
 

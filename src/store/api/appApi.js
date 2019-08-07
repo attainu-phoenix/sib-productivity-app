@@ -23,7 +23,7 @@ function addEvent(store, action) {
         eventTitle: action.formData.eventTitle,
         description: action.formData.description
     }
-    console.log(formData)
+    // console.log(formData)
 
     events.push(formData)
     return events;
@@ -49,7 +49,7 @@ function Do_signup(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("DATA CREATED", json);
+            // console.log("DATA CREATED", json);
             store.dispatch({
                 type: "USER_CREATED",
                 newuser: json
@@ -71,7 +71,7 @@ function Do_login(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("LOGIN", json.sessionToken);
+            // console.log("LOGIN", json.sessionToken);
             let user = json;
             localStorage.setItem("user", JSON.stringify(user));
             store.dispatch({
@@ -106,7 +106,7 @@ function Add_TODO(store, action) {
     })
         .then(data => data.json())
         .then(json => {
-            console.log("Added Todo", json);
+            // console.log("Added Todo", json);
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
@@ -164,12 +164,30 @@ function updateToDoStatus(store, action) {
         })
         .then(function (data) {
             store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
+            store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: categoryID
             })
         })
-        .catch(function(error){
+        .catch(function (error) {
             console.log(error);
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Updating Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
         })
 }
 
@@ -178,20 +196,39 @@ function deleteTODO(store, action) {
     let category_id = action.payLoadData.categoryID;
     console.log("API DELETE >> ", todoID, category_id);
     let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
-    console.log("DELETE URL", url);
+    // console.log("DELETE URL", url);
     fetch(url, {
         method: "DELETE",
         headers: HEADERS
     })
         .then(data => data.json())
         .then(json => {
-            console.log(json);
+            // console.log(json);
             store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: category_id
             })
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Deleted Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "Failed Deleting Please Try Again !",
+                    isActive: true,
+                    messageType: 'Error'
+                }
+            })
+        });
 }
 
 
@@ -201,7 +238,7 @@ function fetchTodoByCategoryId(store, action) {
 
     let params = encodeURI(`where={"category_id": "${category_id}"}`);
     let url = `http://localhost:1337/parse/classes/todos/?${params}`;
-    console.log("URL=>", url);
+    // console.log("URL=>", url);
     fetch(url, {
 
         method: "get",
@@ -212,7 +249,7 @@ function fetchTodoByCategoryId(store, action) {
             return data.json()
         })
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
             store.dispatch({
                 type: "TODOS_LOADED",
                 toDos: data.results

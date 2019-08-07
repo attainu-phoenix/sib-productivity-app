@@ -197,6 +197,7 @@ class CalendarComponent extends React.Component {
             type: "ADD_EVENT",
             formData: eventData
         })
+        document.getElementById("addEventForm").reset();
     }
 
 

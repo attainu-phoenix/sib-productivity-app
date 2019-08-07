@@ -19,7 +19,7 @@ function fetchcategorydata(store, action) {
             return data.json()
         })
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
             store.dispatch({
                 type: "CATEGORY_DATA_LOADED",
                 currentCategoryData: data.results[0]

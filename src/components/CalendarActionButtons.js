@@ -53,7 +53,7 @@ class CalendarActionButtons extends React.Component {
                                     <span aria-hidden="true" style={CalendarStyles.closeIcon}>&times;</span>
                                 </button>
                             </div>
-                            <form  onSubmit={this.props.handelSubmitAddEventForm}>
+                            <form  onSubmit={this.props.handelSubmitAddEventForm} id="addEventForm">
                             <div className="modal-body">
                                 
                                 <input type="text" name="title"  className={this.props.classNameEventTitle} placeholder="Enter Event"
