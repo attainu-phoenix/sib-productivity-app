@@ -1,5 +1,5 @@
 
-
+import config from "../../config.js";
 let events;
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
@@ -35,7 +35,7 @@ function addEvent(store, action) {
 }
 
 function Do_signup(store, action) {
-    let url = "http://localhost:1337/parse/users";
+    let url = `${config.url}/users`
 
     fetch(url, {
         method: "post",
@@ -64,7 +64,7 @@ function Do_login(store, action) {
     let username = action.formData.email;
     let password = action.formData.password;
     let params = encodeURI(`username=${username}&password=${password}`);
-    let url = `http://localhost:1337/parse/login?${params}`;
+    let url = `${config.url}/login?${params}`;
     fetch(url, {
         method: "get",
         headers: HEADERS,
@@ -91,7 +91,7 @@ function Add_TODO(store, action) {
     let status = action.payLoadData.status;
     let notes = action.payLoadData.notes;
 
-    let url = "http://localhost:1337/parse/classes/todos";
+    let url = `${config.url}/classes/todos`;
     fetch(url, {
         method: "post",
         headers: HEADERS,
@@ -125,7 +125,7 @@ function updateTODO(store, action) {
         tododescription: action.payLoadData.updatedDescription,
         notes: action.payLoadData.updatedNotes
     }
-    let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
+    let url = `${config.url}/classes/todos/${objectId}`;
 
     fetch(url, {
         method: "put",
@@ -136,9 +136,19 @@ function updateTODO(store, action) {
         .then(data => data.json())
         .then(json => {
             store.dispatch({
+                type: "SHOW_TOAST_MESSAGE",
+                payLoadData: {
+                    toastTitle: "ToDo",
+                    toastMessage: "ToDo Updated Successfully !",
+                    isActive: true,
+                    messageType: 'Success'
+                }
+            })
+            store.dispatch({
                 type: "FETCH_TODOS_BY_CATEGORY_ID",
                 payLoadData: categoryID
             })
+        
         })
         .catch(err => console.log(err));
 }
@@ -152,7 +162,7 @@ function updateToDoStatus(store, action) {
         status: action.payLoadData.status
     }
     let data = JSON.stringify(toDoStatus);
-    let url = `http://localhost:1337/parse/classes/todos/${objectId}`;
+    let url = `${config.url}/classes/todos/${objectId}`;
 
     fetch(url, {
         method: "put",
@@ -195,7 +205,7 @@ function deleteTODO(store, action) {
     let todoID = action.payLoadData.todoID;
     let category_id = action.payLoadData.categoryID;
     console.log("API DELETE >> ", todoID, category_id);
-    let url = `http://localhost:1337/parse/classes/todos/${todoID}`;
+    let url = `${config.url}/classes/todos/${todoID}`;
     // console.log("DELETE URL", url);
     fetch(url, {
         method: "DELETE",
@@ -237,7 +247,7 @@ function fetchTodoByCategoryId(store, action) {
     let category_id = action.payLoadData;
 
     let params = encodeURI(`where={"category_id": "${category_id}"}`);
-    let url = `http://localhost:1337/parse/classes/todos/?${params}`;
+    let url = `${config.url}/classes/todos/?${params}`;
     // console.log("URL=>", url);
     fetch(url, {
 

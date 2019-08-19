@@ -1,4 +1,5 @@
 import {USER_DATA} from './user_helper'
+import config from "../../config.js";
 
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
@@ -10,7 +11,7 @@ function fetchEventsByEmail(store, action) {
 
     let email = action.email;
     let params = encodeURI(`where={"email": "${email}"}`);
-    let url = `http://localhost:1337/parse/classes/events?${params}`;
+    let url = `${config.url}/classes/events?${params}`;
     fetch(url, {
         method: "GET",
         headers: HEADERS
@@ -32,7 +33,7 @@ function fetchEventsByEmail(store, action) {
 
 function addEvent(store, action) {
 
-    let url = "http://localhost:1337/parse/classes/events";
+    let url = `${config.url}/classes/events`;
 
     let eventData = {
         id: action.formData.id,
@@ -96,7 +97,7 @@ function editEvent(store, action) {
     }
     let data = JSON.stringify(eventData);
 
-    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+    let url = `${config.url}/classes/events/${objectId}`;
     fetch(url, {
         method: "put",
         headers: HEADERS,
@@ -149,7 +150,7 @@ function editCheckBox(store, action) {
         isDone: action.payLoadData.isDone
     }
     let data = JSON.stringify(eventStatus);
-    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+    let url = `${config.url}/classes/events/${objectId}`;
     fetch(url, {
         method: "put",
         headers: HEADERS,
@@ -196,7 +197,7 @@ function editCheckBox(store, action) {
 function deleteEvent(store, action) {
 
     let objectId = action.objectId
-    let url = `http://localhost:1337/parse/classes/events/${objectId}`;
+    let url = `${config.url}/classes/events/${objectId}`;
 
     fetch(url, {
         method: "delete",

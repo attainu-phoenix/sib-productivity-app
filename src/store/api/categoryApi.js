@@ -1,4 +1,5 @@
 import {USER_DATA} from './user_helper';
+import config from "../../config.js";
 
 const HEADERS = {
     "X-Parse-Application-Id": "checklist",
@@ -7,7 +8,7 @@ const HEADERS = {
 
 function createCategories(store, action) {
 
-    let url = "http://localhost:1337/parse/classes/categories";
+    let url = `${config.url}/classes/categories`;
 
     let data = {
         categoryName: action.categoryName,
@@ -61,7 +62,7 @@ function deleteCategory(store, action) {
     console.log(objectId);
 
 
-    let url = `http://localhost:1337/parse/classes/categories/${objectId}`;
+    let url = `${config.url}/classes/categories/${objectId}`;
     console.log("this is the url ====>", url);
     fetch(url, {
         method: "delete",
@@ -102,7 +103,7 @@ function retrieveCategory(store, action) {
     let userId = action.userId;
     let params = encodeURI(`where={"userId":"${userId}"}`);
 
-    let url = `http://localhost:1337/parse/classes/categories/?${params}`;
+    let url = `${config.url}/classes/categories/?${params}`;
 
     fetch(url, {
         method: "get",
@@ -123,7 +124,7 @@ function retrieveCategory(store, action) {
 
 function updateCategory(store, action) {
     let objectId = action.updatedCategory.objectId;
-    let url = `http://localhost:1337/parse/classes/categories/${objectId}`;
+    let url = `${config.url}/classes/categories/${objectId}`;
     let data = {
         objectId: objectId,
         categoryName: action.updatedCategory.categoryName
